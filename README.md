@@ -54,7 +54,7 @@ hammer，kav7，merc：麦卡托投影，gnom, cyl：等经纬度投影
    
    ![](https://github.com/flashlxy/MicapsDataDraw/raw/master/images/4.png)
    
-### Copyright ©江西省气象台 2017
+### Copyright ![](https://github.com/flashlxy/MicapsDataDraw/raw/master/jxlogo.png) 2017
    
-   ![](https://github.com/flashlxy/MicapsDataDraw/raw/master/jxlogo.png)
+   
    
