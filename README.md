@@ -2,7 +2,7 @@
 
 ## 用matplotlib和basemap绘制micaps数据
 
-利用配置文件config.xml定制参数。
+利用配置文件config.xml定制参数，结合micaps具体数据，可实现程序自动输出相应图像。
 
 ## 主要功能：
 
@@ -20,7 +20,9 @@ hammer，kav7，merc：麦卡托投影，gnom, cyl：等经纬度投影
 
 ### 4、程序运行 python main.py config.xml
 
-### 5、本程序用到了气象家园帖子
+### 5、本项目参考的代码及的用到的一些库
+
+   气象家园帖子
  
    http://bbs.06climate.com/forum.php?mod=viewthread&tid=42437
    
