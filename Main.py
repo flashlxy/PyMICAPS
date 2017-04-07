@@ -32,7 +32,7 @@ def main(debug):
     :return: 
     """
     if debug:
-        xml = r'configshp.xml'
+        xml = r'config.xml'
     else:
         if len(sys.argv) < 2:
             print(u'参数不够，至少需要一个xml文件名参数')
