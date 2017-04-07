@@ -1,5 +1,5 @@
 # -*- coding: utf-8 -*-
-#
+#     产品参数类 关联模块Main，maskout和类Micaps3Data，Micaps4Data，Projection, HeadDesc
 #     Author:     Liu xianyao
 #     Email:      flashlxy@qq.com
 #     Update:     2017-04-06
