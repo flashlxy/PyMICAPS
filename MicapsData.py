@@ -396,8 +396,11 @@ class Micaps:
 
             else:
 
-                cb = m.colorbar(CS, location=products.projection.location, size=products.projection.size,
+                CB = m.colorbar(CS, location=products.projection.location, size=products.projection.size,
                                 pad=products.projection.pad)
+                
+            if CB is not None:
+                CB.ax.tick_params(axis='y', length=0)
 
         # 绘制描述文本
         Micaps.DrawTitle(m, products, self.title)
