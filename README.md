@@ -41,11 +41,16 @@ hammer，kav7，merc：麦卡托投影，gnom, cyl：等经纬度投影
    ![](https://github.com/flashlxy/MicapsDataDraw/raw/master/images/1.png)
    
    Micaps第四类 数据无投影：
-   ![](http://bbs.06climate.com/forum.php?mod=attachment&aid=NjM2MjJ8ZGNmMjY3OTR8MTQ5MTU2ODk4MnwxNTU5Mnw1MTk0NA%3D%3D&noupdate=yes)
+   
+   ![](https://github.com/flashlxy/MicapsDataDraw/raw/master/images/2.png)
    
    Micaps第四类 数据Lambert投影：
-   ![](http://bbs.06climate.com/forum.php?mod=attachment&aid=NjM2MjN8ZDQxM2RhYzZ8MTQ5MTU2ODk4MnwxNTU5Mnw1MTk0NA%3D%3D&noupdate=yes)
+   
+   ![](https://github.com/flashlxy/MicapsDataDraw/raw/master/images/3.png)
    
    Micaps第三类数据-等经纬度投影：
-   ![](http://bbs.06climate.com/forum.php?mod=attachment&aid=NjM2MjR8YzY3NGE3NTl8MTQ5MTU2ODk4MnwxNTU5Mnw1MTk0NA%3D%3D&noupdate=yes)
+   
+   ![](https://github.com/flashlxy/MicapsDataDraw/raw/master/images/4.png)
+   
+   
    
