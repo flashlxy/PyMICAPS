@@ -14,4 +14,14 @@
 
 4、程序运行 python main.py config.xml
 
-5、本程序用到了气象家园http://bbs.06climate.com/forum.php?mod=viewthread&tid=42437作者的片段代码、以及http://bbs.06climate.com/forum.php?mod=viewthread&tid=43521作者的一个支持NCL colorbar的python库。
+5、本程序用到了气象家园帖子
+ 
+   http://bbs.06climate.com/forum.php?mod=viewthread&tid=42437
+   
+   作者的片段代码
+   
+   以及
+   
+   http://bbs.06climate.com/forum.php?mod=viewthread&tid=43521
+   
+   作者的一个支持NCL colorbar的python库。
