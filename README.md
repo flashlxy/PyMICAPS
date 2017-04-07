@@ -1,4 +1,4 @@
-# MicapsDataDraw
+![](https://github.com/flashlxy/MicapsDataDraw/raw/master/jxlogo.png) # MicapsDataDraw
 
 ## 用matplotlib和basemap绘制micaps数据
 
@@ -56,5 +56,5 @@ hammer，kav7，merc：麦卡托投影，gnom, cyl：等经纬度投影
    
 ##### 
    
-   ![](https://github.com/flashlxy/MicapsDataDraw/raw/master/jxlogo.png)
+   
    
