@@ -1,7 +1,5 @@
 # MicapsDataDraw 
 
-![](https://github.com/flashlxy/MicapsDataDraw/raw/master/jxlogo.png) 
-
 ## 用matplotlib和basemap绘制micaps数据
 
 利用配置文件config.xml定制参数，结合micaps具体数据，可实现程序自动输出相应图像。
@@ -56,7 +54,7 @@ hammer，kav7，merc：麦卡托投影，gnom, cyl：等经纬度投影
    
    ![](https://github.com/flashlxy/MicapsDataDraw/raw/master/images/4.png)
    
-##### 
+##### ![](https://github.com/flashlxy/MicapsDataDraw/raw/master/jxlogo.png) 
    
    
    
