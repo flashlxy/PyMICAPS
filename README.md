@@ -10,6 +10,12 @@
 
 2、支持多种投影
 
+sall：无投影，lcc:兰波托投影，mill，ortho，stere：极射赤面投影，
+
+npstere：北半球极射赤面投影, 
+
+hammer，kav7，merc：麦卡托投影，gnom, cyl：等经纬度投影
+
 3、支持用shp或者定制的txt文件 所形成的单个或多个闭合区域切图，也就是所谓的白化。
 
 4、程序运行 python main.py config.xml
