@@ -37,7 +37,8 @@ hammer，kav7，merc：麦卡托投影，gnom, cyl：等经纬度投影
 ## 以下是利用示例数据结合适当配置文件输出的图片
    
    Micaps第四类数据ortho投影：
-   ![](http://bbs.06climate.com/forum.php?mod=attachment&aid=NjM2MjF8ZDBjNGQ0OTR8MTQ5MTU2ODk4MnwxNTU5Mnw1MTk0NA%3D%3D&noupdate=yes)  
+   
+   ![](https://github.com/flashlxy/MicapsDataDraw/raw/master/images/1.png)
    
    Micaps第四类 数据无投影：
    ![](http://bbs.06climate.com/forum.php?mod=attachment&aid=NjM2MjJ8ZGNmMjY3OTR8MTQ5MTU2ODk4MnwxNTU5Mnw1MTk0NA%3D%3D&noupdate=yes)
