@@ -2,7 +2,7 @@
 
 ## 用matplotlib和basemap绘制micaps数据
 
-利用配置文件config.xml定制参数，结合micaps具体数据，可实现程序自动输出相应图像。
+利用配置文件config.xml定制参数，结合micaps具体数据，可实现一种或多种类型（in the future）的micaps数据的叠加绘制并自动输出相应图像到指定文件。
 
 ## 主要功能：
 
@@ -18,7 +18,9 @@ hammer，kav7，merc：麦卡托投影，gnom, cyl：等经纬度投影
 
 ### 3、支持用shp或者定制的txt文件 所形成的单个或多个闭合区域切图，也就是所谓的白化。
 
-### 4、程序运行 python main.py config.xml
+### 4、程序运行 
+
+       python main.py config.xml
 
 ### 5、本项目参考的代码及的用到的一些库
 
