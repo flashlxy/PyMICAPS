@@ -44,7 +44,7 @@
    
 ### 第三方库
 
-    matplotlib，basemap，numpy，scipy，shapefile，nclcmaps
+    matplotlib，basemap，numpy，scipy，shapefile，nclcmaps
     
     http://bbs.06climate.com/forum.php?mod=viewthread&tid=43521
 
