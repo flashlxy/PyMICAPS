@@ -22,19 +22,21 @@
 
 ### 3、支持用shp或者定制的txt文件 所形成的单个或多个闭合区域切图，也就是所谓的白化。
 
-### 4、程序运行 
+## 程序运行 
 
-       python main.py config.xml
+   python main.py config.xml
 
-### 5、本项目参考的代码及的用到的一些库
+## 项目参考的代码及的用到的一些库
+
+### 代码
 
     气象家园帖子
  
     http://bbs.06climate.com/forum.php?mod=viewthread&tid=42437
    
     作者的片段代码
-   
-    以及
+   
+### 第三方库
    
     http://bbs.06climate.com/forum.php?mod=viewthread&tid=43521
    
