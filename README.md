@@ -18,7 +18,7 @@
 
     npstere：北半球极射赤面投影, 
 
-    hammer，kav7，merc：麦卡托投影，gnom, cyl：等经纬度投影
+    hammer，kav7，merc：麦卡托投影，gnom, cyl：等经纬度投影。
 
 ### 3、支持任意区域完美白化
 
