@@ -6,7 +6,7 @@
 
     并自动输出相应图像到指定文件。
 
-## 主要功能：
+## 主要功能
 
 ### 1、支持Micaps第3和第4类数据的绘制
 
@@ -20,7 +20,7 @@
 
     hammer，kav7，merc：麦卡托投影，gnom, cyl：等经纬度投影
 
-### 3、支持完美白化
+### 3、支持任意区域完美白化
 
     用shp或者定制的txt文件所形成的单个或多个闭合区域切图，也就是所谓的白化。
 
@@ -48,19 +48,19 @@
    
 ## 以下是利用示例数据结合适当配置文件输出的图片
 
-Micaps第四类数据ortho投影：
+    Micaps第四类数据ortho投影：
    
 ![](https://github.com/flashlxy/MicapsDataDraw/raw/master/images/3.png)
 
-Micaps第四类 数据无投影：
+    Micaps第四类 数据无投影：
 
 ![](https://github.com/flashlxy/MicapsDataDraw/raw/master/images/2.png)
 
-Micaps第四类 数据Lambert投影：
+    Micaps第四类 数据Lambert投影：
 
 ![](https://github.com/flashlxy/MicapsDataDraw/raw/master/images/1.png)
 
-Micaps第三类数据-等经纬度投影：
+    Micaps第三类数据-等经纬度投影：
 
 ![](https://github.com/flashlxy/MicapsDataDraw/raw/master/images/4.png)
    
