@@ -1,6 +1,6 @@
 # MicapsDataDraw 
 
-## 一个python语言编写的超级实用生产图片工具，用matplotlib和basemap绘制micaps数据
+## 一个超级实用生产图片工具，用matplotlib和basemap绘制micaps数据
 
     利用配置文件config.xml定制参数，结合micaps具体数据，可实现一种或多种类型（in the future）的micaps数据的叠加绘制
 
