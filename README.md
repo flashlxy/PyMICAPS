@@ -43,7 +43,9 @@
     作者的片段代码
    
 ### 第三方库
-   
+
+    matplotlib，basemap，numpy，scipy，shapefile，nclcmaps
+   
     http://bbs.06climate.com/forum.php?mod=viewthread&tid=43521
    
     作者的一个支持NCL colorbar的python库。
