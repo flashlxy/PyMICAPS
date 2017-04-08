@@ -20,11 +20,13 @@
 
     hammer，kav7，merc：麦卡托投影，gnom, cyl：等经纬度投影
 
-### 3、支持用shp或者定制的txt文件 所形成的单个或多个闭合区域切图，也就是所谓的白化。
+### 3、支持完美白化
 
-## 程序运行 
+    用shp或者定制的txt文件所形成的单个或多个闭合区域切图，也就是所谓的白化。
 
-   python main.py config.xml
+## 程序运行
+
+    python main.py config.xml
 
 ## 项目参考的代码及的用到的一些库
 
