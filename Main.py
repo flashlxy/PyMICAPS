@@ -4,7 +4,7 @@
 #     Email:      flashlxy@qq.com
 #     Update:     2017-04-06
 #     Copyright:  ©江西省气象台 2017
-#     Version:    1.1
+#     Version:    1.1.20170406
 
 import sys
 
@@ -44,11 +44,11 @@ def main(debug):
     from Products import Products
     products = Products(xml)
     if products is not None:
-        products.micapsdata.Draw(products, debug)
+        products.micapsfiles[0].file.micapsdata.Draw(products, debug)
 
     print('Micaps data contour and save picture seconds:', ttime.clock() - start)
 
 
 if __name__ == '__main__':
-    ISDEBUG = True
+    ISDEBUG = False
     main(ISDEBUG)

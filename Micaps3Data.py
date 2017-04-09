@@ -14,7 +14,8 @@ import re
 import numpy as np
 import PolygonEx
 from datetime import datetime
-from MicapsData import Micaps, griddata
+from MicapsData import Micaps
+from matplotlib.mlab import griddata
 
 
 class Micaps3Data(Micaps):
@@ -137,20 +138,21 @@ class Micaps3Data(Micaps):
     def UpdateData(self, products):
         self.UpdateExtents(products)
 
-        xmax = products.extents.xmax
-        xmin = products.extents.xmin
-        ymax = products.extents.ymax
-        ymin = products.extents.ymin
+        extents = products.picture.extents
+        xmax = extents.xmax
+        xmin = extents.xmin
+        ymax = extents.ymax
+        ymin = extents.ymin
 
-        path = products.cutborders[0]['path']
+        path = products.map.clipborders[0].path
 
         if path is not None:
             self.AddPoints(self.x, self.y, self.z, path)
 
         # self.CreateArray()
-
-        self.X = np.linspace(xmin, xmax, products.grid[0])
-        self.Y = np.linspace(ymin, ymax, products.grid[1])
+        micapsfile = products.micapsfiles[0]
+        self.X = np.linspace(xmin, xmax, micapsfile.contour.grid[0])
+        self.Y = np.linspace(ymin, ymax, micapsfile.contour.grid[1])
         # x = self.data['lon']
         # y = self.data['lat']
         # z = self.data['zvalue']
@@ -159,7 +161,7 @@ class Micaps3Data(Micaps):
 
         self.min = min(self.z)
         self.max = max(self.z)
-        self.distance = products.step
+        self.distance = micapsfile.contour.step
         self.min = math.floor(self.min / self.distance) * self.distance
         self.max = math.ceil(self.max / self.distance) * self.distance
 
