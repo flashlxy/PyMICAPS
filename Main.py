@@ -4,7 +4,7 @@
 #     Email:      flashlxy@qq.com
 #     Update:     2017-04-06
 #     Copyright:  ©江西省气象台 2017
-#     Version:    1.1.20170406
+#     Version:    1.1
 
 import sys
 
