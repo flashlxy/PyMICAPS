@@ -8,6 +8,8 @@
 
 import sys
 
+import math
+
 reload(sys)
 sys.setdefaultencoding('utf-8')
 
@@ -23,6 +25,10 @@ def parseInt(s):
     """
     assert isinstance(s, basestring)
     return int(''.join(list(takewhile(lambda x: x.isdigit(), s)))) if s[0].isdigit() else None
+
+
+def equal(value1, value2):
+    return math.fabs(value1 - value2) < 10e-5
 
 
 def main(debug):
@@ -50,5 +56,5 @@ def main(debug):
 
 
 if __name__ == '__main__':
-    ISDEBUG = False
+    ISDEBUG = True
     main(ISDEBUG)

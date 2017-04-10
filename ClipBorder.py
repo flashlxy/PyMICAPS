@@ -17,7 +17,7 @@ from Projection import Projection
 
 class ClipBorder:
     """
-    裁切边界类
+    边界裁切类
     """
 
     def __init__(self, leaf):

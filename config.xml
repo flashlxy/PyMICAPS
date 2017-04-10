@@ -84,7 +84,7 @@
                 <LineWidth>0.5</LineWidth>                         <!-- 线宽：float -->
                 <LineColor>k</LineColor>                            <!-- 线颜色：str -->
                 <Polygon>on</Polygon>                               <!-- 闭合折线(仅用于非shp文件)：on, off -->
-                <Draw>off</Draw>                                     <!-- 是否绘制：on, off -->
+                <Draw>on</Draw>                                     <!-- 是否绘制：on, off -->
             </Border>
             <Border>
                 <File>LC.txt</File>  <!-- 地图文件 -->
@@ -220,7 +220,7 @@
                  460000,500000,510000,520000,530000,540000,610000,620000,630000,640000,
                  650000,710000,810000,820000
                 -->
-                <Code>360000</Code>
+                <Code>360000,430000,440000,350000,330000,340000,420000,710000,810000,820000</Code>
                 <Using>off</Using>                                   <!-- 是否启用：on,off -->
                 <Draw>off</Draw>                                     <!-- 是否绘制：on,off -->
                 <LineWidth>1</LineWidth>                            <!-- 线宽：float -->
@@ -237,15 +237,16 @@
             <!-- micaps数据类型 -->
             <File>
                 <!-- M1：站点数据，M4：第4类格点数据，M11：第11类UV数据-->
-                <Type>M4</Type>
+                <Type>M11</Type>
 
                 <!--原始数据文件
                     M4 - K:\GQEC\TP\r24\17032908.060 16062908.012 K:\ecmwf\pressure\999\16122520.000
                          K:\ecmwf\height\500\17033108.240 K:\ecmwf\temper\850\16122520.000
                          K:\GQJP\HGT\500\17040514.084 K:\GQJP\24P\1010\17040514.078
                     M3 - K:\zdzjm\maxtemp\17011418.000 K:\zdzjm\rain24\17033115.000
+                    M11  K:\ecmwf\uv\850\16122520.000
                 -->
-                <FileName>K:\ecmwf\height\500\17033108.240</FileName>
+                <FileName>K:\ecmwf\uv\850\16122520.000</FileName>
             </File>
             <!-- 图例 -->
             <Legend>
@@ -326,6 +327,23 @@
                     <FontColor>k</FontColor>   <!-- string. default is 'black' -->
                 </ContourLabel>
             </Contour>
+
+            <UV>
+                <!-- Streamplot -->
+                <Stream>on</Stream>
+                <Density>5, 5</Density>
+                <Color>r</Color>
+                <OnSpeed>off</OnSpeed>
+                <OnColor>on</OnColor>
+
+                <!-- effact projection on -->
+                <Scale>500</Scale>
+
+                <!-- Barbs -->
+                <Barbs>off</Barbs>
+
+                <Length>7</Length>
+            </UV>
 
             <!-- 标题 -->
             <Title>

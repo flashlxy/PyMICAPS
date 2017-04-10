@@ -28,7 +28,7 @@ class Border:
         self.polygon = str.upper(Projection.leaf_to_string(leaf, "Polygon", 'on'))
         self.draw = Projection.leaf_to_bool(leaf, "Draw", False)
         self.linewidth = Projection.leaf_to_float(leaf, "LineWidth", 1)
-        self.linecolor = Projection.leaf_to_float(leaf, "LineColor", 1)
+        self.linecolor = Projection.leaf_to_string(leaf, "LineColor", 'k')
 
     @staticmethod
     def readPolygon(filename):

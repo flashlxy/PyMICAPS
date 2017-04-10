@@ -51,3 +51,4 @@ class Products:
         except Exception as err:
             print(u'【{0}】{1}-{2}'.format(self.xmlfile, err, datetime.now()))
             return None
+

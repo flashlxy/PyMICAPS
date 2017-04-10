@@ -6,7 +6,6 @@
 #     Copyright:  ©江西省气象台 2017
 #     Version:    1.1.20170406
 from __future__ import print_function
-from __future__ import print_function
 
 import sys
 
@@ -126,6 +125,9 @@ class Micaps:
             extend = 'neither'
         return extend
 
+    def DrawUV(self, m, products):
+        return
+
     def Draw(self, products, debug=True):
         """
         根据产品参数绘制图像
@@ -213,6 +215,8 @@ class Micaps:
 
         # 绘制描述文本
         MicapsFile.MicapsFile.DrawTitle(m, micapsfile.title, self.title)
+
+        self.DrawUV(m, products)
 
         # 存图
         Picture.savePicture(fig, products.picture.picfile)

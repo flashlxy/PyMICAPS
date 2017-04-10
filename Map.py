@@ -1,5 +1,5 @@
 # -*- coding: utf-8 -*-
-#
+#     Map类
 #     Author:     Liu xianyao
 #     Email:      flashlxy@qq.com
 #     Update:     2017-04-06

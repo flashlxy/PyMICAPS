@@ -6,17 +6,15 @@
 #     Copyright:  ©江西省气象台 2017
 #     Version:    1.1.20170406
 from __future__ import print_function
-from __future__ import print_function
-
 import os
-
 from matplotlib.font_manager import FontProperties
-
 from Contour import Contour
 from File import File
 from Legend import Legend
 from Title import Title
 import matplotlib.pyplot as plt
+
+from UV import UV
 
 
 class MicapsFile:
@@ -25,6 +23,7 @@ class MicapsFile:
         self.legend = Legend(leaf)
         self.contour = Contour(leaf)
         self.title = Title(leaf)
+        self.uv = UV(leaf)
 
     @staticmethod
     def DrawTitle(m, title, headtxt):

@@ -40,7 +40,7 @@ class Picture:
 
         extents = p.find("Extents").text.strip()
         if extents is None or extents == '':
-            if len(clipborders) < 1 or clipborders[0].path is None:
+            if len(clipborders) < 1 or clipborders[0].path is None or (not clipborders[0].using):
                 self.extents = None
             else:
                 jxextend = clipborders[0].path.get_extents()
@@ -69,6 +69,7 @@ class Picture:
     def savePicture(fig, filename):
         # 存图
         fig.savefig(filename, format='png', transparent=False)
+        # return
 
     @staticmethod
     def checkFilename(filepath):
