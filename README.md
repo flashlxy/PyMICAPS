@@ -10,7 +10,7 @@
 
 #### 主要功能
 
-##### 1、支持Micaps第3和第4类数据的绘制
+##### 1、支持Micaps第3、4、11类数据的绘制
 
     目前实现了某类数据的单独绘制，多类数据叠加在不久的将来实现。
 
@@ -71,7 +71,11 @@
     Micaps第三类数据-等经纬度投影：
 
 ![](https://github.com/flashlxy/MicapsDataDraw/raw/master/images/4.png)
-   
+
+    Micaps第11类数据-ortho投影：
+    
+![](https://github.com/flashlxy/MicapsDataDraw/raw/ver-2.0/images/17032520.001.png)
+
 ##### ![](https://github.com/flashlxy/MicapsDataDraw/raw/master/jxlogo.png) 
    
    
