@@ -2,9 +2,9 @@
 #     MicapsData基类
 #     Author:     Liu xianyao
 #     Email:      flashlxy@qq.com
-#     Update:     2017-04-06
+#     Update:     2017-04-11
 #     Copyright:  ©江西省气象台 2017
-#     Version:    1.1.20170406
+#     Version:    2.0.20170411
 from __future__ import print_function
 
 import sys
@@ -97,6 +97,13 @@ class Micaps:
     def UpdateXY(projection, x, y):
         return projection(x, y)
 
+    @staticmethod
+    def StandardPinLegendValue(pin):
+        distance = pin[2]
+        minvalue = math.floor(pin[0] / distance) * distance
+        maxvalue = math.ceil(pin[1] / distance) * distance
+        return minvalue, maxvalue, distance
+
     def UpdateExtents(self, products):
         """
         更新产品参数的extents
@@ -115,8 +122,19 @@ class Micaps:
             ymin = minlat - margin if minlat - margin >= -90 else -90
             products.picture.extents = Bbox.from_extents(xmin, ymin, xmax, ymax)
 
-    def UpdateData(self, products):
-        self.UpdateExtents(products)
+    def UpdatePinLegendValue(self, micapsfile):
+        pin = micapsfile.legend.pinlegendvalue
+        if pin is not None:
+            self.min, self.max, self.distance = self.StandardPinLegendValue(pin)
+
+    def UpdateData(self, products, micapsfile):
+        """
+        要被重载的函数，用来更新产品中的一系列参数
+        :param micapsfile: 产品中包含的一个micapsfile
+        :param products:产品参数 
+        :return: 
+        """
+        return
 
     def GetExtend(self):
         if self.title.find(u'降水') >= 0 or self.title.find(u'雨'):
@@ -128,19 +146,20 @@ class Micaps:
     def DrawUV(self, m, products):
         return
 
-    def Draw(self, products, debug=True):
+    def Draw(self, products, micapsfile, debug=True):
         """
         根据产品参数绘制图像
-        :param debug: 
-        :param products: 
-        :return: 产品参数
+        :param micapsfile: 指定绘制产品中包含的一个micapsfile
+        :param debug: 调试状态
+        :param products: 产品参数 
+        :return: 
         """
         # 图例的延展类型
         extend = self.GetExtend()
 
         # 更新绘图矩形区域
         # self.UpdateExtents(products)
-        self.UpdateData(products)
+        self.UpdateData(products, micapsfile)
         extents = products.picture.extents
         xmax = extents.xmax
         xmin = extents.xmin
@@ -187,7 +206,7 @@ class Micaps:
         # 绘制地图
         Map.DrawBorders(m, products)
 
-        micapsfile = products.micapsfiles[0]
+        # micapsfile = products.micapsfiles[0]
 
         cmap = nclcmaps.cmaps(micapsfile.legend.micapslegendcolor)  # cm.jet  temp_diff_18lev
         vmax = math.ceil(self.max)
@@ -216,7 +235,7 @@ class Micaps:
         # 绘制描述文本
         MicapsFile.MicapsFile.DrawTitle(m, micapsfile.title, self.title)
 
-        self.DrawUV(m, products)
+        self.DrawUV(m, micapsfile)
 
         # 存图
         Picture.savePicture(fig, products.picture.picfile)

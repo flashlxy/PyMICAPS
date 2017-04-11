@@ -244,9 +244,9 @@
                          K:\ecmwf\height\500\17033108.240 K:\ecmwf\temper\850\16122520.000
                          K:\GQJP\HGT\500\17040514.084 K:\GQJP\24P\1010\17040514.078
                     M3 - K:\zdzjm\maxtemp\17011418.000 K:\zdzjm\rain24\17033115.000
-                    M11  K:\ecmwf\uv\850\16122520.000
+                    M11  K:\ecmwf\uv\850\17041020.000
                 -->
-                <FileName>K:\ecmwf\uv\850\16122520.000</FileName>
+                <FileName>K:\ecmwf\uv\850\17041020.000</FileName>
             </File>
             <!-- 图例 -->
             <Legend>
@@ -260,11 +260,19 @@
                 <MicapsLegendValue>True</MicapsLegendValue>
 
                 <!--
+                     When micapslegendvalue is true, the setting is working.
+                     if pin the legend values, [begin value,stop value,step] is working. default is None
+                     else use the data self legend values
+                     -12,40,2
+                -->
+                <PinLegendValue></PinLegendValue>
+
+                <!--
                 色标名称: 仅当MicapsLegendValue=True时有效。
-                支持NCL colorbar name. example: precip3_16le, ncl_default, MPL_RdBu etc. default is ncl_default
+                支持NCL colorbar name. example: MPL_jet, ncl_default, MPL_RdBu MPL_cool etc. default is ncl_default
                 参考链接：http://www.ncl.ucar.edu/Document/Graphics/color_table_gallery.shtml
                 -->
-                <MicapsLegendColor>ncl_default</MicapsLegendColor>
+                <MicapsLegendColor>MPL_jet</MicapsLegendColor>
 
                 <!--
                      图例填充样式数组，一般和自定义的legend结合使用，如不够LegendValue数组的长度，则会用最后一个样式自动补齐
@@ -303,7 +311,10 @@
 
             <!-- 等值线 -->
             <Contour>
-                <!-- 等值线步长(float) 仅当数据是第三类数据并且本身图例值开关打开的时候有效 default is 4. -->
+                <!--
+                    等值线步长(float) 仅当数据是第三类数据并且本身图例值开关打开的时候有效 default is 4.
+                    if the pinning legend values is not none, the setting is ignore.
+                -->
                 <Step>2.</Step>
                 <!-- 插值点数 （经度方向点数，纬度方向点数） default is [195,216]-->
                 <Grid>195.5,216.7</Grid>
@@ -330,19 +341,27 @@
 
             <UV>
                 <!-- Streamplot -->
-                <Stream>on</Stream>
+                <!-- 绘制流场开关 on off. default is False -->
+                <Stream>off</Stream>
+                <!-- 流场密度 list. [x方向 y方向]-->
                 <Density>5, 5</Density>
-                <Color>r</Color>
+                <!-- 流线颜色 string. default is 'k'-->
+                <Color>k</Color>
+                <!-- 流线颜色随风速变化 on off. default is False -->
                 <OnSpeed>off</OnSpeed>
-                <OnColor>on</OnColor>
+                <!-- 彩色流线开关 on off. default is False -->
+                <OnColor>off</OnColor>
 
                 <!-- effact projection on -->
+                <!-- 有投影时的尺寸 -->
                 <Scale>500</Scale>
-
+                <!-- 单位比例尺指示的风速值:m/s, default is 12 -->
+                <MarkScaleLength>12</MarkScaleLength>
                 <!-- Barbs -->
-                <Barbs>off</Barbs>
-
-                <Length>7</Length>
+                <!-- 风场开关 on off. default is False -->
+                <Barbs>on</Barbs>
+                <!-- 风杆长度 int. default is 5  -->
+                <Length>6</Length>
             </UV>
 
             <!-- 标题 -->

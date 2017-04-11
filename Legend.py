@@ -2,9 +2,9 @@
 #
 #     Author:     Liu xianyao
 #     Email:      flashlxy@qq.com
-#     Update:     2017-04-06
+#     Update:     2017-04-11
 #     Copyright:  ©江西省气象台 2017
-#     Version:    1.1.20170406
+#     Version:    2.0.20170411
 from __future__ import print_function
 from __future__ import print_function
 
@@ -37,6 +37,12 @@ class Legend:
 
         # 是否取MICAPS数据本身的图例值
         self.micapslegendvalue = Projection.leaf_to_bool(p, "MicapsLegendValue", True, 'TRUE')
+
+        # When micapslegendvalue is true, the setting is working.
+        # if pin the legend values, [begin value, stop value, step] is working.default is None
+        # else use the data self legend values
+        self.pinlegendvalue = Projection.leaf_to_list(p, "PinLegendValue", None)
+        self.valid(self.pinlegendvalue)
 
         # NCL colorbar 的别名
         self.micapslegendcolor = Projection.leaf_to_string(p, 'MicapsLegendColor', 'ncl_default')
@@ -71,3 +77,10 @@ class Legend:
 
         # 图例放置位置
         self.location = Projection.leaf_to_string(leaf=p, code='Location', defvalue='right')
+
+    def valid(self, pin):
+        if pin is not None and len(pin) == 3:
+            if pin[1] < pin[0] or pin[2] < 0:
+                self.pinlegendvalue = None
+        else:
+            self.pinlegendvalue = None

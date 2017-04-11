@@ -2,9 +2,9 @@
 #     产品参数类 关联模块Main，maskout和类Micaps3Data，Micaps4Data，Projection, HeadDesc
 #     Author:     Liu xianyao
 #     Email:      flashlxy@qq.com
-#     Update:     2017-04-06
+#     Update:     2017-04-11
 #     Copyright:  ©江西省气象台 2017
-#     Version:    1.1.20170406
+#     Version:    2.0.20170411
 import os
 import re
 from datetime import datetime
@@ -36,17 +36,14 @@ class Products:
             # 地图
             self.map = Map(p)
 
-            # Get the micaps files list
-
-            self.micapsfiles = []
-
-            micapsfiles = p.find("MicapsFiles").getchildren()
-
-            for micapsfile in micapsfiles:
-                self.micapsfiles.append(MicapsFile(micapsfile))
-
             # get picture para class
             self.picture = Picture(p, self.map.clipborders)
+
+            # Get the micaps files list
+            self.micapsfiles = []
+            micapsfiles = p.find("MicapsFiles").getchildren()
+            for micapsfile in micapsfiles:
+                self.micapsfiles.append(MicapsFile(micapsfile))
 
         except Exception as err:
             print(u'【{0}】{1}-{2}'.format(self.xmlfile, err, datetime.now()))

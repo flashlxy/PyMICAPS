@@ -2,9 +2,9 @@
 #
 #     Author:     Liu xianyao
 #     Email:      flashlxy@qq.com
-#     Update:     2017-04-06
+#     Update:     2017-04-11
 #     Copyright:  ©江西省气象台 2017
-#     Version:    1.1.20170406
+#     Version:    2.0.20170411
 
 import sys
 
@@ -50,7 +50,9 @@ def main(debug):
     from Products import Products
     products = Products(xml)
     if products is not None:
-        products.micapsfiles[0].file.micapsdata.Draw(products, debug)
+        for micapsfile in products.micapsfiles:
+            micapsfile.file.micapsdata.Draw(products, micapsfile, debug)
+            # break
 
     print('Micaps data contour and save picture seconds:', ttime.clock() - start)
 

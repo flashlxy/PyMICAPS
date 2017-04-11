@@ -2,9 +2,9 @@
 #     Micaps第3类数据 继承Micaps基类
 #     Author:     Liu xianyao
 #     Email:      flashlxy@qq.com
-#     Update:     2017-04-06
+#     Update:     2017-04-11
 #     Copyright:  ©江西省气象台 2017
-#     Version:    1.1.20170406
+#     Version:    2.0.20170411
 
 import codecs
 import itertools
@@ -14,6 +14,8 @@ import re
 import numpy as np
 import PolygonEx
 from datetime import datetime
+
+from Main import equal
 from MicapsData import Micaps
 from matplotlib.mlab import griddata
 
@@ -28,23 +30,19 @@ class Micaps3Data(Micaps):
         self.elementsum = 1
         self.stationsum = None
         self.data = []
-        # self.ReadFromFile()
         self.defaultvalue = 9999.
+
         self.ReadFromFile()
 
-    @staticmethod
-    def EqualValue(value1, value2):
-        return math.fabs(value1 - value2) < 10e-5
-
     def EqualDefaultValue(self, value):
-        return Micaps3Data.EqualValue(self.defaultvalue, value)
+        return equal(self.defaultvalue, value)
 
     def valid(self, lon, lat, zvalue):
-        if self.EqualValue(lon, 0) or self.EqualValue(lon, self.defaultvalue):
+        if equal(lon, 0) or equal(lon, self.defaultvalue):
             return False
-        if self.EqualValue(lat, 0) or self.EqualValue(lat, self.defaultvalue):
+        if equal(lat, 0) or equal(lat, self.defaultvalue):
             return False
-        if self.EqualValue(zvalue, self.defaultvalue):
+        if equal(zvalue, self.defaultvalue):
             return False
         return True
 
@@ -135,7 +133,7 @@ class Micaps3Data(Micaps):
             ('zvalue', np.float32)]
                              )
 
-    def UpdateData(self, products):
+    def UpdateData(self, products, micapsfile):
         self.UpdateExtents(products)
 
         extents = products.picture.extents
@@ -150,7 +148,6 @@ class Micaps3Data(Micaps):
             self.AddPoints(self.x, self.y, self.z, path)
 
         # self.CreateArray()
-        micapsfile = products.micapsfiles[0]
         self.X = np.linspace(xmin, xmax, micapsfile.contour.grid[0])
         self.Y = np.linspace(ymin, ymax, micapsfile.contour.grid[1])
         # x = self.data['lon']
@@ -164,6 +161,8 @@ class Micaps3Data(Micaps):
         self.distance = micapsfile.contour.step
         self.min = math.floor(self.min / self.distance) * self.distance
         self.max = math.ceil(self.max / self.distance) * self.distance
+        # 如果自定义了legend的最小、最大和步长值 则用自定义的值更新
+        self.UpdatePinLegendValue(micapsfile)
 
     @staticmethod
     def CheckData(data):

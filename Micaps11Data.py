@@ -2,9 +2,9 @@
 #     Micaps第11类数据 继承Micaps基类
 #     Author:     Liu xianyao
 #     Email:      flashlxy@qq.com
-#     Update:     2017-04-06
+#     Update:     2017-04-11
 #     Copyright:  ©江西省气象台 2017
-#     Version:    1.1.20170406
+#     Version:    2.0.20170411
 
 import codecs
 import math
@@ -90,14 +90,18 @@ class Micaps11Data(Micaps):
         except Exception as err:
             print(u'【{0}】{1}-{2}'.format(self.filename, err, datetime.now()))
 
-    def UpdateData(self, products):
+    def UpdateData(self, products, micapsfile):
         self.UpdateExtents(products)
-        micapsfile = products.micapsfiles[0]
+        # micapsfile = products.micapsfiles[0]
         self.min = self.Z.min()
         self.max = self.Z.max()
         self.distance = micapsfile.contour.step
         self.min = math.floor(self.min / self.distance) * self.distance
         self.max = math.ceil(self.max / self.distance) * self.distance
+
+        # 如果自定义了legend的最小、最大和步长值 则用自定义的值更新
+        self.UpdatePinLegendValue(micapsfile)
+
         from Main import equal
         if micapsfile.uv.onspeed and not equal(self.Z.max(), 0):
             self.linewidth = 5*self.Z/self.Z.max()
@@ -117,7 +121,7 @@ class Micaps11Data(Micaps):
         self.scale = micapsfile.uv.scale
         self.colorlist = micapsfile.legend.legendcolor
 
-    def DrawUV(self, m, products):
+    def DrawUV(self, m, micapsfile):
 
         if m is plt:
             if self.stream:
@@ -134,24 +138,24 @@ class Micaps11Data(Micaps):
                         sizes=dict(emptybarb=0))
 
         else:
-            if self.stream:
-                # transform vectors to projection grid.
-                uproj, vproj, xx, yy = \
-                    m.transform_vector(self.U, self.V, self.x, self.y, 31, 31,
-                                       returnxy=True, masked=True)
+            # transform vectors to projection grid.
+            uproj, vproj, xx, yy = \
+                m.transform_vector(self.U, self.V, self.x, self.y, 31, 31,
+                                   returnxy=True, masked=True)
 
-                if isinstance(self.color, np.ndarray):
-                    self.color = self.colorlist
+            if isinstance(self.color, np.ndarray):
+                self.color = self.colorlist
+
+            if self.stream:
                 # now plot.
                 Q = m.quiver(xx, yy, uproj, vproj, color=self.color, scale=self.scale)
                 # make quiver key.
-                qk = plt.quiverkey(Q, 0.1, 0.1, 20, '20 m/s', labelpos='W')
-
+                speed = micapsfile.uv.markscalelength
+                qk = plt.quiverkey(Q, 0.1, 0.1, speed, '%.0f m/s' % speed, labelpos='W')
             if self.barbs:
-
                 barbs = m.barbs(xx, yy, uproj, vproj, length=self.length,
                                 barb_increments=dict(half=2, full=4, flag=20),
                                 sizes=dict(emptybarb=0),
                                 barbcolor='k', flagcolor='r',
                                 linewidth=0.5)
-        #  plt.colorbar(strm.lines)
+
