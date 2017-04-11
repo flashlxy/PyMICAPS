@@ -1,6 +1,6 @@
 ### MicapsDataDraw
 
-    Version：2.1.20170410 Language：Python2.7
+    Version：2.0.20170411 Language：Python2.7
 
 #### 一个超级实用生产图片工具，用matplotlib和basemap绘制micaps数据
 
