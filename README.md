@@ -53,7 +53,7 @@
     作者的一个支持NCL colorbar的python库。
    
     欢迎大家star和fork，一并感谢2位作者！
-   
+    
 #### 以下是利用示例数据结合适当配置文件输出的图片
 
     Micaps第四类数据ortho投影：
