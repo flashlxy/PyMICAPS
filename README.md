@@ -33,7 +33,7 @@
     
 ##### 5、支持灵活配置色标
 
-`可以自己定义色标，同时支持`[NCL色标](http://www.ncl.ucar.edu/Document/Graphics/color_table_gallery.shtml)
+`****可以自己定义色标，同时支持` [NCL色标](http://www.ncl.ucar.edu/Document/Graphics/color_table_gallery.shtml)
 
 #### 程序运行
 
