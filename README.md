@@ -29,6 +29,10 @@
 ##### 4、支持任意区域完美白化
 
     用shp或者定制的txt文件所形成的单个或多个闭合区域切图，也就是所谓的白化。
+    
+##### 5、支持灵活配置色标
+
+    可以自己定义色标，同时支持[NCL色标](http://www.ncl.ucar.edu/Document/Graphics/color_table_gallery.shtml)
 
 #### 程序运行
 
