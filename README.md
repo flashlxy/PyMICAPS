@@ -1,4 +1,4 @@
-### MicapsDataDraw
+### MicapsDataDraw :joy:
 #### 一个超级实用生产图片工具，用matplotlib和basemap绘制micaps数据
 
     利用配置文件config.xml定制参数，结合micaps具体数据，可实现一种或多种类型（in the future）的micaps数据的叠加绘制
@@ -33,8 +33,7 @@
     
 ##### 5、支持灵活配置色标
 
-|----|-----|
-|`可以自己定义色标，同时支持`|[NCL色标](http://www.ncl.ucar.edu/Document/Graphics/color_table_gallery.shtml) |
+`可以自己定义色标，同时支持`[NCL色标](http://www.ncl.ucar.edu/Document/Graphics/color_table_gallery.shtml)
 
 #### 程序运行
 
