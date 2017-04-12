@@ -7,6 +7,11 @@
     利用配置文件config.xml定制参数，结合micaps具体数据，可实现一种或多种类型（in the future）的micaps数据的叠加绘制
 
     并自动输出相应图像到指定文件。
+    
+****
+#### Author:Xianyao Liu
+#### E-mail:flashlxy@qq.com
+****
 
 #### 主要功能
 
@@ -32,7 +37,7 @@
     
 ##### 5、支持灵活配置色标
 
-    可以自己定义色标，同时支持[NCL色标](http://www.ncl.ucar.edu/Document/Graphics/color_table_gallery.shtml)
+    可以自己定义色标，同时支持[NCL色标](http://www.ncl.ucar.edu/Document/Graphics/color_table_gallery.shtml)    
 
 #### 程序运行
 
@@ -43,9 +48,9 @@
 ##### 代码
 
     气象家园帖子
- 
-    http://bbs.06climate.com/forum.php?mod=viewthread&tid=42437
-   
+    
+##### [完美白化](http://bbs.06climate.com/forum.php?mod=viewthread&tid=42437)
+    
     作者的片段代码
    
 ##### 第三方库
