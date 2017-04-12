@@ -6,8 +6,8 @@
     并自动输出相应图像到指定文件。
     
 ****
-###### Author：Xianyao Liu       Version：2.0.20170411
-###### E-mail：flashlxy@qq.com   Language：Python2.7
+###### Author：Xianyao Liu | Version：2.0.20170411 | E-mail：flashlxy@qq.com | Language：Python2.7
+###### 
 ****
 
 #### 主要功能
