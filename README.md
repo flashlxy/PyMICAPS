@@ -5,7 +5,6 @@
 
     并自动输出相应图像到指定文件。
     
-****
 ###### Author：Xianyao Liu | Version：2.0.20170411 | E-mail：flashlxy@qq.com | Language：Python2.7
 ###### 
 ****
@@ -34,7 +33,8 @@
     
 ##### 5、支持灵活配置色标
 
-    * 可以自己定义色标，同时支持[NCL色标](http://www.ncl.ucar.edu/Document/Graphics/color_table_gallery.shtml)    
+|----|-----|
+|`可以自己定义色标，同时支持`|[NCL色标](http://www.ncl.ucar.edu/Document/Graphics/color_table_gallery.shtml) |
 
 #### 程序运行
 
