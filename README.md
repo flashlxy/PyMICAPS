@@ -42,22 +42,16 @@
 
 #### 项目参考的代码及的用到的一些库
 
-##### 代码
+##### 代码[完美白化](http://bbs.06climate.com/forum.php?mod=viewthread&tid=42437)
 
-    气象家园帖子
-    
-##### [完美白化](http://bbs.06climate.com/forum.php?mod=viewthread&tid=42437)
-    
-    作者的片段代码
+    气象家园帖子作者的片段代码
    
-##### 第三方库
-
-    matplotlib，basemap，numpy，scipy，shapefile，nclcmaps
-    
-    http://bbs.06climate.com/forum.php?mod=viewthread&tid=43521
+##### 第三方库[nclcmaps](http://bbs.06climate.com/forum.php?mod=viewthread&tid=43521)
 
     作者的一个支持NCL colorbar的python库。
-   
+    
+    matplotlib，basemap，numpy，scipy，shapefile，nclcmaps
+    
     欢迎大家star和fork，一并感谢2位作者！
    
 #### 以下是利用示例数据结合适当配置文件输出的图片
