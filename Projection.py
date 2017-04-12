@@ -62,6 +62,13 @@ class Projection:
         self.lonlabels = Projection.leaf_to_list(leaf=leaf, code='LonLabels', defvalue=[0, 0, 0, 0])
 
     @staticmethod
+    def ValidExtents(extents):
+        for extent in extents:
+            if extent is None:
+                return False
+        return True
+
+    @staticmethod
     def GetProjection(products):
         """
         根据获得产品参数获得投影后的画布对象
@@ -79,11 +86,12 @@ class Projection:
         projection = products.map.projection
         pjname = projection.name
 
-        if projection.lat_0 is not None:
+        if Projection.ValidExtents((projection.lon_0, projection.lon_0)):
             lon_0 = projection.lon_0
             lat_0 = projection.lat_0
 
-        if projection.llcrnrlat is not None:
+        if Projection.ValidExtents(
+                (projection.llcrnrlat, projection.llcrnrlat, projection.urcrnrlat, projection.urcrnrlon)):
             xmax = projection.urcrnrlon
             xmin = projection.llcrnrlon
             ymax = projection.urcrnrlat

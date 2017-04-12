@@ -32,7 +32,9 @@
             -->
             <BoundingLat>0</BoundingLat>
 
-            <!-- 为空或者为非数值则首先使用裁切区的左下角和右上角的经纬度，其次使用数据本身所在区域的左下角和右上角的经纬度
+            <!-- 左下角和右上角的经纬度任意一个为空或者为非数值
+                 则首先使用裁切区的左下角和右上角的经纬度，
+                 其次使用数据本身所在区域的左下角和右上角的经纬度。
                  对lcc, stere, merc很重要
                  5.13 85.86 53.51 174.69
                  lcc stere merc 比较适合的配置 leftbottom:-4,75 righttop:55,188
@@ -221,8 +223,8 @@
                  650000,710000,810000,820000
                 -->
                 <Code>360000,430000,440000,350000,330000,340000,420000,710000,810000,820000</Code>
-                <Using>off</Using>                                   <!-- 是否启用：on,off -->
-                <Draw>off</Draw>                                     <!-- 是否绘制：on,off -->
+                <Using>onf</Using>                                   <!-- 是否启用：on,off -->
+                <Draw>on</Draw>                                     <!-- 是否绘制：on,off -->
                 <LineWidth>1</LineWidth>                            <!-- 线宽：float -->
                 <LineColor>k</LineColor>                            <!-- 线颜色：str -->
             </ClipBorder>
@@ -275,11 +277,14 @@
                 <MicapsLegendColor>MPL_jet</MicapsLegendColor>
 
                 <!--
-                     图例填充样式数组，一般和自定义的legend结合使用，如不够LegendValue数组的长度，则会用最后一个样式自动补齐
-                     default is None
-                     单个样式有'', '/', '\', '|', '-', '+', 'x', 'o', 'O', '.', '*'共10种.
+                     When micapslegendvalue is false, the Hatches,LegendValue and LegendColor settings is working.
                 -->
-                <Hatches>'','','','*','*','-'</Hatches>
+                <!--
+                     图例填充样式数组，一般和自定义的legend结合使用，如不够LegendValue数组的长度，则会用最后一个样式自动补齐
+                     default is ['']
+                     单个样式有'', '/', '\\', '|', '-', '+', 'x', 'o', 'O', '.', '*'共10种.
+                -->
+                <Hatches></Hatches>
                 <!-- 图例等级值 0, 0.01, 10, 25, 50, 100, 250, 9999. default is None -->
                 <LegendValue>0.01, 10, 25, 50, 100, 250</LegendValue>
                 <!-- 图例颜色值 'none', '#A6F28F', '#3DBA3D', '#61B8FF', '#0000FF', '#FF00FA', '#800040', '#000000'. default is None-->
@@ -311,13 +316,18 @@
 
             <!-- 等值线 -->
             <Contour>
+                <!-- 是否用彩色圆点标注格点或站点 default is off-->
+                <Scatter>on1</Scatter>
+                <!-- 圆点的透明度 default is 1-->
+                <Alpha>0.5</Alpha>
+
                 <!--
                     等值线步长(float) 仅当数据是第三类数据并且本身图例值开关打开的时候有效 default is 4.
                     if the pinning legend values is not none, the setting is ignore.
                 -->
                 <Step>2.</Step>
                 <!-- 插值点数 （经度方向点数，纬度方向点数） default is [195,216]-->
-                <Grid>195.5,216.7</Grid>
+                <Grid>195,216</Grid>
                 <!-- 等值线配置 -->
                 <Contour>
                     <Visible>True1</Visible>     <!-- True False. default is False -->

@@ -16,6 +16,11 @@ class Contour:
     def __init__(self, root):
         p = root.find("Contour")
 
+        # 是否用彩色圆点标注格点或站点
+        self.scatter = Projection.leaf_to_bool(p, 'Scatter', False)
+        # 圆点的透明度
+        self.alpha = Projection.leaf_to_float(p, 'Alpha', 1)
+
         # 第三类数据等值线步长
         self.step = Projection.leaf_to_float(p, 'Step', 2.)
 

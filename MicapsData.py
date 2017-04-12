@@ -237,9 +237,29 @@ class Micaps:
 
         self.DrawUV(m, micapsfile)
 
+        # 绘制散点
+        if micapsfile.contour.scatter:
+            if hasattr(self, 'x1'):
+                m.scatter(self.x1, self.y1, s=20, c=self.z1,
+                          alpha=micapsfile.contour.alpha,
+                          edgecolors='b')
+            else:
+                m.scatter(self.X, self.Y, s=20, c=self.Z,
+                          alpha=micapsfile.contour.alpha,
+                          edgecolors='b')
+
         # 存图
         Picture.savePicture(fig, products.picture.picfile)
 
         print(products.picture.picfile + u'存图成功!')
         if debug:
             plt.show()
+
+    # def GetColors(self, legend, z):
+    #     if legend.micapslegendvalue:
+    #         pass
+    #     else:
+    #         for i in range(len(z)):
+    #             if z[i]
+
+

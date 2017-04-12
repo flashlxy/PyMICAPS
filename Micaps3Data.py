@@ -79,6 +79,10 @@ class Micaps3Data(Micaps):
             self.y = []
             self.z = []
 
+            self.x1 = []
+            self.y1 = []
+            self.z1 = []
+
             self.stationsum = (len(contents) - 14) / 5
             stations = []
             if self.dataflag == 'diamond' and self.style == '3':
@@ -104,6 +108,9 @@ class Micaps3Data(Micaps):
                 self.x.append(lon)
                 self.y.append(lat)
                 self.z.append(zvalue)
+                self.x1.append(lon)
+                self.y1.append(lat)
+                self.z1.append(zvalue)
 
             self.beginlon = min(self.x)
             self.endlon = max(self.x)

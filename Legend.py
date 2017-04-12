@@ -48,8 +48,8 @@ class Legend:
         self.micapslegendcolor = Projection.leaf_to_string(p, 'MicapsLegendColor', 'ncl_default')
 
         # 图例填充样式数组，一般和自定义的legend结合使用，如不够LegendValue数组的长度，则会用最后一个样式自动补齐
-        self.hatches = Projection.leaf_to_list(p, "Hatches", None)
-
+        self.hatches = Projection.leaf_to_list(p, "Hatches", [''])
+        self.validhatches(self.hatches)
         # 图例等级值
         self.legendvalue = Projection.leaf_to_list(p, "LegendValue", None)
 
@@ -84,3 +84,9 @@ class Legend:
                 self.pinlegendvalue = None
         else:
             self.pinlegendvalue = None
+
+    def validhatches(self, hatches):
+        hatches_list = ["", "/", "\\", "|", "-", "+", "x", "o", "O", ".", "*"]
+        if hatches is not None:
+            self.hatches = [a if a in hatches_list else '' for a in hatches]
+
