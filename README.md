@@ -36,6 +36,12 @@
     可以自己定义色标，同时支持
 [NCL色标](http://www.ncl.ucar.edu/Document/Graphics/color_table_gallery.shtml)
 
+#### 6、高度可定制化
+
+    包括但不限于标题内容、样式、位置；色标选择、位置、放置方式；
+
+    色版图、等值线、标注、格点着色的显隐等都实现了高度自定义。
+
 ### 程序运行
 
     python main.py config.xml
