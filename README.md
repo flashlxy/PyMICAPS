@@ -1,7 +1,8 @@
-## MicapsDataDraw :joy:
-### 一个超级实用生产图片工具，用matplotlib和basemap绘制micaps数据
 
-    利用配置文件config.xml定制参数，结合micaps具体数据，可实现一种或多种类型（in the future）的micaps数据的叠加绘制
+
+    利用配置文件config.xml定制参数，结合micaps具体数据，
+    
+    可实现一种或多种类型（in the future）的micaps数据的叠加绘制
 
     并自动输出相应图像到指定文件。
     
@@ -59,15 +60,10 @@
     matplotlib，basemap，numpy，scipy，shapefile，nclcmaps
     
     欢迎大家star和fork，一并感谢2位作者！
-   
-### 以下是利用示例数据结合适当配置文件输出的图片
 
-    Micaps第11类数据-ortho投影：
-
-![](https://github.com/flashlxy/MicapsDataDraw/raw/ver-2.0/images/17032520.001.png)
 
     Micaps第四类数据ortho投影：
-   
+    
 ![](https://github.com/flashlxy/MicapsDataDraw/raw/master/images/3.png)
 
     Micaps第四类 数据无投影：
