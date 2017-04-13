@@ -1,4 +1,8 @@
+### MicapsDataDraw
 
+    Version：2.0.20170411 Language：Python2.7
+
+#### 一个超级实用生产图片工具，用matplotlib和basemap绘制micaps数据
 
     利用配置文件config.xml定制参数，结合micaps具体数据，
     
@@ -61,6 +65,11 @@
     
     欢迎大家star和fork，一并感谢2位作者！
 
+#### 以下是利用示例数据结合适当配置文件输出的图片
+
+    Micaps第11类数据-ortho投影：
+
+![](https://github.com/flashlxy/MicapsDataDraw/raw/ver-2.0/images/17032520.001.png)
 
     Micaps第四类数据ortho投影：
     
