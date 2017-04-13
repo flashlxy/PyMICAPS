@@ -67,7 +67,7 @@
 
     Micaps第11类数据-ortho投影：
 
-![](https://github.com/flashlxy/MicapsDataDraw/raw/ver-2.0/images/17032520.001.png)
+![](https://github.com/flashlxy/MicapsDataDraw/raw/master/images/17032520.001.png)
 
     Micaps第四类数据ortho投影：
     
