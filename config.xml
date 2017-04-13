@@ -10,7 +10,7 @@
                  stere：极射赤面投影，npstere：北半球极射赤面投影, hammer，kav7，
                  merc：麦卡托投影，gnom, cyl：等经纬度投影
              -->
-            <Name>ortho</Name>
+            <Name>sall</Name>
 
             <!-- 为空或者为非数值则首先使用裁切区的中心经纬度，其次使用数据本身所在区域的中心经纬度-->
             <!-- central latitude (y-axis origin) - used by all projections. -->
@@ -94,7 +94,7 @@
                 <LineWidth>0.5</LineWidth>                          <!-- 线宽：float -->
                 <LineColor>blue</LineColor>                         <!-- 线颜色：str -->
                 <Polygon>off</Polygon>                              <!-- 闭合折线(仅用于非shp文件)：on, off -->
-                <Draw>off</Draw>                                    <!-- 是否绘制：on, off -->
+                <Draw>on</Draw>                                    <!-- 是否绘制：on, off -->
             </Border>
             <Border>
                 <File>XD.txt</File>  <!-- 地图文件 -->
@@ -102,7 +102,7 @@
                 <LineWidth>0.5</LineWidth>                          <!-- 线宽：float -->
                 <LineColor>blue</LineColor>                         <!-- 线颜色：str -->
                 <Polygon>on</Polygon>                               <!-- 闭合折线(仅用于非shp文件)：on, off -->
-                <Draw>off</Draw>                                    <!-- 是否绘制：on, off -->
+                <Draw>on</Draw>                                    <!-- 是否绘制：on, off -->
             </Border>
             <Border>
                 <File>YD.txt</File>  <!-- 地图文件 -->
@@ -110,7 +110,7 @@
                 <LineWidth>0.5</LineWidth>                          <!-- 线宽：float -->
                 <LineColor>blue</LineColor>                         <!-- 线颜色：str -->
                 <Polygon>on</Polygon>                               <!-- 闭合折线(仅用于非shp文件)：on, off -->
-                <Draw>off</Draw>                                    <!-- 是否绘制：on, off -->
+                <Draw>on</Draw>                                    <!-- 是否绘制：on, off -->
             </Border>
             <Border>
                 <File>YN.txt</File>  <!-- 地图文件 -->
@@ -118,7 +118,7 @@
                 <LineWidth>0.5</LineWidth>                          <!-- 线宽：float -->
                 <LineColor>blue</LineColor>                         <!-- 线颜色：str -->
                 <Polygon>on</Polygon>                               <!-- 闭合折线(仅用于非shp文件)：on, off -->
-                <Draw>off</Draw>                                    <!-- 是否绘制：on, off -->
+                <Draw>on</Draw>                                    <!-- 是否绘制：on, off -->
             </Border>
             <Border>
                 <File>SR.txt</File>  <!-- 地图文件 -->
@@ -126,7 +126,7 @@
                 <LineWidth>0.5</LineWidth>                          <!-- 线宽：float -->
                 <LineColor>blue</LineColor>                         <!-- 线颜色：str -->
                 <Polygon>on</Polygon>                               <!-- 闭合折线(仅用于非shp文件)：on, off -->
-                <Draw>off</Draw>                                    <!-- 是否绘制：on, off -->
+                <Draw>on</Draw>                                    <!-- 是否绘制：on, off -->
             </Border>
             <Border>
                 <File>PX.txt</File>  <!-- 地图文件 -->
@@ -134,7 +134,7 @@
                 <LineWidth>0.5</LineWidth>                          <!-- 线宽：float -->
                 <LineColor>blue</LineColor>                         <!-- 线颜色：str -->
                 <Polygon>on</Polygon>                               <!-- 闭合折线(仅用于非shp文件)：on, off -->
-                <Draw>off</Draw>                                    <!-- 是否绘制：on, off -->
+                <Draw>on</Draw>                                    <!-- 是否绘制：on, off -->
             </Border>
             <Border>
                 <File>GA.txt</File>  <!-- 地图文件 -->
@@ -142,7 +142,7 @@
                 <LineWidth>0.5</LineWidth>                          <!-- 线宽：float -->
                 <LineColor>blue</LineColor>                         <!-- 线颜色：str -->
                 <Polygon>on</Polygon>                               <!-- 闭合折线(仅用于非shp文件)：on, off -->
-                <Draw>off</Draw>                                    <!-- 是否绘制：on, off -->
+                <Draw>on</Draw>                                    <!-- 是否绘制：on, off -->
             </Border>
             <Border>
                 <File>JJ.txt</File>  <!-- 地图文件 -->
@@ -150,7 +150,7 @@
                 <LineWidth>0.5</LineWidth>                          <!-- 线宽：float -->
                 <LineColor>blue</LineColor>                         <!-- 线颜色：str -->
                 <Polygon>on</Polygon>                               <!-- 闭合折线(仅用于非shp文件)：on, off -->
-                <Draw>off</Draw>                                    <!-- 是否绘制：on, off -->
+                <Draw>on</Draw>                                    <!-- 是否绘制：on, off -->
             </Border>
             <Border>
                 <File>JA.txt</File>  <!-- 地图文件 -->
@@ -158,7 +158,7 @@
                 <LineWidth>0.5</LineWidth>                          <!-- 线宽：float -->
                 <LineColor>blue</LineColor>                         <!-- 线颜色：str -->
                 <Polygon>on</Polygon>                               <!-- 闭合折线(仅用于非shp文件)：on, off -->
-                <Draw>off</Draw>                                    <!-- 是否绘制：on, off -->
+                <Draw>on</Draw>                                    <!-- 是否绘制：on, off -->
             </Border>
             <Border>
                 <File>JD.txt</File>  <!-- 地图文件 -->
@@ -166,7 +166,7 @@
                 <LineWidth>0.5</LineWidth>                          <!-- 线宽：float -->
                 <LineColor>blue</LineColor>                         <!-- 线颜色：str -->
                 <Polygon>on</Polygon>                               <!-- 闭合折线(仅用于非shp文件)：on, off -->
-                <Draw>off</Draw>                                    <!-- 是否绘制：on, off -->
+                <Draw>on</Draw>                                    <!-- 是否绘制：on, off -->
             </Border>
         </Borders>
 
@@ -222,8 +222,8 @@
                  460000,500000,510000,520000,530000,540000,610000,620000,630000,640000,
                  650000,710000,810000,820000
                 -->
-                <Code>360000,430000,440000,350000,330000,340000,420000,710000,810000,820000</Code>
-                <Using>onf</Using>                                   <!-- 是否启用：on,off -->
+                <Code>360000</Code>
+                <Using>on</Using>                                   <!-- 是否启用：on,off -->
                 <Draw>on</Draw>                                     <!-- 是否绘制：on,off -->
                 <LineWidth>1</LineWidth>                            <!-- 线宽：float -->
                 <LineColor>k</LineColor>                            <!-- 线颜色：str -->
@@ -239,7 +239,7 @@
             <!-- micaps数据类型 -->
             <File>
                 <!-- M1：站点数据，M4：第4类格点数据，M11：第11类UV数据-->
-                <Type>M11</Type>
+                <Type>M3</Type>
 
                 <!--原始数据文件
                     M4 - K:\GQEC\TP\r24\17032908.060 16062908.012 K:\ecmwf\pressure\999\16122520.000
@@ -248,7 +248,7 @@
                     M3 - K:\zdzjm\maxtemp\17011418.000 K:\zdzjm\rain24\17033115.000
                     M11  K:\ecmwf\uv\850\17041020.000
                 -->
-                <FileName>K:\ecmwf\uv\850\17041020.000</FileName>
+                <FileName> K:\zdzjm\rain24\17033115.000 </FileName>
             </File>
             <!-- 图例 -->
             <Legend>
@@ -259,7 +259,7 @@
                 <LegendPic> </LegendPic>
 
                 <!-- 是否取MICAPS数据本身的图例值 True False default is True-->
-                <MicapsLegendValue>True</MicapsLegendValue>
+                <MicapsLegendValue>True1</MicapsLegendValue>
 
                 <!--
                      When micapslegendvalue is true, the setting is working.
@@ -317,9 +317,11 @@
             <!-- 等值线 -->
             <Contour>
                 <!-- 是否用彩色圆点标注格点或站点 default is off-->
-                <Scatter>on1</Scatter>
+                <Scatter>on</Scatter>
                 <!-- 圆点的透明度 default is 1-->
                 <Alpha>0.5</Alpha>
+                <!-- 圆点半径 default is 10-->
+                <Radius>10</Radius>
 
                 <!--
                     等值线步长(float) 仅当数据是第三类数据并且本身图例值开关打开的时候有效 default is 4.

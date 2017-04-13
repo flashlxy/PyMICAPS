@@ -240,11 +240,11 @@ class Micaps:
         # 绘制散点
         if micapsfile.contour.scatter:
             if hasattr(self, 'x1'):
-                m.scatter(self.x1, self.y1, s=20, c=self.z1,
+                m.scatter(self.x1, self.y1, s=micapsfile.contour.radius, c=self.z1,
                           alpha=micapsfile.contour.alpha,
                           edgecolors='b')
             else:
-                m.scatter(self.X, self.Y, s=20, c=self.Z,
+                m.scatter(self.X, self.Y, s=micapsfile.contour.radius, c=self.Z,
                           alpha=micapsfile.contour.alpha,
                           edgecolors='b')
 
