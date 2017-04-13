@@ -137,7 +137,7 @@ class Micaps:
         return
 
     def GetExtend(self):
-        if self.title.find(u'降水') >= 0 or self.title.find(u'雨'):
+        if self.title.find(u'降水') >= 0 or self.title.find(u'雨') >= 0:
             extend = 'max'
         else:
             extend = 'neither'
@@ -155,7 +155,8 @@ class Micaps:
         :return: 
         """
         # 图例的延展类型
-        extend = self.GetExtend()
+        # extend = self.GetExtend()
+        extend = micapsfile.legend.extend
 
         # 更新绘图矩形区域
         # self.UpdateExtents(products)

@@ -35,6 +35,9 @@ class Legend:
             else:
                 self.legendpic = legend_pics[0].strip()
 
+        # 图例的延展类型:neither,min,max default is neither
+        self.extend = Projection.leaf_to_string(p, 'Extend', 'neither')
+
         # 是否取MICAPS数据本身的图例值
         self.micapslegendvalue = Projection.leaf_to_bool(p, "MicapsLegendValue", True, 'TRUE')
 

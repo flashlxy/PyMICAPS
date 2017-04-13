@@ -239,7 +239,7 @@
             <!-- micaps数据类型 -->
             <File>
                 <!-- M1：站点数据，M4：第4类格点数据，M11：第11类UV数据-->
-                <Type>M3</Type>
+                <Type>M4</Type>
 
                 <!--原始数据文件
                     M4 - K:\GQEC\TP\r24\17032908.060 16062908.012 K:\ecmwf\pressure\999\16122520.000
@@ -248,7 +248,7 @@
                     M3 - K:\zdzjm\maxtemp\17011418.000 K:\zdzjm\rain24\17033115.000
                     M11  K:\ecmwf\uv\850\17041020.000
                 -->
-                <FileName> K:\zdzjm\rain24\17033115.000 </FileName>
+                <FileName> K:\ecmwf\height\500\17033108.240 </FileName>
             </File>
             <!-- 图例 -->
             <Legend>
@@ -258,8 +258,11 @@
                 -->
                 <LegendPic> </LegendPic>
 
+                <!-- 图例的延展类型:neither,min,max default is neither-->
+                <Extend>max</Extend>
+
                 <!-- 是否取MICAPS数据本身的图例值 True False default is True-->
-                <MicapsLegendValue>True1</MicapsLegendValue>
+                <MicapsLegendValue>True</MicapsLegendValue>
 
                 <!--
                      When micapslegendvalue is true, the setting is working.
