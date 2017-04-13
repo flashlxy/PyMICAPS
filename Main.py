@@ -2,11 +2,13 @@
 #
 #     Author:     Liu xianyao
 #     Email:      flashlxy@qq.com
-#     Update:     2017-04-06
+#     Update:     2017-04-11
 #     Copyright:  ©江西省气象台 2017
-#     Version:    1.1
+
 
 import sys
+
+import math
 
 reload(sys)
 sys.setdefaultencoding('utf-8')
@@ -23,6 +25,10 @@ def parseInt(s):
     """
     assert isinstance(s, basestring)
     return int(''.join(list(takewhile(lambda x: x.isdigit(), s)))) if s[0].isdigit() else None
+
+
+def equal(value1, value2):
+    return math.fabs(value1 - value2) < 10e-5
 
 
 def main(debug):
@@ -44,7 +50,9 @@ def main(debug):
     from Products import Products
     products = Products(xml)
     if products is not None:
-        products.micapsdata.Draw(products, debug)
+        for micapsfile in products.micapsfiles:
+            micapsfile.file.micapsdata.Draw(products, micapsfile, debug)
+            # break
 
     print('Micaps data contour and save picture seconds:', ttime.clock() - start)
 

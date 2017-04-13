@@ -2,9 +2,9 @@
 #     Micaps第4类数据 继承Micaps基类
 #     Author:     Liu xianyao
 #     Email:      flashlxy@qq.com
-#     Update:     2017-04-06
+#     Update:     2017-04-11
 #     Copyright:  ©江西省气象台 2017
-#     Version:    1.1.20170406
+#     Version:    2.0.20170411
 
 import codecs
 import numpy as np
@@ -70,6 +70,11 @@ class Micaps4Data(Micaps):
 
         except Exception as err:
             print(u'【{0}】{1}-{2}'.format(self.filename, err, datetime.now()))
+
+    def UpdateData(self, products, micapsfile):
+        self.UpdateExtents(products)
+        # 如果自定义了legend的最小、最大和步长值 则用自定义的值更新
+        self.UpdatePinLegendValue(micapsfile)
 
     @staticmethod
     def Write(filename, fdate, edate, flon, elon, flat, elat, xjj, yjj, nx, ny, zi):

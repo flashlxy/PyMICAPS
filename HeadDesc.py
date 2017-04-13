@@ -16,4 +16,3 @@ class HeadDesc:
         self.pos = pos
         self.font = font
         # fontdict={'family': 'monospace', 'color': 'blue'}
-

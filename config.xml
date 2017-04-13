@@ -1,16 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
-<Products>
-    <Product>
-	    <!-- M1：站点数据，M4：第4类格点数据，M11：第11类UV数据-->   
-        <OriginalDataType>M4</OriginalDataType>
-
-        <!--原始数据文件路径
-            M4 - K:\GQEC\TP\r24\17032908.060 16062908.012 K:\ecmwf\pressure\999\16122520.000
-                 K:\ecmwf\height\500\17033108.240 K:\ecmwf\temper\850\16122520.000
-                 K:\GQJP\HGT\500\17040514.084 K:\GQJP\24P\1010\17040514.078
-        -->
-        <OriginalFile>K:\GQEC\TP\r24\17032908.060</OriginalFile>
-
+<Product>
+    <!-- 地图 -->
+    <Map>
         <!-- 地图投影 -->
         <Projection>
             <!-- map projection. Print the module variable supported_projections to see a list of allowed values.
@@ -19,184 +10,171 @@
                  stere：极射赤面投影，npstere：北半球极射赤面投影, hammer，kav7，
                  merc：麦卡托投影，gnom, cyl：等经纬度投影
              -->
-            <name>sall</name>
+            <Name>sall</Name>
 
             <!-- 为空或者为非数值则首先使用裁切区的中心经纬度，其次使用数据本身所在区域的中心经纬度-->
             <!-- central latitude (y-axis origin) - used by all projections. -->
-            <lon_0>116.</lon_0>
+            <Lon_0>116.</Lon_0>
 
             <!-- central meridian (x-axis origin) - used by all projections. -->
-            <lat_0>30.</lat_0>
+            <Lat_0>30.</Lat_0>
 
             <!-- latitude of true scale. Optional for stereographic, cylindrical equal area and mercator projections.
                  default is lat_0 for stereographic projection.
                  default is 0 for mercator and cylindrical equal area projections.
             -->
-            <lat_ts>90.</lat_ts>
+            <Lat_ts>90.</Lat_ts>
 
             <!-- bounding latitude for pole-centered projections (npstere,spstere,nplaea,splaea,npaeqd,spaeqd).
                  These projections are square regions centered on the north or south pole.
                  The longitude lon_0 is at 6-o’clock,
                  and the latitude circle boundinglat is tangent to the edge of the map at lon_0.
             -->
-            <boundinglat>0</boundinglat>
+            <BoundingLat>0</BoundingLat>
 
-            <!-- 为空或者为非数值则首先使用裁切区的左下角和右上角的经纬度，其次使用数据本身所在区域的左下角和右上角的经纬度
+            <!-- 左下角和右上角的经纬度任意一个为空或者为非数值
+                 则首先使用裁切区的左下角和右上角的经纬度，
+                 其次使用数据本身所在区域的左下角和右上角的经纬度。
                  对lcc, stere, merc很重要
                  5.13 85.86 53.51 174.69
                  lcc stere merc 比较适合的配置 leftbottom:-4,75 righttop:55,188
             -->
             <!-- latitude of lower left hand corner of the selected map domain. -->
-            <llcrnrlat>10</llcrnrlat>
+            <LlcrnrLat>-4</LlcrnrLat>
 
             <!--longitude of lower left hand corner of the selected map domain.-->
-            <llcrnrlon>50</llcrnrlon>
+            <LlcrnrLon>75</LlcrnrLon>
 
             <!--latitude of upper right hand corner of the selected map domain.-->
-            <urcrnrlat>70</urcrnrlat>
+            <UrcrnrLat>55</UrcrnrLat>
 
             <!--longitude of upper right hand corner of the selected map domain.-->
-            <urcrnrlon>160</urcrnrlon>
+            <UrcrnrLon>188</UrcrnrLon>
+
+            <!-- 坐标轴 -->
+            <!-- 是否显示坐标轴 on off. default is off -->
+            <Axis>on</Axis>
+            <!-- 纬度方向坐标轴的文本 左 上 右 下 - 1,0,0,1 -->
+            <LatLabels>1,0,0,0</LatLabels>
+            <!-- 经度方向坐标轴的文本 左 上 右 下 - 1,0,0,1 -->
+            <LonLabels>0,0,0,1</LonLabels>
 
             <!-- 是否显示海岸线 on off. default is off -->
-            <coastlines>on</coastlines>
+            <Coastlines>on</Coastlines>
 
             <!-- 是否显示国界线 on off. default is off -->
-            <countries>on</countries>
+            <Countries>on</Countries>
 
             <!-- 海洋陆地设置 -->
-            <lsmask>
-                <visible>on</visible>                         <!-- 海洋陆地配色开关 default is off -->
-                <land_color>#ddaa66</land_color>              <!-- 陆地颜色 default is '#689CD2' -->
-                <ocean_color>#7777ff</ocean_color>            <!-- 海洋颜色 default is '#689CD2' -->
-            </lsmask>
-
-            <!-- 是否显示坐标轴 on off. default is off -->
-            <axis>on</axis>
-
-            <!-- 纬度方向坐标轴的文本 左 上 右 下 - 1,0,0,1 -->
-            <latlabels>1,0,0,0</latlabels>
-
-            <!-- 经度方向坐标轴的文本 左 上 右 下 - 1,0,0,1 -->
-            <lonlabels>0,0,0,1</lonlabels>
-
-            <!-- colorbar settings begin 对无投影无效-->
-            <!-- where to put colorbar (‘top’,’bottom’,’left’,’right’) Default ‘right’. -->
-            <location>bottom</location>
-
-            <!-- width of colorbar axes (string ‘N%’, where N is an integer describing
-                 the fractional width of the parent axes). Default ‘5%’.
-            -->
-            <size>3%</size>
-
-            <!--Padding between parent axes and colorbar axes in same units as size. Default ‘2%’.-->
-            <pad>5%</pad>
-            <!-- colorbar settings stop 对无投影无效-->
+            <Lsmask>
+                <Visible>on</Visible>                         <!-- 海洋陆地配色开关 default is off -->
+                <Land_color>#ddaa66</Land_color>              <!-- 陆地颜色 default is '#689CD2' -->
+                <Ocean_color>#7777ff</Ocean_color>            <!-- 海洋颜色 default is '#689CD2' -->
+            </Lsmask>
 
         </Projection>
 
-
-		<!-- 地图边界 支持shp和指定格式的txt文件，见示例基础数据
-		 D:\CODES\pyproject\shapefiles\china\bou2_4l.shp  BOUA5
-		 D:\CODES\pyproject\shapefiles\xz_new\BOUA5.shp
-		 'LC', 'GA', 'JA', 'JD', 'JJ', 'NC', 'PX', 'SR', 'XD', 'YD', 'YN'
-		-->
-        <MapBorders>
-            <MapBorder>
-                <File>D:\CODES\pyproject\shapefiles\bou2_4l.shp</File>  <!-- 地图文件 -->
+        <!-- 地图边界 支持shp和指定格式的txt文件，见示例基础数据
+         D:\CODES\pyproject\shapefiles\china\bou2_4l.shp  BOUA5
+         D:\CODES\pyproject\shapefiles\xz_new\BOUA5.shp
+         'LC', 'GA', 'JA', 'JD', 'JJ', 'NC', 'PX', 'SR', 'XD', 'YD', 'YN'
+        -->
+        <Borders>
+            <Border>
+                <File>D:\CODES\MicapsDataDraw\shapefiles\bou2_4l.shp</File>  <!-- 地图文件 -->
                 <Type>shp</Type>                                    <!-- 地图文件类型 -->
                 <LineWidth>0.5</LineWidth>                         <!-- 线宽：float -->
                 <LineColor>k</LineColor>                            <!-- 线颜色：str -->
                 <Polygon>on</Polygon>                               <!-- 闭合折线(仅用于非shp文件)：on, off -->
                 <Draw>on</Draw>                                     <!-- 是否绘制：on, off -->
-            </MapBorder>
-            <MapBorder>
+            </Border>
+            <Border>
                 <File>LC.txt</File>  <!-- 地图文件 -->
                 <Type>txt</Type>                                    <!-- 地图文件类型 -->
                 <LineWidth>0.5</LineWidth>                          <!-- 线宽：float -->
                 <LineColor>blue</LineColor>                         <!-- 线颜色：str -->
                 <Polygon>off</Polygon>                              <!-- 闭合折线(仅用于非shp文件)：on, off -->
-                <Draw>off</Draw>                                    <!-- 是否绘制：on, off -->
-            </MapBorder>
-            <MapBorder>
+                <Draw>on</Draw>                                    <!-- 是否绘制：on, off -->
+            </Border>
+            <Border>
                 <File>XD.txt</File>  <!-- 地图文件 -->
                 <Type>txt</Type>                                    <!-- 地图文件类型 -->
                 <LineWidth>0.5</LineWidth>                          <!-- 线宽：float -->
                 <LineColor>blue</LineColor>                         <!-- 线颜色：str -->
                 <Polygon>on</Polygon>                               <!-- 闭合折线(仅用于非shp文件)：on, off -->
-                <Draw>off</Draw>                                    <!-- 是否绘制：on, off -->
-            </MapBorder>
-            <MapBorder>
+                <Draw>on</Draw>                                    <!-- 是否绘制：on, off -->
+            </Border>
+            <Border>
                 <File>YD.txt</File>  <!-- 地图文件 -->
                 <Type>txt</Type>                                    <!-- 地图文件类型 -->
                 <LineWidth>0.5</LineWidth>                          <!-- 线宽：float -->
                 <LineColor>blue</LineColor>                         <!-- 线颜色：str -->
                 <Polygon>on</Polygon>                               <!-- 闭合折线(仅用于非shp文件)：on, off -->
-                <Draw>off</Draw>                                    <!-- 是否绘制：on, off -->
-            </MapBorder>
-            <MapBorder>
+                <Draw>on</Draw>                                    <!-- 是否绘制：on, off -->
+            </Border>
+            <Border>
                 <File>YN.txt</File>  <!-- 地图文件 -->
                 <Type>txt</Type>                                    <!-- 地图文件类型 -->
                 <LineWidth>0.5</LineWidth>                          <!-- 线宽：float -->
                 <LineColor>blue</LineColor>                         <!-- 线颜色：str -->
                 <Polygon>on</Polygon>                               <!-- 闭合折线(仅用于非shp文件)：on, off -->
-                <Draw>off</Draw>                                    <!-- 是否绘制：on, off -->
-            </MapBorder>
-            <MapBorder>
+                <Draw>on</Draw>                                    <!-- 是否绘制：on, off -->
+            </Border>
+            <Border>
                 <File>SR.txt</File>  <!-- 地图文件 -->
                 <Type>txt</Type>                                    <!-- 地图文件类型 -->
                 <LineWidth>0.5</LineWidth>                          <!-- 线宽：float -->
                 <LineColor>blue</LineColor>                         <!-- 线颜色：str -->
                 <Polygon>on</Polygon>                               <!-- 闭合折线(仅用于非shp文件)：on, off -->
-                <Draw>off</Draw>                                    <!-- 是否绘制：on, off -->
-            </MapBorder>
-            <MapBorder>
+                <Draw>on</Draw>                                    <!-- 是否绘制：on, off -->
+            </Border>
+            <Border>
                 <File>PX.txt</File>  <!-- 地图文件 -->
                 <Type>txt</Type>                                    <!-- 地图文件类型 -->
                 <LineWidth>0.5</LineWidth>                          <!-- 线宽：float -->
                 <LineColor>blue</LineColor>                         <!-- 线颜色：str -->
                 <Polygon>on</Polygon>                               <!-- 闭合折线(仅用于非shp文件)：on, off -->
-                <Draw>off</Draw>                                    <!-- 是否绘制：on, off -->
-            </MapBorder>
-            <MapBorder>
+                <Draw>on</Draw>                                    <!-- 是否绘制：on, off -->
+            </Border>
+            <Border>
                 <File>GA.txt</File>  <!-- 地图文件 -->
                 <Type>txt</Type>                                    <!-- 地图文件类型 -->
                 <LineWidth>0.5</LineWidth>                          <!-- 线宽：float -->
                 <LineColor>blue</LineColor>                         <!-- 线颜色：str -->
                 <Polygon>on</Polygon>                               <!-- 闭合折线(仅用于非shp文件)：on, off -->
-                <Draw>off</Draw>                                    <!-- 是否绘制：on, off -->
-            </MapBorder>
-            <MapBorder>
+                <Draw>on</Draw>                                    <!-- 是否绘制：on, off -->
+            </Border>
+            <Border>
                 <File>JJ.txt</File>  <!-- 地图文件 -->
                 <Type>txt</Type>                                    <!-- 地图文件类型 -->
                 <LineWidth>0.5</LineWidth>                          <!-- 线宽：float -->
                 <LineColor>blue</LineColor>                         <!-- 线颜色：str -->
                 <Polygon>on</Polygon>                               <!-- 闭合折线(仅用于非shp文件)：on, off -->
-                <Draw>off</Draw>                                    <!-- 是否绘制：on, off -->
-            </MapBorder>
-            <MapBorder>
+                <Draw>on</Draw>                                    <!-- 是否绘制：on, off -->
+            </Border>
+            <Border>
                 <File>JA.txt</File>  <!-- 地图文件 -->
                 <Type>txt</Type>                                    <!-- 地图文件类型 -->
                 <LineWidth>0.5</LineWidth>                          <!-- 线宽：float -->
                 <LineColor>blue</LineColor>                         <!-- 线颜色：str -->
                 <Polygon>on</Polygon>                               <!-- 闭合折线(仅用于非shp文件)：on, off -->
-                <Draw>off</Draw>                                    <!-- 是否绘制：on, off -->
-            </MapBorder>
-            <MapBorder>
+                <Draw>on</Draw>                                    <!-- 是否绘制：on, off -->
+            </Border>
+            <Border>
                 <File>JD.txt</File>  <!-- 地图文件 -->
                 <Type>txt</Type>                                    <!-- 地图文件类型 -->
                 <LineWidth>0.5</LineWidth>                          <!-- 线宽：float -->
                 <LineColor>blue</LineColor>                         <!-- 线颜色：str -->
                 <Polygon>on</Polygon>                               <!-- 闭合折线(仅用于非shp文件)：on, off -->
-                <Draw>off</Draw>                                    <!-- 是否绘制：on, off -->
-            </MapBorder>
-        </MapBorders>
+                <Draw>on</Draw>                                    <!-- 是否绘制：on, off -->
+            </Border>
+        </Borders>
 
         <!-- 裁剪边界文件路径，用于对色斑图进行裁剪
-		d:\codes\pyproject\shapefiles\bou2_4p|360000,430000,440000,350000|1
-		360000,430000,440000,350000,330000,340000,420000,710000,810000,820000
-		-->
-        <CutBorders>
+        d:\codes\pyproject\shapefiles\bou2_4p|360000,430000,440000,350000|1
+        360000,430000,440000,350000,330000,340000,420000,710000,810000,820000
+        -->
+        <ClipBorders>
             <!--shp地图文件路径|裁切区编码数组(支持多省合并)|线宽
             各省、直辖市、港澳台行政区划码说明：
             110000     北京市
@@ -235,20 +213,224 @@
             820000     澳门特别行政区
             -->
 
-            <CutBorder>
-                <File>d:\codes\pyproject\shapefiles\bou2_4p</File>  <!-- 地图文件 -->
+            <ClipBorder>
+                <File>d:\codes\MicapsDataDraw\shapefiles\bou2_4p</File>  <!-- 地图文件 -->
                 <Type>shp</Type>                                    <!-- 地图文件类型 -->
-                <!-- 行政区划码数组 ，仅对shp文件有效 360000,430000 default is 360000 -->
-                <Code>360000,430000,440000,350000,330000,340000,420000,710000,810000,820000</Code>
-                <Using>on</Using>                                  <!-- 是否启用：on,off -->
-                <Draw>off</Draw>                                     <!-- 是否绘制：on,off -->
+                <!-- 行政区划码数组 ，仅对shp文件有效 360000,430000 default is 360000
+                 110000,120000,130000,140000,150000,210000,220000,230000,310000,320000,
+                 330000,340000,350000,360000,370000,410000,420000,430000,440000,450000,
+                 460000,500000,510000,520000,530000,540000,610000,620000,630000,640000,
+                 650000,710000,810000,820000
+                -->
+                <Code>360000</Code>
+                <Using>on</Using>                                   <!-- 是否启用：on,off -->
+                <Draw>on</Draw>                                     <!-- 是否绘制：on,off -->
                 <LineWidth>1</LineWidth>                            <!-- 线宽：float -->
                 <LineColor>k</LineColor>                            <!-- 线颜色：str -->
-            </CutBorder>
-        </CutBorders>
-		<!-- 生成的图片宽度 基本不用 根据高度按比例确定 default is 10 -->
+            </ClipBorder>
+        </ClipBorders>
+
+    </Map>
+
+    <!-- 输入Micaps数据 -->
+    <MicapsFiles>
+
+        <MicapsFile>
+            <!-- micaps数据类型 -->
+            <File>
+                <!-- M1：站点数据，M4：第4类格点数据，M11：第11类UV数据-->
+                <Type>M3</Type>
+
+                <!--原始数据文件
+                    M4 - K:\GQEC\TP\r24\17032908.060 16062908.012 K:\ecmwf\pressure\999\16122520.000
+                         K:\ecmwf\height\500\17033108.240 K:\ecmwf\temper\850\16122520.000
+                         K:\GQJP\HGT\500\17040514.084 K:\GQJP\24P\1010\17040514.078
+                    M3 - K:\zdzjm\maxtemp\17011418.000 K:\zdzjm\rain24\17033115.000
+                    M11  K:\ecmwf\uv\850\17041020.000
+                -->
+                <FileName> K:\zdzjm\rain24\17033115.000 </FileName>
+            </File>
+            <!-- 图例 -->
+            <Legend>
+                <!-- 图例图片文件路径，图例叠加到产品图上的位置，为空表示自行生成图例
+                 格式:文件名，插入经度，插入纬度，图例缩放系数
+                 jxlogo.png,117,25.7,1
+                -->
+                <LegendPic> </LegendPic>
+
+                <!-- 是否取MICAPS数据本身的图例值 True False default is True-->
+                <MicapsLegendValue>True1</MicapsLegendValue>
+
+                <!--
+                     When micapslegendvalue is true, the setting is working.
+                     if pin the legend values, [begin value,stop value,step] is working. default is None
+                     else use the data self legend values
+                     -12,40,2
+                -->
+                <PinLegendValue></PinLegendValue>
+
+                <!--
+                色标名称: 仅当MicapsLegendValue=True时有效。
+                支持NCL colorbar name. example: MPL_jet, ncl_default, MPL_RdBu MPL_cool etc. default is ncl_default
+                参考链接：http://www.ncl.ucar.edu/Document/Graphics/color_table_gallery.shtml
+                -->
+                <MicapsLegendColor>MPL_jet</MicapsLegendColor>
+
+                <!--
+                     When micapslegendvalue is false, the Hatches,LegendValue and LegendColor settings is working.
+                -->
+                <!--
+                     图例填充样式数组，一般和自定义的legend结合使用，如不够LegendValue数组的长度，则会用最后一个样式自动补齐
+                     default is ['']
+                     单个样式有'', '/', '\\', '|', '-', '+', 'x', 'o', 'O', '.', '*'共10种.
+                -->
+                <Hatches></Hatches>
+                <!-- 图例等级值 0, 0.01, 10, 25, 50, 100, 250, 9999. default is None -->
+                <LegendValue>0.01, 10, 25, 50, 100, 250</LegendValue>
+                <!-- 图例颜色值 'none', '#A6F28F', '#3DBA3D', '#61B8FF', '#0000FF', '#FF00FA', '#800040', '#000000'. default is None-->
+                <LegendColor>'#A6F28F', '#3DBA3D', '#61B8FF', '#0000FF', '#FF00FA', '#800040'</LegendColor>
+
+                <!-- 无投影时的图例配置 start -->
+                <!-- 图例放置方式 vertical：竖 or horizontal：横 default is vertical-->
+                <Orientation>vertical</Orientation>
+                <!-- 图例离边框位置 default is [0, 0]-->
+                <Anchor>0, 0.15</Anchor>
+                <!-- 图例收缩系数 0-1 之间 default is 1-->
+                <Shrink>0.5</Shrink>
+                <!-- fraction of original axes to use for colorbar. default is 0.15-->
+                <Fraction>0.025</Fraction>
+                <!-- 无投影时的图例配置 stop -->
+
+                <!-- colorbar settings begin 有投影-->
+                <!-- where to put colorbar (‘top’,’bottom’,’left’,’right’) Default ‘right’. -->
+                <Location>bottom</Location>
+                <!-- width of colorbar axes (string ‘N%’, where N is an integer describing
+                     the fractional width of the parent axes). Default ‘5%’.
+                -->
+                <Size>3%</Size>
+                <!--Padding between parent axes and colorbar axes in same units as size. Default ‘2%’.-->
+                <Pad>5%</Pad>
+                <!-- colorbar settings stop 有投影-->
+
+            </Legend>
+
+            <!-- 等值线 -->
+            <Contour>
+                <!-- 是否用彩色圆点标注格点或站点 default is off-->
+                <Scatter>on</Scatter>
+                <!-- 圆点的透明度 default is 1-->
+                <Alpha>0.5</Alpha>
+                <!-- 圆点半径 default is 10-->
+                <Radius>10</Radius>
+
+                <!--
+                    等值线步长(float) 仅当数据是第三类数据并且本身图例值开关打开的时候有效 default is 4.
+                    if the pinning legend values is not none, the setting is ignore.
+                -->
+                <Step>2.</Step>
+                <!-- 插值点数 （经度方向点数，纬度方向点数） default is [195,216]-->
+                <Grid>195,216</Grid>
+                <!-- 等值线配置 -->
+                <Contour>
+                    <Visible>True1</Visible>     <!-- True False. default is False -->
+                    <LineWidth>0.5</LineWidth>  <!-- float. default is 1. -->
+                    <LineColor>b</LineColor>    <!-- string. default is 'black' -->
+                    <ColorLine>True1</ColorLine> <!-- 等值线渐变色 if True linecolor设置无效. default is False-->
+                </Contour>
+                <!-- <ContourVisible>True</ContourVisible>  -->
+
+                <!-- 是否显示色斑图 True False. default is False  -->
+                <ContourfVisible>True</ContourfVisible>
+
+                <!-- 等值线标注配置 True False. default is False  -->
+                <ContourLabel>
+                    <Visible>True1</Visible>    <!-- True False. default is False -->
+                    <Fmt>%1.0f</Fmt>           <!-- label数据显示格式 default is '%1.0f' -->
+                    <FontSize>12</FontSize>    <!-- float.. default is 12. -->
+                    <FontColor>k</FontColor>   <!-- string. default is 'black' -->
+                </ContourLabel>
+            </Contour>
+
+            <UV>
+                <!-- Streamplot -->
+                <!-- 绘制流场开关 on off. default is False -->
+                <Stream>off</Stream>
+                <!-- 流场密度 list. [x方向 y方向]-->
+                <Density>5, 5</Density>
+                <!-- 流线颜色 string. default is 'k'-->
+                <Color>k</Color>
+                <!-- 流线颜色随风速变化 on off. default is False -->
+                <OnSpeed>off</OnSpeed>
+                <!-- 彩色流线开关 on off. default is False -->
+                <OnColor>off</OnColor>
+
+                <!-- effact projection on -->
+                <!-- 有投影时的尺寸 -->
+                <Scale>500</Scale>
+                <!-- 单位比例尺指示的风速值:m/s, default is 12 -->
+                <MarkScaleLength>12</MarkScaleLength>
+                <!-- Barbs -->
+                <!-- 风场开关 on off. default is False -->
+                <Barbs>on</Barbs>
+                <!-- 风杆长度 int. default is 5  -->
+                <Length>6</Length>
+            </UV>
+
+            <!-- 标题 -->
+            <Title>
+                <!-- 是否按Micaps数据的标题作为产品描述 标题位置：113.2,30.3,
+                 不为空：是-(特殊值0,0表示默认的标题位置)，
+                 为空：  否
+                -->
+                <MTitlePosition> 0,0 </MTitlePosition>
+                <!-- 产品图片文字描述（可能多个）113.38
+                 常用中文字体说明：
+                 新宋体:simsun.ttc
+                 微软雅黑 常规:myyh.ttc
+                 微软雅黑 粗体:msyhbd.ttc
+                 微软雅黑 细体:msyhl.ttc
+                 宋体 常规:simsun.ttc
+                 楷体 常规:simkai.ttf
+                 华文细黑 常规:华文细黑.TTF
+                 黑体 常规:simhei.ttf
+                 仿宋 常规:simfang.ttf
+                 方正等线 常规:DengXian.ttf
+                 等线 常规:Deng.ttf
+                 等线 粗体:Dengb.ttf
+                 等线 细体:Dengl.ttf
+                 Microsoft YaHei UI 常规:msyh.ttc
+                 Microsoft YaHei UI 粗体:msyhbd.ttc
+                 Microsoft YaHei UI 细体:msyhl.ttc
+                 SimSun-ExB:simsunb.ttf
+                -->
+                <Descs>
+                    <Desc>
+                        <Text>江西格点，24小时累计降水</Text>       <!-- 文字-->
+                        <Position>113.2,30.1</Position>                 <!-- 文字绘制的开始点-->
+                        <Font>18,myyh.ttc,bold,black</Font>               <!-- 文字大小,字体,是否加粗,颜色-->
+                    </Desc>
+                    <Desc>
+                        <Text>2017年3月26日20时-27日20时</Text>
+                        <Position>113.2,29.85</Position>
+                        <Font>18,myyh.ttc,bold,black</Font>
+                    </Desc>
+                    <Desc>
+                        <Text>江西省气象台</Text>
+                        <Position>113.2,29.55</Position>
+                        <Font>16,myyh.ttc,bold,black</Font>
+                    </Desc>
+                </Descs>
+            </Title>
+
+        </MicapsFile>
+
+    </MicapsFiles>
+
+    <!-- 输出图像 -->
+    <Picture>
+        <!-- 生成的图片宽度 基本不用 根据高度按比例确定 default is 10 -->
         <PicWidth>10</PicWidth>
-		<!-- 生成的图片高度 单位：inches ，default is 10 貌似 1 inches = 100 pixel -->
+        <!-- 生成的图片高度 单位：inches ，default is 10 貌似 1 inches = 100 pixel -->
         <PicHeight>10</PicHeight>
         <!-- dpi:int dots per inch default is 72 -->
         <Dpi>72</Dpi>
@@ -266,107 +448,12 @@
         <Extents> </Extents>
         <!-- 画布透明度 浮点数0-1之间 default is 1.-->
         <Opacity>1</Opacity>
-
-
-		<!-- 生成的图片文件路径 default is mytest.png -->
+        <!-- 生成的图片文件路径 default is mytest.png -->
         <PicFile>C:\Pic\17032520.001.png</PicFile>
-        <!-- 图例图片文件路径，图例叠加到产品图上的位置，为空表示自行生成图例
-             格式:文件名，插入经度，插入纬度，图例缩放系数
-             jxlogo.png,117,25.7,1
-        -->
-		<LegendPic> </LegendPic>
 
-        <!-- 是否取MICAPS数据本身的图例值 True False default is True-->
-        <MicapsLegendValue>True1</MicapsLegendValue>
-        <!-- 等值线步长(float) 仅当数据是第三类数据并且本身图例值开关打开的时候有效 default is 4. -->
-        <Step>2.</Step>
-        <!--
-        色标名称: 仅当MicapsLegendValue=True时有效。
-        支持NCL colorbar name. example: precip3_16le, ncl_default, MPL_RdBu etc. default is ncl_default
-        参考链接：http://www.ncl.ucar.edu/Document/Graphics/color_table_gallery.shtml
-        -->
-        <MicapsLegendColor>ncl_default</MicapsLegendColor>
 
-        <!-- 图例等级值 0, 0.01, 10, 25, 50, 100, 250, 9999. default is None -->
-		<LegendValue>0.01, 10, 25, 50, 100, 250</LegendValue>
-        <!-- 图例颜色值 'none', '#A6F28F', '#3DBA3D', '#61B8FF', '#0000FF', '#FF00FA', '#800040', '#000000'. default is None-->
-		<LegendColor>'#A6F28F', '#3DBA3D', '#61B8FF', '#0000FF', '#FF00FA', '#800040'</LegendColor>
 
-        <!-- 无投影时的图例配置  -->
-        <!-- 图例放置方式 vertical：竖 or horizontal：横 default is vertical-->
-        <Orientation>vertical</Orientation>
-        <!-- 图例离边框位置 default is [0, 0]-->
-        <Anchor>0, 0.15</Anchor>
-        <!-- 图例收缩系数 0-1 之间 default is 1-->
-        <Shrink>0.5</Shrink>
-        <!-- fraction of original axes to use for colorbar. default is 0.15-->
-        <Fraction>0.025</Fraction>
+    </Picture>
 
-        <!-- 插值点数 （经度方向点数，纬度方向点数） default is [195,216]-->
-        <Grid>195.5,216.7</Grid>
 
-        <!-- 等值线配置 -->
-        <Contour>
-            <Visible>True1</Visible>     <!-- True False. default is False -->
-            <LineWidth>0.5</LineWidth>  <!-- float. default is 1. -->
-            <LineColor>b</LineColor>    <!-- string. default is 'black' -->
-            <ColorLine>True1</ColorLine> <!-- 等值线渐变色 if True linecolor设置无效. default is False-->
-        </Contour>
-        <!-- <ContourVisible>True</ContourVisible>  -->
-
-        <!-- 是否显示色斑图 True False. default is False  -->
-        <ContourfVisible>True</ContourfVisible>
-
-        <!-- 等值线标注配置 True False. default is False  -->
-        <ContourLabel>
-            <Visible>True1</Visible>    <!-- True False. default is False -->
-            <Fmt>%1.0f</Fmt>           <!-- label数据显示格式 default is '%1.0f' -->
-            <FontSize>12</FontSize>    <!-- float.. default is 12. -->
-            <FontColor>k</FontColor>   <!-- string. default is 'black' -->
-        </ContourLabel>
-        <!-- <ContourLabelVisible>True</ContourLabelVisible> -->
-
-        <!-- 是否按Micaps数据的标题作为产品描述 标题位置：113.2,30.3,
-             不为空：是-(特殊值0,0表示默认的标题位置)，
-             为空：  否
-        -->
-        <MTitlePosition> 0,0 </MTitlePosition>
-        <!-- 产品图片文字描述（可能多个）113.38
-         常用中文字体说明：
-         新宋体:simsun.ttc
-         微软雅黑 常规:myyh.ttc
-         微软雅黑 粗体:msyhbd.ttc
-         微软雅黑 细体:msyhl.ttc
-         宋体 常规:simsun.ttc
-         楷体 常规:simkai.ttf
-         华文细黑 常规:华文细黑.TTF
-         黑体 常规:simhei.ttf
-         仿宋 常规:simfang.ttf
-         方正等线 常规:DengXian.ttf
-         等线 常规:Deng.ttf
-         等线 粗体:Dengb.ttf
-         等线 细体:Dengl.ttf
-         Microsoft YaHei UI 常规:msyh.ttc
-         Microsoft YaHei UI 粗体:msyhbd.ttc
-         Microsoft YaHei UI 细体:msyhl.ttc
-         SimSun-ExB:simsunb.ttf
-        -->
-		<Descs> 
-            <Desc>
-                <Text>江西格点，24小时累计降水</Text>       <!-- 文字-->
-                <Position>113.2,30.1</Position>                 <!-- 文字绘制的开始点-->
-                <Font>18,myyh.ttc,bold,black</Font>               <!-- 文字大小,字体,是否加粗,颜色-->
-            </Desc>
-            <Desc>
-                <Text>2017年3月26日20时-27日20时</Text>
-                <Position>113.2,29.85</Position>
-                <Font>18,myyh.ttc,bold,black</Font>
-            </Desc>
-            <Desc>
-                <Text>江西省气象台</Text>
-                <Position>113.2,29.55</Position>
-                <Font>16,myyh.ttc,bold,black</Font>
-            </Desc>
-        </Descs>
-    </Product>
-</Products>
+</Product>

@@ -2,9 +2,9 @@
 #     Micaps第3类数据 继承Micaps基类
 #     Author:     Liu xianyao
 #     Email:      flashlxy@qq.com
-#     Update:     2017-04-06
+#     Update:     2017-04-11
 #     Copyright:  ©江西省气象台 2017
-#     Version:    1.1.20170406
+#     Version:    2.0.20170411
 
 import codecs
 import itertools
@@ -14,7 +14,10 @@ import re
 import numpy as np
 import PolygonEx
 from datetime import datetime
-from MicapsData import Micaps, griddata
+
+from Main import equal
+from MicapsData import Micaps
+from matplotlib.mlab import griddata
 
 
 class Micaps3Data(Micaps):
@@ -27,23 +30,19 @@ class Micaps3Data(Micaps):
         self.elementsum = 1
         self.stationsum = None
         self.data = []
-        # self.ReadFromFile()
         self.defaultvalue = 9999.
+
         self.ReadFromFile()
 
-    @staticmethod
-    def EqualValue(value1, value2):
-        return math.fabs(value1 - value2) < 10e-5
-
     def EqualDefaultValue(self, value):
-        return Micaps3Data.EqualValue(self.defaultvalue, value)
+        return equal(self.defaultvalue, value)
 
     def valid(self, lon, lat, zvalue):
-        if self.EqualValue(lon, 0) or self.EqualValue(lon, self.defaultvalue):
+        if equal(lon, 0) or equal(lon, self.defaultvalue):
             return False
-        if self.EqualValue(lat, 0) or self.EqualValue(lat, self.defaultvalue):
+        if equal(lat, 0) or equal(lat, self.defaultvalue):
             return False
-        if self.EqualValue(zvalue, self.defaultvalue):
+        if equal(zvalue, self.defaultvalue):
             return False
         return True
 
@@ -80,6 +79,10 @@ class Micaps3Data(Micaps):
             self.y = []
             self.z = []
 
+            self.x1 = []
+            self.y1 = []
+            self.z1 = []
+
             self.stationsum = (len(contents) - 14) / 5
             stations = []
             if self.dataflag == 'diamond' and self.style == '3':
@@ -105,6 +108,9 @@ class Micaps3Data(Micaps):
                 self.x.append(lon)
                 self.y.append(lat)
                 self.z.append(zvalue)
+                self.x1.append(lon)
+                self.y1.append(lat)
+                self.z1.append(zvalue)
 
             self.beginlon = min(self.x)
             self.endlon = max(self.x)
@@ -134,23 +140,23 @@ class Micaps3Data(Micaps):
             ('zvalue', np.float32)]
                              )
 
-    def UpdateData(self, products):
+    def UpdateData(self, products, micapsfile):
         self.UpdateExtents(products)
 
-        xmax = products.extents.xmax
-        xmin = products.extents.xmin
-        ymax = products.extents.ymax
-        ymin = products.extents.ymin
+        extents = products.picture.extents
+        xmax = extents.xmax
+        xmin = extents.xmin
+        ymax = extents.ymax
+        ymin = extents.ymin
 
-        path = products.cutborders[0]['path']
+        path = products.map.clipborders[0].path
 
         if path is not None:
             self.AddPoints(self.x, self.y, self.z, path)
 
         # self.CreateArray()
-
-        self.X = np.linspace(xmin, xmax, products.grid[0])
-        self.Y = np.linspace(ymin, ymax, products.grid[1])
+        self.X = np.linspace(xmin, xmax, micapsfile.contour.grid[0])
+        self.Y = np.linspace(ymin, ymax, micapsfile.contour.grid[1])
         # x = self.data['lon']
         # y = self.data['lat']
         # z = self.data['zvalue']
@@ -159,9 +165,11 @@ class Micaps3Data(Micaps):
 
         self.min = min(self.z)
         self.max = max(self.z)
-        self.distance = products.step
+        self.distance = micapsfile.contour.step
         self.min = math.floor(self.min / self.distance) * self.distance
         self.max = math.ceil(self.max / self.distance) * self.distance
+        # 如果自定义了legend的最小、最大和步长值 则用自定义的值更新
+        self.UpdatePinLegendValue(micapsfile)
 
     @staticmethod
     def CheckData(data):

@@ -27,15 +27,15 @@ class Projection:
         leaf = root.find("Projection")
         if leaf is None:
             self.name = 'sall'
-        self.name = self.leaf_to_string(leaf, 'name', 'sall')
-        self.lon_0 = self.leaf_to_float(leaf, 'lon_0')
-        self.lat_0 = self.leaf_to_float(leaf, 'lat_0')
-        self.lat_ts = self.leaf_to_float(leaf, 'lat_ts')
-        self.boundinglat = self.leaf_to_float(leaf, 'boundinglat')
-        self.llcrnrlat = self.leaf_to_float(leaf, 'llcrnrlat')
-        self.llcrnrlon = self.leaf_to_float(leaf, 'llcrnrlon')
-        self.urcrnrlat = self.leaf_to_float(leaf, 'urcrnrlat')
-        self.urcrnrlon = self.leaf_to_float(leaf, 'urcrnrlon')
+        self.name = self.leaf_to_string(leaf, 'Name', 'sall')
+        self.lon_0 = self.leaf_to_float(leaf, 'Lon_0')
+        self.lat_0 = self.leaf_to_float(leaf, 'Lat_0')
+        self.lat_ts = self.leaf_to_float(leaf, 'Lat_ts')
+        self.boundinglat = self.leaf_to_float(leaf, 'BoundingLat')
+        self.llcrnrlat = self.leaf_to_float(leaf, 'LlcrnrLat')
+        self.llcrnrlon = self.leaf_to_float(leaf, 'LlcrnrLon')
+        self.urcrnrlat = self.leaf_to_float(leaf, 'UrcrnrLat')
+        self.urcrnrlon = self.leaf_to_float(leaf, 'UrcrnrLon')
 
         if self.lon_0 is None or self.lat_0 is None:
             self.lon_0 = None
@@ -46,24 +46,27 @@ class Projection:
             self.urcrnrlat = None
             self.urcrnrlon = None
 
-        self.coastlines = self.leaf_to_bool(leaf=leaf, code='coastlines')
-        self.countries = self.leaf_to_bool(leaf=leaf, code='countries')
+        self.coastlines = self.leaf_to_bool(leaf=leaf, code='Coastlines')
+        self.countries = self.leaf_to_bool(leaf=leaf, code='Countries')
 
-        subleaf = leaf.find('lsmask')
+        subleaf = leaf.find('Lsmask')
         if subleaf is None:
             self.lsmask = {'visible': False, 'land_color': '#BF9E30', 'ocean_color': '#689CD2'}
         else:
-            self.lsmask = {'visible': self.leaf_to_bool(leaf=subleaf, code='visible'),
-                           'land_color': self.leaf_to_string(subleaf, 'land_color', '#BF9E30'),
-                           'ocean_color': self.leaf_to_string(subleaf, 'ocean_color', '#689CD2')
+            self.lsmask = {'visible': self.leaf_to_bool(leaf=subleaf, code='Visible'),
+                           'land_color': self.leaf_to_string(subleaf, 'Land_color', '#BF9E30'),
+                           'ocean_color': self.leaf_to_string(subleaf, 'Ocean_color', '#689CD2')
                            }
+        self.axis = Projection.leaf_to_string(leaf=leaf, code='Axis', defvalue='off')
+        self.latlabels = Projection.leaf_to_list(leaf=leaf, code='LatLabels', defvalue=[0, 0, 0, 0])
+        self.lonlabels = Projection.leaf_to_list(leaf=leaf, code='LonLabels', defvalue=[0, 0, 0, 0])
 
-        self.axis = self.leaf_to_string(leaf=leaf, code='axis', defvalue='off')
-        self.latlabels = self.leaf_to_list(leaf=leaf, code='latlabels', defvalue=[0, 0, 0, 0])
-        self.lonlabels = self.leaf_to_list(leaf=leaf, code='lonlabels', defvalue=[0, 0, 0, 0])
-        self.size = self.leaf_to_string(leaf=leaf, code='size', defvalue='5%')
-        self.pad = self.leaf_to_string(leaf=leaf, code='pad', defvalue='2%')
-        self.location = self.leaf_to_string(leaf=leaf, code='location', defvalue='right')
+    @staticmethod
+    def ValidExtents(extents):
+        for extent in extents:
+            if extent is None:
+                return False
+        return True
 
     @staticmethod
     def GetProjection(products):
@@ -73,21 +76,22 @@ class Projection:
         :return: 画布对象
         """
 
-        xmax = products.extents.xmax
-        xmin = products.extents.xmin
-        ymax = products.extents.ymax
-        ymin = products.extents.ymin
+        xmax = products.picture.extents.xmax
+        xmin = products.picture.extents.xmin
+        ymax = products.picture.extents.ymax
+        ymin = products.picture.extents.ymin
         lon_0 = xmin + (xmax - xmin) / 2
         lat_0 = ymin + (ymax - ymin) / 2
 
-        projection = products.projection
+        projection = products.map.projection
         pjname = projection.name
 
-        if projection.lat_0 is not None:
+        if Projection.ValidExtents((projection.lon_0, projection.lon_0)):
             lon_0 = projection.lon_0
             lat_0 = projection.lat_0
 
-        if projection.llcrnrlat is not None:
+        if Projection.ValidExtents(
+                (projection.llcrnrlat, projection.llcrnrlat, projection.urcrnrlat, projection.urcrnrlon)):
             xmax = projection.urcrnrlon
             xmin = projection.llcrnrlon
             ymax = projection.urcrnrlat
