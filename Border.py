@@ -12,6 +12,7 @@ from datetime import datetime
 import re
 from matplotlib.path import Path
 
+from ClipBorder import ClipBorder
 from Projection import Projection
 
 
@@ -24,7 +25,8 @@ class Border:
 
         self.file = Projection.leaf_to_string(leaf, "File")
         self.filetype = str.upper(Projection.leaf_to_string(leaf, "Type", 'shp'))
-        self.path = self.readPolygon(self.file) if self.filetype != 'SHP' else None
+        # self.path = self.readPolygon(self.file) if self.filetype != 'SHP' else None
+        self.path = ClipBorder.readPath(self.file, 0) if self.filetype != 'SHP' else None
         self.polygon = str.upper(Projection.leaf_to_string(leaf, "Polygon", 'on'))
         self.draw = Projection.leaf_to_bool(leaf, "Draw", False)
         self.linewidth = Projection.leaf_to_float(leaf, "LineWidth", 1)
@@ -39,7 +41,7 @@ class Border:
         """
         try:
             file_object = open(filename)
-            all_the_text = file_object.read()
+            all_the_text = file_object.read().strip()
             file_object.close()
             poses = re.split('[,]+|[\s]+', all_the_text)
             lon = [float(p) for p in poses[0::2]]

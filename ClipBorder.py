@@ -21,21 +21,22 @@ class ClipBorder:
     """
 
     def __init__(self, leaf):
-
+        start_pos = 0
         filehead = Projection.leaf_to_string(leaf, "File")
         filetype = Projection.leaf_to_string(leaf, "Type", 'shp')
         code = Projection.leaf_to_list(leaf, "Code", [360000])
         drawswitch = str.upper(Projection.leaf_to_string(leaf, "Draw", 'off'))
-        self.path = self.getPath(filehead=filehead, code=code, filetype=filetype)
+        self.path = self.getPath(filehead=filehead, code=code, filetype=filetype, start_pos=start_pos)
         self.draw = str.upper(Projection.leaf_to_string(leaf, "Draw", 'off'))
         self.using = Projection.leaf_to_bool(leaf, "Using", True)
         self.linewidth = Projection.leaf_to_float(leaf, "LineWidth", 1)
         self.linecolor = Projection.leaf_to_string(leaf, "LineColor", 'k') if drawswitch == 'ON' else 'none'
 
     @staticmethod
-    def getPath(filehead, code, filetype):
+    def getPath(filehead, code, filetype, start_pos):
         """
         根据文件类型获取path对象
+        :param start_pos: 正文开始的位置，对txt文件有效
         :param filehead: 文件名
         :param code: 闭合区域行政区号-对shp文件有效
         :param filetype: 文件类型
@@ -44,13 +45,14 @@ class ClipBorder:
         if filetype == 'shp':
             path = maskout.getPathFromShp(filehead, code)
         else:
-            path = ClipBorder.readPath(filehead)
+            path = ClipBorder.readPath(filehead, start_pos)
         return path
 
     @staticmethod
-    def readPath(filename):
+    def readPath(filename, start_pos=13):
         """
         从类似第9类micaps数据中获取path
+        :param start_pos: 
         :param filename: 数据文件全名
         :return: path对象的一个实例
         """
@@ -58,9 +60,9 @@ class ClipBorder:
             file_object = open(filename)
             all_the_text = file_object.read()
             file_object.close()
-            poses = all_the_text.split()
-            lon = [float(p) for p in poses[13::2]]
-            lat = [float(p) for p in poses[14::2]]
+            poses = all_the_text.strip().split()
+            lon = [float(p) for p in poses[start_pos::2]]
+            lat = [float(p) for p in poses[start_pos+1::2]]
             path = Path(zip(lon, lat))
             return path
         except Exception as err:
