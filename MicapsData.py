@@ -9,6 +9,9 @@ from __future__ import print_function
 
 import sys
 
+from matplotlib.font_manager import FontProperties
+from matplotlib.markers import MarkerStyle
+
 import MicapsFile
 from Map import Map
 from Picture import Picture
@@ -146,6 +149,13 @@ class Micaps:
     def DrawUV(self, m, products):
         return
 
+    def DrawCommon(self, products, debug=True):
+        # 图例的延展类型
+        # extend = self.GetExtend()
+        # 更新绘图矩形区域
+        # self.UpdateExtents(products)
+        micapsfile = products.micapsfiles[0]
+
     def Draw(self, products, micapsfile, debug=True):
         """
         根据产品参数绘制图像
@@ -154,12 +164,6 @@ class Micaps:
         :param products: 产品参数 
         :return: 
         """
-        # 图例的延展类型
-        # extend = self.GetExtend()
-        extend = micapsfile.legend.extend
-
-        # 更新绘图矩形区域
-        # self.UpdateExtents(products)
         self.UpdateData(products, micapsfile)
         extents = products.picture.extents
         xmax = extents.xmax
@@ -176,7 +180,11 @@ class Micaps:
 
         # 创建画布
         fig = plt.figure(figsize=(w, h), dpi=products.picture.dpi, facecolor="white")  # 必须在前面
-        # ax = fig.add_subplot(111)
+        ax = fig.add_subplot(111)
+        ax.spines['bottom'].set_linewidth(products.map.projection.axisthick)
+        ax.spines['left'].set_linewidth(products.map.projection.axisthick)
+        ax.spines['right'].set_linewidth(products.map.projection.axisthick)
+        ax.spines['top'].set_linewidth(products.map.projection.axisthick)
         # 设置绘图区域
         plt.xlim(xmin, xmax)
         plt.ylim(ymin, ymax)
@@ -207,8 +215,6 @@ class Micaps:
         # 绘制地图
         Map.DrawBorders(m, products)
 
-        # micapsfile = products.micapsfiles[0]
-
         cmap = nclcmaps.cmaps(micapsfile.legend.micapslegendcolor)  # cm.jet  temp_diff_18lev
         vmax = math.ceil(self.max)
         vmin = math.floor(self.min)
@@ -227,7 +233,7 @@ class Micaps:
 
         cf = micapsfile.contour
         cbar = micapsfile.legend
-
+        extend = micapsfile.legend.extend
         # 绘制色斑图 ------ 色版图、图例、裁切是一体的
         Map.DrawContourfAndLegend(contourf=cf, legend=cbar, clipborder=clipborder,
                                   patch=patch, cmap=cmap, levels=levels,
@@ -249,6 +255,39 @@ class Micaps:
                           alpha=micapsfile.contour.alpha,
                           edgecolors='b')
 
+        # 绘制站点
+        stations = products.map.stations
+        if stations.visible:
+            # 'code': code, 'lon': lon, 'lat': lat, 'height': height,
+            # 'iclass': iclass, 'infosum': infosum, 'name': info[0]
+            # stations_tuple = tuple(stations.micapsdata.stations)
+            # (code, lat, lon, height, iclass, infosum, info[0])
+            stations_array = np.array(stations.micapsdata.stations, dtype=[
+                ('code', 'U'),
+                ('lat', np.float32),
+                ('lon', np.float32),
+                ('height', np.float32),
+                ('iclass', 'i'),
+                ('infosum', 'i'),
+                ('info', 'U')
+            ])
+            marker = MarkerStyle(stations.markstyle[0], stations.markstyle[1])
+            m.scatter(stations_array['lon'], stations_array['lat'], marker=marker,
+                      s=stations.radius, c=stations.color,
+                      alpha=stations.alpha, edgecolors=stations.edgecolors)
+
+            # 画站点
+
+            fontfile = r"C:\WINDOWS\Fonts\{0}".format(stations.font[1])
+            if not os.path.exists(fontfile):
+                font = FontProperties(size=stations.font[0], weight=stations.font[2])
+            else:
+                font = FontProperties(fname=fontfile, size=stations.font[0], weight=stations.font[2])
+            for sta in stations.micapsdata.stations:
+                plt.text(sta[2]+0.01, sta[1], sta[6],
+                         fontproperties=font, rotation=0,
+                         color=stations.font[3], ha='left', va='center')
+
         # 存图
         Picture.savePicture(fig, products.picture.picfile)
 
@@ -256,11 +295,9 @@ class Micaps:
         if debug:
             plt.show()
 
-    # def GetColors(self, legend, z):
-    #     if legend.micapslegendvalue:
-    #         pass
-    #     else:
-    #         for i in range(len(z)):
-    #             if z[i]
-
-
+            # def GetColors(self, legend, z):
+            #     if legend.micapslegendvalue:
+            #         pass
+            #     else:
+            #         for i in range(len(z)):
+            #             if z[i]

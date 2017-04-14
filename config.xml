@@ -54,10 +54,14 @@
             <!-- 坐标轴 -->
             <!-- 是否显示坐标轴 on off. default is off -->
             <Axis>on</Axis>
+            <!-- 坐标轴粗细 float. default is 1. -->
+            <AxisThick>1.5</AxisThick>
+            <!-- 坐标轴文本显示格式 '%.1f°E','%.1f°N' , '%d°E','%d°N' default is 'd' -->
+            <AxisFmt>"%.1f°E","%.1f°N"</AxisFmt>
             <!-- 纬度方向坐标轴的文本 左 上 右 下 - 1,0,0,1 -->
-            <LatLabels>1,0,0,0</LatLabels>
+            <LatLabels>0,0,0,0</LatLabels>
             <!-- 经度方向坐标轴的文本 左 上 右 下 - 1,0,0,1 -->
-            <LonLabels>0,0,0,1</LonLabels>
+            <LonLabels>0,0,0,0</LonLabels>
 
             <!-- 是否显示海岸线 on off. default is off -->
             <Coastlines>on</Coastlines>
@@ -80,155 +84,325 @@
          'LC', 'GA', 'JA', 'JD', 'JJ', 'NC', 'PX', 'SR', 'XD', 'YD', 'YN'
         -->
         <Borders>
-            <Border>
-                <File>D:\CODES\MicapsDataDraw\shapefiles\bou2_4l.shp</File>  <!-- 地图文件 -->
-                <Type>shp</Type>                                    <!-- 地图文件类型 -->
-                <LineWidth>0.5</LineWidth>                         <!-- 线宽：float -->
-                <LineColor>k</LineColor>                            <!-- 线颜色：str -->
-                <Polygon>on</Polygon>                               <!-- 闭合折线(仅用于非shp文件)：on, off -->
-                <Draw>on</Draw>                                     <!-- 是否绘制：on, off -->
-            </Border>
-            <Border>
-                <File>LC.txt</File>  <!-- 地图文件 -->
-                <Type>txt</Type>                                    <!-- 地图文件类型 -->
-                <LineWidth>0.5</LineWidth>                          <!-- 线宽：float -->
-                <LineColor>blue</LineColor>                         <!-- 线颜色：str -->
-                <Polygon>off</Polygon>                              <!-- 闭合折线(仅用于非shp文件)：on, off -->
-                <Draw>on</Draw>                                    <!-- 是否绘制：on, off -->
-            </Border>
-            <Border>
-                <File>XD.txt</File>  <!-- 地图文件 -->
-                <Type>txt</Type>                                    <!-- 地图文件类型 -->
-                <LineWidth>0.5</LineWidth>                          <!-- 线宽：float -->
-                <LineColor>blue</LineColor>                         <!-- 线颜色：str -->
-                <Polygon>on</Polygon>                               <!-- 闭合折线(仅用于非shp文件)：on, off -->
-                <Draw>on</Draw>                                    <!-- 是否绘制：on, off -->
-            </Border>
-            <Border>
-                <File>YD.txt</File>  <!-- 地图文件 -->
-                <Type>txt</Type>                                    <!-- 地图文件类型 -->
-                <LineWidth>0.5</LineWidth>                          <!-- 线宽：float -->
-                <LineColor>blue</LineColor>                         <!-- 线颜色：str -->
-                <Polygon>on</Polygon>                               <!-- 闭合折线(仅用于非shp文件)：on, off -->
-                <Draw>on</Draw>                                    <!-- 是否绘制：on, off -->
-            </Border>
-            <Border>
-                <File>YN.txt</File>  <!-- 地图文件 -->
-                <Type>txt</Type>                                    <!-- 地图文件类型 -->
-                <LineWidth>0.5</LineWidth>                          <!-- 线宽：float -->
-                <LineColor>blue</LineColor>                         <!-- 线颜色：str -->
-                <Polygon>on</Polygon>                               <!-- 闭合折线(仅用于非shp文件)：on, off -->
-                <Draw>on</Draw>                                    <!-- 是否绘制：on, off -->
-            </Border>
-            <Border>
-                <File>SR.txt</File>  <!-- 地图文件 -->
-                <Type>txt</Type>                                    <!-- 地图文件类型 -->
-                <LineWidth>0.5</LineWidth>                          <!-- 线宽：float -->
-                <LineColor>blue</LineColor>                         <!-- 线颜色：str -->
-                <Polygon>on</Polygon>                               <!-- 闭合折线(仅用于非shp文件)：on, off -->
-                <Draw>on</Draw>                                    <!-- 是否绘制：on, off -->
-            </Border>
-            <Border>
-                <File>PX.txt</File>  <!-- 地图文件 -->
-                <Type>txt</Type>                                    <!-- 地图文件类型 -->
-                <LineWidth>0.5</LineWidth>                          <!-- 线宽：float -->
-                <LineColor>blue</LineColor>                         <!-- 线颜色：str -->
-                <Polygon>on</Polygon>                               <!-- 闭合折线(仅用于非shp文件)：on, off -->
-                <Draw>on</Draw>                                    <!-- 是否绘制：on, off -->
-            </Border>
-            <Border>
-                <File>GA.txt</File>  <!-- 地图文件 -->
-                <Type>txt</Type>                                    <!-- 地图文件类型 -->
-                <LineWidth>0.5</LineWidth>                          <!-- 线宽：float -->
-                <LineColor>blue</LineColor>                         <!-- 线颜色：str -->
-                <Polygon>on</Polygon>                               <!-- 闭合折线(仅用于非shp文件)：on, off -->
-                <Draw>on</Draw>                                    <!-- 是否绘制：on, off -->
-            </Border>
-            <Border>
-                <File>JJ.txt</File>  <!-- 地图文件 -->
-                <Type>txt</Type>                                    <!-- 地图文件类型 -->
-                <LineWidth>0.5</LineWidth>                          <!-- 线宽：float -->
-                <LineColor>blue</LineColor>                         <!-- 线颜色：str -->
-                <Polygon>on</Polygon>                               <!-- 闭合折线(仅用于非shp文件)：on, off -->
-                <Draw>on</Draw>                                    <!-- 是否绘制：on, off -->
-            </Border>
-            <Border>
-                <File>JA.txt</File>  <!-- 地图文件 -->
-                <Type>txt</Type>                                    <!-- 地图文件类型 -->
-                <LineWidth>0.5</LineWidth>                          <!-- 线宽：float -->
-                <LineColor>blue</LineColor>                         <!-- 线颜色：str -->
-                <Polygon>on</Polygon>                               <!-- 闭合折线(仅用于非shp文件)：on, off -->
-                <Draw>on</Draw>                                    <!-- 是否绘制：on, off -->
-            </Border>
-            <Border>
-                <File>JD.txt</File>  <!-- 地图文件 -->
-                <Type>txt</Type>                                    <!-- 地图文件类型 -->
-                <LineWidth>0.5</LineWidth>                          <!-- 线宽：float -->
-                <LineColor>blue</LineColor>                         <!-- 线颜色：str -->
-                <Polygon>on</Polygon>                               <!-- 闭合折线(仅用于非shp文件)：on, off -->
-                <Draw>on</Draw>                                    <!-- 是否绘制：on, off -->
-            </Border>
+          <Border>
+            <File>C:\sample\border\昌平区.txt</File>
+            <!-- 地图文件 -->
+            <Type>txt</Type>
+            <!-- 地图文件类型 -->
+            <LineWidth>0.5</LineWidth>
+            <!-- 线宽：float -->
+            <LineColor>#A2A2A2</LineColor>
+            <!-- 线颜色：str -->
+            <Polygon>off</Polygon>
+            <!-- 闭合折线(仅用于非shp文件)：on, off -->
+            <Draw>on</Draw>
+            <!-- 是否绘制：on, off -->
+          </Border>
+          <Border>
+            <File>C:\sample\border\朝阳区.txt</File>
+            <!-- 地图文件 -->
+            <Type>txt</Type>
+            <!-- 地图文件类型 -->
+            <LineWidth>0.5</LineWidth>
+            <!-- 线宽：float -->
+            <LineColor>#A2A2A2</LineColor>
+            <!-- 线颜色：str -->
+            <Polygon>on</Polygon>
+            <!-- 闭合折线(仅用于非shp文件)：on, off -->
+            <Draw>on</Draw>
+            <!-- 是否绘制：on, off -->
+          </Border>
+          <Border>
+            <File>C:\sample\border\大兴区.txt</File>
+            <!-- 地图文件 -->
+            <Type>txt</Type>
+            <!-- 地图文件类型 -->
+            <LineWidth>0.5</LineWidth>
+            <!-- 线宽：float -->
+            <LineColor>#A2A2A2</LineColor>
+            <!-- 线颜色：str -->
+            <Polygon>on</Polygon>
+            <!-- 闭合折线(仅用于非shp文件)：on, off -->
+            <Draw>on</Draw>
+            <!-- 是否绘制：on, off -->
+          </Border>
+          <Border>
+            <File>C:\sample\border\东城区.txt</File>
+            <!-- 地图文件 -->
+            <Type>txt</Type>
+            <!-- 地图文件类型 -->
+            <LineWidth>0.5</LineWidth>
+            <!-- 线宽：float -->
+            <LineColor>#A2A2A2</LineColor>
+            <!-- 线颜色：str -->
+            <Polygon>on</Polygon>
+            <!-- 闭合折线(仅用于非shp文件)：on, off -->
+            <Draw>on</Draw>
+            <!-- 是否绘制：on, off -->
+          </Border>
+          <Border>
+            <File>C:\sample\border\房山区.txt</File>
+            <!-- 地图文件 -->
+            <Type>txt</Type>
+            <!-- 地图文件类型 -->
+            <LineWidth>0.5</LineWidth>
+            <!-- 线宽：float -->
+            <LineColor>#A2A2A2</LineColor>
+            <!-- 线颜色：str -->
+            <Polygon>on</Polygon>
+            <!-- 闭合折线(仅用于非shp文件)：on, off -->
+            <Draw>on</Draw>
+            <!-- 是否绘制：on, off -->
+          </Border>
+          <Border>
+            <File>C:\sample\border\丰台区.txt</File>
+            <!-- 地图文件 -->
+            <Type>txt</Type>
+            <!-- 地图文件类型 -->
+            <LineWidth>0.5</LineWidth>
+            <!-- 线宽：float -->
+            <LineColor>#A2A2A2</LineColor>
+            <!-- 线颜色：str -->
+            <Polygon>on</Polygon>
+            <!-- 闭合折线(仅用于非shp文件)：on, off -->
+            <Draw>on</Draw>
+            <!-- 是否绘制：on, off -->
+          </Border>
+          <Border>
+            <File>C:\sample\border\海淀区.txt</File>
+            <!-- 地图文件 -->
+            <Type>txt</Type>
+            <!-- 地图文件类型 -->
+            <LineWidth>0.5</LineWidth>
+            <!-- 线宽：float -->
+            <LineColor>#A2A2A2</LineColor>
+            <!-- 线颜色：str -->
+            <Polygon>on</Polygon>
+            <!-- 闭合折线(仅用于非shp文件)：on, off -->
+            <Draw>on</Draw>
+            <!-- 是否绘制：on, off -->
+          </Border>
+          <Border>
+            <File>C:\sample\border\怀柔区.txt</File>
+            <!-- 地图文件 -->
+            <Type>txt</Type>
+            <!-- 地图文件类型 -->
+            <LineWidth>0.5</LineWidth>
+            <!-- 线宽：float -->
+            <LineColor>#A2A2A2</LineColor>
+            <!-- 线颜色：str -->
+            <Polygon>on</Polygon>
+            <!-- 闭合折线(仅用于非shp文件)：on, off -->
+            <Draw>on</Draw>
+            <!-- 是否绘制：on, off -->
+          </Border>
+          <Border>
+            <File>C:\sample\border\门头沟区.txt</File>
+            <!-- 地图文件 -->
+            <Type>txt</Type>
+            <!-- 地图文件类型 -->
+            <LineWidth>0.5</LineWidth>
+            <!-- 线宽：float -->
+            <LineColor>#A2A2A2</LineColor>
+            <!-- 线颜色：str -->
+            <Polygon>on</Polygon>
+            <!-- 闭合折线(仅用于非shp文件)：on, off -->
+            <Draw>on</Draw>
+            <!-- 是否绘制：on, off -->
+          </Border>
+          <Border>
+            <File>C:\sample\border\密云区.txt</File>
+            <!-- 地图文件 -->
+            <Type>txt</Type>
+            <!-- 地图文件类型 -->
+            <LineWidth>0.5</LineWidth>
+            <!-- 线宽：float -->
+            <LineColor>#A2A2A2</LineColor>
+            <!-- 线颜色：str -->
+            <Polygon>on</Polygon>
+            <!-- 闭合折线(仅用于非shp文件)：on, off -->
+            <Draw>on</Draw>
+            <!-- 是否绘制：on, off -->
+          </Border>
+          <Border>
+            <File>C:\sample\border\平谷区.txt</File>
+            <!-- 地图文件 -->
+            <Type>txt</Type>
+            <!-- 地图文件类型 -->
+            <LineWidth>0.5</LineWidth>
+            <!-- 线宽：float -->
+            <LineColor>#A2A2A2</LineColor>
+            <!-- 线颜色：str -->
+            <Polygon>on</Polygon>
+            <!-- 闭合折线(仅用于非shp文件)：on, off -->
+            <Draw>on</Draw>
+            <!-- 是否绘制：on, off -->
+          </Border>
+          <Border>
+            <File>C:\sample\border\石景山区.txt</File>
+            <!-- 地图文件 -->
+            <Type>txt</Type>
+            <!-- 地图文件类型 -->
+            <LineWidth>0.5</LineWidth>
+            <!-- 线宽：float -->
+            <LineColor>#A2A2A2</LineColor>
+            <!-- 线颜色：str -->
+            <Polygon>on</Polygon>
+            <!-- 闭合折线(仅用于非shp文件)：on, off -->
+            <Draw>on</Draw>
+            <!-- 是否绘制：on, off -->
+          </Border>
+          <Border>
+            <File>C:\sample\border\顺义区.txt</File>
+            <!-- 地图文件 -->
+            <Type>txt</Type>
+            <!-- 地图文件类型 -->
+            <LineWidth>0.5</LineWidth>
+            <!-- 线宽：float -->
+            <LineColor>#A2A2A2</LineColor>
+            <!-- 线颜色：str -->
+            <Polygon>on</Polygon>
+            <!-- 闭合折线(仅用于非shp文件)：on, off -->
+            <Draw>on</Draw>
+            <!-- 是否绘制：on, off -->
+          </Border>
+          <Border>
+            <File>C:\sample\border\通州区.txt</File>
+            <!-- 地图文件 -->
+            <Type>txt</Type>
+            <!-- 地图文件类型 -->
+            <LineWidth>0.5</LineWidth>
+            <!-- 线宽：float -->
+            <LineColor>#A2A2A2</LineColor>
+            <!-- 线颜色：str -->
+            <Polygon>on</Polygon>
+            <!-- 闭合折线(仅用于非shp文件)：on, off -->
+            <Draw>on</Draw>
+            <!-- 是否绘制：on, off -->
+          </Border>
+          <Border>
+            <File>C:\sample\border\西城区.txt</File>
+            <!-- 地图文件 -->
+            <Type>txt</Type>
+            <!-- 地图文件类型 -->
+            <LineWidth>0.5</LineWidth>
+            <!-- 线宽：float -->
+            <LineColor>#A2A2A2</LineColor>
+            <!-- 线颜色：str -->
+            <Polygon>on</Polygon>
+            <!-- 闭合折线(仅用于非shp文件)：on, off -->
+            <Draw>on</Draw>
+            <!-- 是否绘制：on, off -->
+          </Border>
+          <Border>
+            <File>C:\sample\border\延庆区.txt</File>
+            <!-- 地图文件 -->
+            <Type>txt</Type>
+            <!-- 地图文件类型 -->
+            <LineWidth>0.5</LineWidth>
+            <!-- 线宽：float -->
+            <LineColor>#A2A2A2</LineColor>
+            <!-- 线颜色：str -->
+            <Polygon>on</Polygon>
+            <!-- 闭合折线(仅用于非shp文件)：on, off -->
+            <Draw>on</Draw>
+            <!-- 是否绘制：on, off -->
+          </Border>
         </Borders>
 
         <!-- 裁剪边界文件路径，用于对色斑图进行裁剪
         d:\codes\pyproject\shapefiles\bou2_4p|360000,430000,440000,350000|1
         360000,430000,440000,350000,330000,340000,420000,710000,810000,820000
+        C:\sample\clipborder\北京市.txt
         -->
         <ClipBorders>
-            <!--shp地图文件路径|裁切区编码数组(支持多省合并)|线宽
-            各省、直辖市、港澳台行政区划码说明：
-            110000     北京市
-            120000     天津市
-            130000     河北省
-            140000     山西省
-            150000     内蒙古自治区
-            210000     辽宁省
-            220000     吉林省
-            230000     黑龙江省
-            310000     上海市
-            320000     江苏省
-            330000     浙江省
-            340000     安徽省
-            350000     福建省
-            360000     江西省
-            370000     山东省
-            410000     河南省
-            420000     湖北省
-            430000     湖南省
-            440000     广东省
-            450000     广西壮族自治区
-            460000     海南省
-            500000     重庆市
-            510000     四川省
-            520000     贵州省
-            530000     云南省
-            540000     西藏自治区
-            610000     陕西省
-            620000     甘肃省
-            630000     青海省
-            640000     宁夏回族自治区
-            650000     新疆维吾尔自治区
-            710000     台湾省
-            810000     香港特别行政区
-            820000     澳门特别行政区
-            -->
+          <!--shp地图文件路径|裁切区编码数组(支持多省合并)|线宽
+                各省、直辖市、港澳台行政区划码说明：
+                110000     北京市
+                120000     天津市
+                130000     河北省
+                140000     山西省
+                150000     内蒙古自治区
+                210000     辽宁省
+                220000     吉林省
+                230000     黑龙江省
+                310000     上海市
+                320000     江苏省
+                330000     浙江省
+                340000     安徽省
+                350000     福建省
+                360000     江西省
+                370000     山东省
+                410000     河南省
+                420000     湖北省
+                430000     湖南省
+                440000     广东省
+                450000     广西壮族自治区
+                460000     海南省
+                500000     重庆市
+                510000     四川省
+                520000     贵州省
+                530000     云南省
+                540000     西藏自治区
+                610000     陕西省
+                620000     甘肃省
+                630000     青海省
+                640000     宁夏回族自治区
+                650000     新疆维吾尔自治区
+                710000     台湾省
+                810000     香港特别行政区
+                820000     澳门特别行政区
+                -->
 
             <ClipBorder>
-                <File>d:\codes\MicapsDataDraw\shapefiles\bou2_4p</File>  <!-- 地图文件 -->
-                <Type>shp</Type>                                    <!-- 地图文件类型 -->
+                <File>d:\codes\pyproject\shapefiles\bou2_4p</File>
+                <!-- 地图文件 -->
+                <Type>shp</Type>
+                <!-- 地图文件类型 -->
                 <!-- 行政区划码数组 ，仅对shp文件有效 360000,430000 default is 360000
-                 110000,120000,130000,140000,150000,210000,220000,230000,310000,320000,
-                 330000,340000,350000,360000,370000,410000,420000,430000,440000,450000,
-                 460000,500000,510000,520000,530000,540000,610000,620000,630000,640000,
-                 650000,710000,810000,820000
-                -->
+                         110000,120000,130000,140000,150000,210000,220000,230000,310000,320000,
+                         330000,340000,350000,360000,370000,410000,420000,430000,440000,450000,
+                         460000,500000,510000,520000,530000,540000,610000,620000,630000,640000,
+                         650000,710000,810000,820000
+                        -->
                 <Code>360000</Code>
-                <Using>on</Using>                                   <!-- 是否启用：on,off -->
-                <Draw>on</Draw>                                     <!-- 是否绘制：on,off -->
-                <LineWidth>1</LineWidth>                            <!-- 线宽：float -->
-                <LineColor>k</LineColor>                            <!-- 线颜色：str -->
+                <Using>on</Using>
+                <!-- 是否启用：on,off -->
+                <Draw>on</Draw>
+                <!-- 是否绘制：on,off -->
+                <LineWidth>3</LineWidth>
+                <!-- 线宽：float -->
+                <LineColor>k</LineColor>
+                <!-- 线颜色：str Olive -->
             </ClipBorder>
         </ClipBorders>
+
+        <Stations>
+            <!-- Micaps 第17类数据格式 兼容小数点版-->
+            <File>jxstation.txt</File>
+            <!-- 是否标注 default is off-->
+            <Visible>on</Visible>
+            <!--
+                站点样式
+                filled_markers = ('o', 'v', '^', '<', '>', '8', 's', 'p', '*', 'h', 'H', 'D', 'd', 'P', 'X')
+                fillstyles = ('full', 'left', 'right', 'bottom', 'top', 'none')
+                default is ['o','full']
+            -->
+            <MarkStyle>'o','full'</MarkStyle>
+            <!-- 站点填充色 default is 'k'-->
+            <Color>red</Color>
+            <!-- mark边界颜色 default is 'k'-->
+            <EdgeColors>k</EdgeColors>
+            <!-- 站点填充色的透明度 default is 1-->
+            <Alpha>0.75</Alpha>
+            <!-- 圆点半径 default is 10-->
+            <Radius>30</Radius>
+
+            <!-- 字体配置 -->
+            <!-- 文字大小,字体,是否加粗,颜色-->
+            <Font>12,'simsun.ttc','bold','k'</Font>
+
+        </Stations>
 
     </Map>
 
@@ -239,16 +413,16 @@
             <!-- micaps数据类型 -->
             <File>
                 <!-- M1：站点数据，M4：第4类格点数据，M11：第11类UV数据-->
-                <Type>M4</Type>
+                <Type>M3</Type>
 
                 <!--原始数据文件
                     M4 - K:\GQEC\TP\r24\17032908.060 16062908.012 K:\ecmwf\pressure\999\16122520.000
                          K:\ecmwf\height\500\17033108.240 K:\ecmwf\temper\850\16122520.000
                          K:\GQJP\HGT\500\17040514.084 K:\GQJP\24P\1010\17040514.078
-                    M3 - K:\zdzjm\maxtemp\17011418.000 K:\zdzjm\rain24\17033115.000
+                    M3 - K:\zdzjm\maxtemp\17011418.000 K:\zdzjm\rain24\17033115.000 data.txt
                     M11  K:\ecmwf\uv\850\17041020.000
                 -->
-                <FileName> K:\ecmwf\height\500\17033108.240 </FileName>
+                <FileName> K:\zdzjm\rain24\17033115.000 </FileName>
             </File>
             <!-- 图例 -->
             <Legend>
@@ -259,10 +433,10 @@
                 <LegendPic> </LegendPic>
 
                 <!-- 图例的延展类型:neither,min,max default is neither-->
-                <Extend>max</Extend>
+                <Extend>neither</Extend>
 
                 <!-- 是否取MICAPS数据本身的图例值 True False default is True-->
-                <MicapsLegendValue>True</MicapsLegendValue>
+                <MicapsLegendValue>True1</MicapsLegendValue>
 
                 <!--
                      When micapslegendvalue is true, the setting is working.
@@ -277,7 +451,7 @@
                 支持NCL colorbar name. example: MPL_jet, ncl_default, MPL_RdBu MPL_cool etc. default is ncl_default
                 参考链接：http://www.ncl.ucar.edu/Document/Graphics/color_table_gallery.shtml
                 -->
-                <MicapsLegendColor>MPL_jet</MicapsLegendColor>
+                <MicapsLegendColor>ncl_default</MicapsLegendColor>
 
                 <!--
                      When micapslegendvalue is false, the Hatches,LegendValue and LegendColor settings is working.
@@ -297,7 +471,7 @@
                 <!-- 图例放置方式 vertical：竖 or horizontal：横 default is vertical-->
                 <Orientation>vertical</Orientation>
                 <!-- 图例离边框位置 default is [0, 0]-->
-                <Anchor>0, 0.15</Anchor>
+                <Anchor>0.6, 0.15</Anchor>
                 <!-- 图例收缩系数 0-1 之间 default is 1-->
                 <Shrink>0.5</Shrink>
                 <!-- fraction of original axes to use for colorbar. default is 0.15-->
@@ -320,7 +494,7 @@
             <!-- 等值线 -->
             <Contour>
                 <!-- 是否用彩色圆点标注格点或站点 default is off-->
-                <Scatter>on</Scatter>
+                <Scatter>onf</Scatter>
                 <!-- 圆点的透明度 default is 1-->
                 <Alpha>0.5</Alpha>
                 <!-- 圆点半径 default is 10-->
@@ -336,8 +510,8 @@
                 <!-- 等值线配置 -->
                 <Contour>
                     <Visible>True1</Visible>     <!-- True False. default is False -->
-                    <LineWidth>0.5</LineWidth>  <!-- float. default is 1. -->
-                    <LineColor>b</LineColor>    <!-- string. default is 'black' -->
+                    <LineWidth>1</LineWidth>  <!-- float. default is 1. -->
+                    <LineColor>k</LineColor>    <!-- string. default is 'black' -->
                     <ColorLine>True1</ColorLine> <!-- 等值线渐变色 if True linecolor设置无效. default is False-->
                 </Contour>
                 <!-- <ContourVisible>True</ContourVisible>  -->
@@ -385,7 +559,7 @@
                  不为空：是-(特殊值0,0表示默认的标题位置)，
                  为空：  否
                 -->
-                <MTitlePosition> 0,0 </MTitlePosition>
+                <MTitlePosition> 0,0  </MTitlePosition>
                 <!-- 产品图片文字描述（可能多个）113.38
                  常用中文字体说明：
                  新宋体:simsun.ttc
@@ -408,19 +582,19 @@
                 -->
                 <Descs>
                     <Desc>
-                        <Text>江西格点，24小时累计降水</Text>       <!-- 文字-->
-                        <Position>113.2,30.1</Position>                 <!-- 文字绘制的开始点-->
-                        <Font>18,myyh.ttc,bold,black</Font>               <!-- 文字大小,字体,是否加粗,颜色-->
+                        <Text>北京市降水量分布图(单位 : 毫米)</Text>       <!-- 文字-->
+                        <Position>115.37,41.126</Position>                 <!-- 文字绘制的开始点-->
+                        <Font>26,msyhbd.ttc,bold,black</Font>               <!-- 文字大小,字体,是否加粗,颜色-->
                     </Desc>
                     <Desc>
-                        <Text>2017年3月26日20时-27日20时</Text>
-                        <Position>113.2,29.85</Position>
-                        <Font>18,myyh.ttc,bold,black</Font>
+                        <Text>2016年09月25日21时-26日08时</Text>
+                        <Position>115.45,41.04</Position>
+                        <Font>20,msyhbd.ttc,bold,black</Font>
                     </Desc>
                     <Desc>
-                        <Text>江西省气象台</Text>
-                        <Position>113.2,29.55</Position>
-                        <Font>16,myyh.ttc,bold,black</Font>
+                        <Text>北京市气象台</Text>
+                        <Position>115.68,40.97</Position>
+                        <Font>20,msyhbd.ttc,bold,black</Font>
                     </Desc>
                 </Descs>
             </Title>
@@ -434,13 +608,13 @@
         <!-- 生成的图片宽度 基本不用 根据高度按比例确定 default is 10 -->
         <PicWidth>10</PicWidth>
         <!-- 生成的图片高度 单位：inches ，default is 10 貌似 1 inches = 100 pixel -->
-        <PicHeight>10</PicHeight>
+        <PicHeight>12</PicHeight>
         <!-- dpi:int dots per inch default is 72 -->
         <Dpi>72</Dpi>
-        <!-- 图像宽度缩小比率：0-1 之间 default is 1-->
+        <!-- 图像宽度缩小比率：0-1 之间,0.8 default is 1-->
         <WidthShrink>1</WidthShrink>
         <!-- 裁切区的外延：浮点数 default is 0-->
-        <Margin>0.25</Margin>
+        <Margin>0.1</Margin>
         <!-- 图像内边距 default is 0-->
         <Pad>3</Pad>
         <!-- 绘图区域范围 - 左下角经纬度坐标 右上角经纬度坐标

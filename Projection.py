@@ -58,6 +58,8 @@ class Projection:
                            'ocean_color': self.leaf_to_string(subleaf, 'Ocean_color', '#689CD2')
                            }
         self.axis = Projection.leaf_to_string(leaf=leaf, code='Axis', defvalue='off')
+        self.axisthick = self.leaf_to_float(leaf, 'AxisThick', 1.)
+        self.axisfmt = Projection.leaf_to_list(leaf=leaf, code='AxisFmt', defvalue=['%d°E', '%d°N'])
         self.latlabels = Projection.leaf_to_list(leaf=leaf, code='LatLabels', defvalue=[0, 0, 0, 0])
         self.lonlabels = Projection.leaf_to_list(leaf=leaf, code='LonLabels', defvalue=[0, 0, 0, 0])
 

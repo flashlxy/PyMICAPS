@@ -50,6 +50,12 @@ class Map:
         for clipleaf in clipsleaf:
             self.clipborders.append(ClipBorder(clipleaf))
 
+        # 站点文件
+        from Stations import Stations
+        self.stations = Stations(root[0])
+
+        pass
+
     @staticmethod
     def DrawContourfAndLegend(contourf, legend, clipborder, patch, cmap, levels, extend, extents, x, y, z, m):
         """
@@ -261,8 +267,8 @@ class Map:
 
             # 设置坐标轴刻度值显示格式
             if pj.axis == 'on':
-                x_majorFormatter = FormatStrFormatter('%d°E')
-                y_majorFormatter = FormatStrFormatter('%d°N')
+                x_majorFormatter = FormatStrFormatter(pj.axisfmt[0])
+                y_majorFormatter = FormatStrFormatter(pj.axisfmt[1])
                 plt.gca().xaxis.set_major_formatter(x_majorFormatter)
                 plt.gca().yaxis.set_major_formatter(y_majorFormatter)
                 xaxis = plt.gca().xaxis
@@ -273,6 +279,10 @@ class Map:
                 for label in yaxis.get_ticklabels():
                     label.set_fontproperties('DejaVu Sans')
                     label.set_fontsize(10)
+
+                xaxis.set_visible(pj.lonlabels[3] == 1)
+                yaxis.set_visible(pj.latlabels[0] == 1)
+
             return
         else:
             # draw parallels and meridians.
