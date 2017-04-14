@@ -20,6 +20,8 @@ class Contour:
         self.scatter = Projection.leaf_to_bool(p, 'Scatter', False)
         # 圆点的透明度
         self.alpha = Projection.leaf_to_float(p, 'Alpha', 1)
+        #  圆点半径 default is 10
+        self.radius = Projection.leaf_to_float(p, 'Radius', 10)
 
         # 第三类数据等值线步长
         self.step = Projection.leaf_to_float(p, 'Step', 2.)
@@ -49,12 +51,14 @@ class Contour:
         # 等值线标注参数
         leaf = p.find("ContourLabel")
         if leaf is None:
-            self.contourlabel = {'visible': False, 'fmt': '%1.0f', 'fontsize': 12, 'fontcolor': 'k'}
+            self.contourlabel = {'visible': False, 'fmt': '%1.0f',
+                                 'fontsize': 12, 'fontcolor': 'k', 'inlinespacing': 2}
         else:
             self.contourlabel = {
                 'visible': Projection.leaf_to_bool(leaf, "Visible", False, 'TRUE'),
                 'fmt': Projection.leaf_to_string(leaf, 'Fmt', '%1.0f'),
                 'fontsize': Projection.leaf_to_float(leaf, 'FontSize', 12),
-                'fontcolor': Projection.leaf_to_string(leaf, 'FontColor', 'k')
+                'fontcolor': Projection.leaf_to_string(leaf, 'FontColor', 'k'),
+                'inlinespacing': Projection.leaf_to_float(leaf, 'InlineSpacing', 2)
             }
 

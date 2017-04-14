@@ -10,7 +10,7 @@
                  stere：极射赤面投影，npstere：北半球极射赤面投影, hammer，kav7，
                  merc：麦卡托投影，gnom, cyl：等经纬度投影
              -->
-            <Name>stere</Name>
+            <Name>sall</Name>
 
             <!-- 为空或者为非数值则首先使用裁切区的中心经纬度，其次使用数据本身所在区域的中心经纬度-->
             <!-- central latitude (y-axis origin) - used by all projections. -->
@@ -53,7 +53,7 @@
 
             <!-- 坐标轴 -->
             <!-- 是否显示坐标轴 on off. default is off -->
-            <Axis>onf</Axis>
+            <Axis>off</Axis>
             <!-- 坐标轴粗细 float. default is 1. -->
             <AxisThick>1.5</AxisThick>
             <!-- 坐标轴文本显示格式 "%.1f°E","%.1f°N" , "%d°E","%d°N" default is 'd' -->
@@ -365,7 +365,7 @@
                          460000,500000,510000,520000,530000,540000,610000,620000,630000,640000,
                          650000,710000,810000,820000
                         -->
-                <Code>360000</Code>
+                <Code>360000,430000,440000,350000,330000,340000,420000,710000,810000,820000</Code>
                 <Using>on</Using>
                 <!-- 是否启用：on,off -->
                 <Draw>on</Draw>
@@ -417,7 +417,7 @@
             <!-- micaps数据类型 -->
             <File>
                 <!-- M1：站点数据，M4：第4类格点数据，M11：第11类UV数据-->
-                <Type>M3</Type>
+                <Type>M4</Type>
 
                 <!--原始数据文件
                     M4 - K:\GQEC\TP\r24\17032908.060 16062908.012 K:\ecmwf\pressure\999\16122520.000
@@ -426,7 +426,7 @@
                     M3 - K:\zdzjm\maxtemp\17011418.000 K:\zdzjm\rain24\17033115.000 data.txt
                     M11  K:\ecmwf\uv\850\17041020.000
                 -->
-                <FileName>  K:\zdzjm\rain24\17033115.000 </FileName>
+                <FileName>  K:\GQEC\TP\r24\17032908.060 </FileName>
             </File>
             <!-- 图例 -->
             <Legend>
@@ -513,7 +513,7 @@
                 <Grid>195,216</Grid>
                 <!-- 等值线配置 -->
                 <Contour>
-                    <Visible>True1</Visible>     <!-- True False. default is False -->
+                    <Visible>True</Visible>     <!-- True False. default is False -->
                     <LineWidth>1</LineWidth>  <!-- float. default is 1. -->
                     <LineColor>k</LineColor>    <!-- string. default is 'black' -->
                     <ColorLine>True1</ColorLine> <!-- 等值线渐变色 if True linecolor设置无效. default is False-->
@@ -521,14 +521,15 @@
                 <!-- <ContourVisible>True</ContourVisible>  -->
 
                 <!-- 是否显示色斑图 True False. default is False  -->
-                <ContourfVisible>True</ContourfVisible>
+                <ContourfVisible>True1</ContourfVisible>
 
                 <!-- 等值线标注配置 True False. default is False  -->
                 <ContourLabel>
-                    <Visible>True1</Visible>    <!-- True False. default is False -->
+                    <Visible>True</Visible>    <!-- True False. default is False -->
                     <Fmt>%1.0f</Fmt>           <!-- label数据显示格式 default is '%1.0f' -->
                     <FontSize>12</FontSize>    <!-- float.. default is 12. -->
                     <FontColor>k</FontColor>   <!-- string. default is 'black' -->
+                    <InlineSpacing>0</InlineSpacing> <!-- 等值线标注开口距离 float. default is 5 -->
                 </ContourLabel>
             </Contour>
 

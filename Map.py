@@ -153,16 +153,24 @@ class Map:
             else:
                 CS1 = m.contour(x, y, z, levels=level,
                                 linewidths=contour.contour['linewidth'], colors=contour.contour['linecolor'])
+
+            # 是否绘制等值线标注
+            if contour.contourlabel['visible']:
+                CS2 = plt.clabel(CS1, inline=1, fmt=contour.contourlabel['fmt'],
+                                 inline_spacing=contour.contourlabel['inlinespacing'],
+                                 fontsize=contour.contourlabel['fontsize'],
+                                 colors=contour.contourlabel['fontcolor'])
+
             # 用区域边界裁切等值线图
             if clipborder.path is not None and clipborder.using:
                 for collection in CS1.collections:
                     collection.set_clip_on(True)
                     collection.set_clip_path(patch)
-            # 是否绘制等值线标注
-            if contour.contourlabel['visible']:
-                plt.clabel(CS1, inline=1, fmt=contour.contourlabel['fmt'],
-                           fontsize=contour.contourlabel['fontsize'],
-                           colors=contour.contourlabel['fontcolor'])
+
+                for text in CS2:
+                    if not clipborder.path.contains_point((text._x, text._y)):
+                        text.remove()
+            print(CS2)
 
     @staticmethod
     def DrawClipBorders(clipborders):
