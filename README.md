@@ -8,10 +8,12 @@
 
     并自动输出相应图像到指定文件。
     
-###### Author：Xianyao Liu | Version：2.0.20170411 | E-mail：flashlxy@qq.com | Language：Python2.7
+###### Author：Xianyao Liu | Version：2.1.20170414 | E-mail：flashlxy@qq.com | Language：Python2.7
 
 ## 更新日志
-
+    
+    2017-04-14 增加Micaps第17类数据的绘制
+    
     2017-04-13 增加Micaps第11类数据的绘制，修复数个小BUG，优化配置文件逻辑。
 
                统一边界txt文件的格式为：
