@@ -10,7 +10,7 @@
                  stere：极射赤面投影，npstere：北半球极射赤面投影, hammer，kav7，
                  merc：麦卡托投影，gnom, cyl：等经纬度投影
              -->
-            <Name>sall</Name>
+            <Name>stere</Name>
 
             <!-- 为空或者为非数值则首先使用裁切区的中心经纬度，其次使用数据本身所在区域的中心经纬度-->
             <!-- central latitude (y-axis origin) - used by all projections. -->
@@ -40,7 +40,7 @@
                  lcc stere merc 比较适合的配置 leftbottom:-4,75 righttop:55,188
             -->
             <!-- latitude of lower left hand corner of the selected map domain. -->
-            <LlcrnrLat>-4</LlcrnrLat>
+            <LlcrnrLat>-4a</LlcrnrLat>
 
             <!--longitude of lower left hand corner of the selected map domain.-->
             <LlcrnrLon>75</LlcrnrLon>
@@ -398,9 +398,13 @@
             <!-- 圆点半径 default is 10-->
             <Radius>30</Radius>
 
+
             <!-- 字体配置 -->
             <!-- 文字大小,字体,是否加粗,颜色-->
             <Font>12,'simsun.ttc','bold','k'</Font>
+
+            <!-- 文字离点的距离：单位经度 default is 0.03 -->
+            <Detax>0.04</Detax>
 
         </Stations>
 

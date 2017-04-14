@@ -271,12 +271,17 @@ class Micaps:
                 ('infosum', 'i'),
                 ('info', 'U')
             ])
+
+            # 画站点mark
+            if m is not plt:
+                stations_array['lon'], stations_array['lat'] = \
+                    Micaps.UpdateXY(m, stations_array['lon'], stations_array['lat'])
             marker = MarkerStyle(stations.markstyle[0], stations.markstyle[1])
             m.scatter(stations_array['lon'], stations_array['lat'], marker=marker,
                       s=stations.radius, c=stations.color,
                       alpha=stations.alpha, edgecolors=stations.edgecolors)
 
-            # 画站点
+            # 画站点文本
 
             fontfile = r"C:\WINDOWS\Fonts\{0}".format(stations.font[1])
             if not os.path.exists(fontfile):
@@ -284,7 +289,14 @@ class Micaps:
             else:
                 font = FontProperties(fname=fontfile, size=stations.font[0], weight=stations.font[2])
             for sta in stations.micapsdata.stations:
-                plt.text(sta[2]+0.01, sta[1], sta[6],
+                if m is not plt:
+                    lon, lat = Micaps.UpdateXY(m, sta[2], sta[1])
+                    lon1, lat1 = Micaps.UpdateXY(m, sta[2]+stations.detax, sta[1])
+                    deta = lon1-lon
+                else:
+                    lon, lat = sta[2], sta[1]
+                    deta = stations.detax
+                plt.text(lon+deta, lat, sta[6],
                          fontproperties=font, rotation=0,
                          color=stations.font[3], ha='left', va='center')
 

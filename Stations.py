@@ -24,6 +24,7 @@ class Stations:
         self.alpha = Projection.leaf_to_float(leaf, 'Alpha', 1.)
         self.radius = Projection.leaf_to_float(leaf, 'Radius', 5)
         self.font = Projection.leaf_to_list(leaf, 'Font', [18, 'myyh.ttc', 'bold', 'k'])
+        self.detax = Projection.leaf_to_float(leaf, 'Detax', 0.03)
         self.micapsdata = Micaps17Data(self.file)
 
 
