@@ -53,21 +53,21 @@
 
             <!-- 坐标轴 -->
             <!-- 是否显示坐标轴 on off. default is off -->
-            <Axis>on</Axis>
+            <Axis>onf</Axis>
             <!-- 坐标轴粗细 float. default is 1. -->
             <AxisThick>1.5</AxisThick>
-            <!-- 坐标轴文本显示格式 '%.1f°E','%.1f°N' , '%d°E','%d°N' default is 'd' -->
-            <AxisFmt>"%.1f°E","%.1f°N"</AxisFmt>
+            <!-- 坐标轴文本显示格式 "%.1f°E","%.1f°N" , "%d°E","%d°N" default is 'd' -->
+            <AxisFmt>"%d°E","%d°N"</AxisFmt>
             <!-- 纬度方向坐标轴的文本 左 上 右 下 - 1,0,0,1 -->
             <LatLabels>0,0,0,0</LatLabels>
             <!-- 经度方向坐标轴的文本 左 上 右 下 - 1,0,0,1 -->
             <LonLabels>0,0,0,0</LonLabels>
 
             <!-- 是否显示海岸线 on off. default is off -->
-            <Coastlines>on</Coastlines>
+            <Coastlines>onf</Coastlines>
 
             <!-- 是否显示国界线 on off. default is off -->
-            <Countries>on</Countries>
+            <Countries>onf</Countries>
 
             <!-- 海洋陆地设置 -->
             <Lsmask>
@@ -370,7 +370,7 @@
                 <!-- 是否启用：on,off -->
                 <Draw>on</Draw>
                 <!-- 是否绘制：on,off -->
-                <LineWidth>3</LineWidth>
+                <LineWidth>2</LineWidth>
                 <!-- 线宽：float -->
                 <LineColor>k</LineColor>
                 <!-- 线颜色：str Olive -->
@@ -390,7 +390,7 @@
             -->
             <MarkStyle>'o','full'</MarkStyle>
             <!-- 站点填充色 default is 'k'-->
-            <Color>red</Color>
+            <Color>r</Color>
             <!-- mark边界颜色 default is 'k'-->
             <EdgeColors>k</EdgeColors>
             <!-- 站点填充色的透明度 default is 1-->
@@ -400,11 +400,11 @@
 
 
             <!-- 字体配置 -->
-            <!-- 文字大小,字体,是否加粗,颜色-->
+            <!-- 文字大小,字体,是否加粗,颜色 12,'simsun.ttc','bold','k' -->
             <Font>12,'simsun.ttc','bold','k'</Font>
 
             <!-- 文字离点的距离：单位经度 default is 0.03 -->
-            <Detax>0.04</Detax>
+            <Detax>0.015</Detax>
 
         </Stations>
 
@@ -426,7 +426,7 @@
                     M3 - K:\zdzjm\maxtemp\17011418.000 K:\zdzjm\rain24\17033115.000 data.txt
                     M11  K:\ecmwf\uv\850\17041020.000
                 -->
-                <FileName> K:\zdzjm\rain24\17033115.000 </FileName>
+                <FileName>  K:\zdzjm\rain24\17033115.000 </FileName>
             </File>
             <!-- 图例 -->
             <Legend>
@@ -437,7 +437,7 @@
                 <LegendPic> </LegendPic>
 
                 <!-- 图例的延展类型:neither,min,max default is neither-->
-                <Extend>neither</Extend>
+                <Extend>max</Extend>
 
                 <!-- 是否取MICAPS数据本身的图例值 True False default is True-->
                 <MicapsLegendValue>True1</MicapsLegendValue>
@@ -535,7 +535,7 @@
             <UV>
                 <!-- Streamplot -->
                 <!-- 绘制流场开关 on off. default is False -->
-                <Stream>off</Stream>
+                <Stream>on</Stream>
                 <!-- 流场密度 list. [x方向 y方向]-->
                 <Density>5, 5</Density>
                 <!-- 流线颜色 string. default is 'k'-->
