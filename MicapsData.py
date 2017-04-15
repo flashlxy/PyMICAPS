@@ -94,7 +94,8 @@ class Micaps:
         Micaps.UpdatePath(products.map.clipborders[0].path, projection)
 
         for area in products.map.borders:
-            Micaps.UpdatePath(area.path, projection)
+            if area.path is not None:
+                Micaps.UpdatePath(area.path, projection)
 
     @staticmethod
     def UpdateXY(projection, x, y):
@@ -262,22 +263,24 @@ class Micaps:
             # 'iclass': iclass, 'infosum': infosum, 'name': info[0]
             # stations_tuple = tuple(stations.micapsdata.stations)
             # (code, lat, lon, height, iclass, infosum, info[0])
-            stations_array = np.array(stations.micapsdata.stations, dtype=[
-                ('code', 'U'),
-                ('lat', np.float32),
-                ('lon', np.float32),
-                ('height', np.float32),
-                ('iclass', 'i'),
-                ('infosum', 'i'),
-                ('info', 'U')
-            ])
+            # stations_array = np.array(stations.micapsdata.stations, dtype=[
+            #     ('code', 'U'),
+            #     ('lat', np.float32),
+            #     ('lon', np.float32),
+            #     ('height', np.float32),
+            #     ('iclass', 'i'),
+            #     ('infosum', 'i'),
+            #     ('info', 'U')
+            # ])
 
+            # stations_array = [list(ele) for ele in zip(*stations.micapsdata.stations)]
+            stations_array = zip(*stations.micapsdata.stations)
             # 画站点mark
             if m is not plt:
-                stations_array['lon'], stations_array['lat'] = \
-                    Micaps.UpdateXY(m, stations_array['lon'], stations_array['lat'])
+                stations_array[2], stations_array[1] = \
+                    Micaps.UpdateXY(m, stations_array[2], stations_array[1])
             marker = MarkerStyle(stations.markstyle[0], stations.markstyle[1])
-            m.scatter(stations_array['lon'], stations_array['lat'], marker=marker,
+            m.scatter(stations_array[2], stations_array[1], marker=marker,
                       s=stations.radius, c=stations.color,
                       alpha=stations.alpha, edgecolors=stations.edgecolors)
 

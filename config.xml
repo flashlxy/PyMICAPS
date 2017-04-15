@@ -10,7 +10,7 @@
                  stere：极射赤面投影，npstere：北半球极射赤面投影, hammer，kav7，
                  merc：麦卡托投影，gnom, cyl：等经纬度投影
              -->
-            <Name>sall</Name>
+            <Name>lcc</Name>
 
             <!-- 为空或者为非数值则首先使用裁切区的中心经纬度，其次使用数据本身所在区域的中心经纬度-->
             <!-- central latitude (y-axis origin) - used by all projections. -->
@@ -96,7 +96,7 @@
                 <!-- 线颜色：str -->
                 <Polygon>off</Polygon>
                 <!-- 闭合折线(仅用于非shp文件)：on, off -->
-                <Draw>on</Draw>
+                <Draw>onf</Draw>
                 <!-- 是否绘制：on, off -->
             </Border>
 
@@ -147,7 +147,7 @@
                 -->
 
             <ClipBorder>
-                <File>D:\CODES\MicapsDataDraw2\shapefiles\bou1_4p</File>
+                <File>D:\CODES\MicapsDataDraw2\shapefiles\bou2_4p</File>
                 <!-- 地图文件 -->
                 <Type>shp</Type>
                 <!-- 地图文件类型 -->
@@ -160,12 +160,12 @@
                          If the code is 100000, the cliped regions is whole polygons of the shp file.
 
                 -->
-                <Code>100000</Code>
+                <Code>360000</Code>
                 <Using>on</Using>
                 <!-- 是否启用：on,off -->
-                <Draw>onf</Draw>
+                <Draw>on</Draw>
                 <!-- 是否绘制：on,off -->
-                <LineWidth>1</LineWidth>
+                <LineWidth>2</LineWidth>
                 <!-- 线宽：float -->
                 <LineColor>k</LineColor>
                 <!-- 线颜色：str Olive -->
@@ -212,7 +212,7 @@
             <!-- micaps数据类型 -->
             <File>
                 <!-- M1：站点数据，M4：第4类格点数据，M11：第11类UV数据-->
-                <Type>M4</Type>
+                <Type>M3</Type>
 
                 <!--原始数据文件
                     M4 - K:\GQEC\TP\r24\17032908.060 16062908.012 K:\ecmwf\pressure\999\16122520.000
@@ -221,7 +221,7 @@
                     M3 - K:\zdzjm\maxtemp\17011418.000 K:\zdzjm\rain24\17033115.000 data.txt
                     M11  K:\ecmwf\uv\850\17041020.000
                 -->
-                <FileName> K:\GQEC\TP\r24\17032908.060 </FileName>
+                <FileName> K:\zdzjm\maxtemp\17011418.000 </FileName>
             </File>
             <!-- 图例 -->
             <Legend>
@@ -235,7 +235,7 @@
                 <Extend>max</Extend>
 
                 <!-- 是否取MICAPS数据本身的图例值 True False default is True-->
-                <MicapsLegendValue>True1</MicapsLegendValue>
+                <MicapsLegendValue>True</MicapsLegendValue>
 
                 <!--
                      When micapslegendvalue is true, the setting is working.

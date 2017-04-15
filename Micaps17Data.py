@@ -60,7 +60,7 @@ class Micaps17Data(Micaps):
                     #      }
                     # )
                     self.stations.append(
-                        (code, lat, lon, height, iclass, infosum, info[0])
+                        [code, lat, lon, height, iclass, infosum, info[0]]
                     )
         except Exception as err:
             print(u'【{0}】{1}-{2}'.format(self.filename, err, datetime.now()))
