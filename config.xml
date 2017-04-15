@@ -53,9 +53,9 @@
 
             <!-- 坐标轴 -->
             <!-- 是否显示坐标轴 on off. default is off -->
-            <Axis>off</Axis>
+            <Axis>onf</Axis>
             <!-- 坐标轴粗细 float. default is 1. -->
-            <AxisThick>1.5</AxisThick>
+            <AxisThick>1</AxisThick>
             <!-- 坐标轴文本显示格式 "%.1f°E","%.1f°N" , "%d°E","%d°N" default is 'd' -->
             <AxisFmt>"%d°E","%d°N"</AxisFmt>
             <!-- 纬度方向坐标轴的文本 左 上 右 下 - 1,0,0,1 -->
@@ -80,234 +80,26 @@
 
         <!-- 地图边界 支持shp和指定格式的txt文件，见示例基础数据
          D:\CODES\pyproject\shapefiles\china\bou2_4l.shp  BOUA5
+         D:\CODES\MicapsDataDraw2\shapefiles\bou1_4p.shp
          D:\CODES\pyproject\shapefiles\xz_new\BOUA5.shp
          'LC', 'GA', 'JA', 'JD', 'JJ', 'NC', 'PX', 'SR', 'XD', 'YD', 'YN'
         -->
         <Borders>
-          <Border>
-            <File>C:\sample\border\昌平区.txt</File>
-            <!-- 地图文件 -->
-            <Type>txt</Type>
-            <!-- 地图文件类型 -->
-            <LineWidth>0.5</LineWidth>
-            <!-- 线宽：float -->
-            <LineColor>#A2A2A2</LineColor>
-            <!-- 线颜色：str -->
-            <Polygon>off</Polygon>
-            <!-- 闭合折线(仅用于非shp文件)：on, off -->
-            <Draw>on</Draw>
-            <!-- 是否绘制：on, off -->
-          </Border>
-          <Border>
-            <File>C:\sample\border\朝阳区.txt</File>
-            <!-- 地图文件 -->
-            <Type>txt</Type>
-            <!-- 地图文件类型 -->
-            <LineWidth>0.5</LineWidth>
-            <!-- 线宽：float -->
-            <LineColor>#A2A2A2</LineColor>
-            <!-- 线颜色：str -->
-            <Polygon>on</Polygon>
-            <!-- 闭合折线(仅用于非shp文件)：on, off -->
-            <Draw>on</Draw>
-            <!-- 是否绘制：on, off -->
-          </Border>
-          <Border>
-            <File>C:\sample\border\大兴区.txt</File>
-            <!-- 地图文件 -->
-            <Type>txt</Type>
-            <!-- 地图文件类型 -->
-            <LineWidth>0.5</LineWidth>
-            <!-- 线宽：float -->
-            <LineColor>#A2A2A2</LineColor>
-            <!-- 线颜色：str -->
-            <Polygon>on</Polygon>
-            <!-- 闭合折线(仅用于非shp文件)：on, off -->
-            <Draw>on</Draw>
-            <!-- 是否绘制：on, off -->
-          </Border>
-          <Border>
-            <File>C:\sample\border\东城区.txt</File>
-            <!-- 地图文件 -->
-            <Type>txt</Type>
-            <!-- 地图文件类型 -->
-            <LineWidth>0.5</LineWidth>
-            <!-- 线宽：float -->
-            <LineColor>#A2A2A2</LineColor>
-            <!-- 线颜色：str -->
-            <Polygon>on</Polygon>
-            <!-- 闭合折线(仅用于非shp文件)：on, off -->
-            <Draw>on</Draw>
-            <!-- 是否绘制：on, off -->
-          </Border>
-          <Border>
-            <File>C:\sample\border\房山区.txt</File>
-            <!-- 地图文件 -->
-            <Type>txt</Type>
-            <!-- 地图文件类型 -->
-            <LineWidth>0.5</LineWidth>
-            <!-- 线宽：float -->
-            <LineColor>#A2A2A2</LineColor>
-            <!-- 线颜色：str -->
-            <Polygon>on</Polygon>
-            <!-- 闭合折线(仅用于非shp文件)：on, off -->
-            <Draw>on</Draw>
-            <!-- 是否绘制：on, off -->
-          </Border>
-          <Border>
-            <File>C:\sample\border\丰台区.txt</File>
-            <!-- 地图文件 -->
-            <Type>txt</Type>
-            <!-- 地图文件类型 -->
-            <LineWidth>0.5</LineWidth>
-            <!-- 线宽：float -->
-            <LineColor>#A2A2A2</LineColor>
-            <!-- 线颜色：str -->
-            <Polygon>on</Polygon>
-            <!-- 闭合折线(仅用于非shp文件)：on, off -->
-            <Draw>on</Draw>
-            <!-- 是否绘制：on, off -->
-          </Border>
-          <Border>
-            <File>C:\sample\border\海淀区.txt</File>
-            <!-- 地图文件 -->
-            <Type>txt</Type>
-            <!-- 地图文件类型 -->
-            <LineWidth>0.5</LineWidth>
-            <!-- 线宽：float -->
-            <LineColor>#A2A2A2</LineColor>
-            <!-- 线颜色：str -->
-            <Polygon>on</Polygon>
-            <!-- 闭合折线(仅用于非shp文件)：on, off -->
-            <Draw>on</Draw>
-            <!-- 是否绘制：on, off -->
-          </Border>
-          <Border>
-            <File>C:\sample\border\怀柔区.txt</File>
-            <!-- 地图文件 -->
-            <Type>txt</Type>
-            <!-- 地图文件类型 -->
-            <LineWidth>0.5</LineWidth>
-            <!-- 线宽：float -->
-            <LineColor>#A2A2A2</LineColor>
-            <!-- 线颜色：str -->
-            <Polygon>on</Polygon>
-            <!-- 闭合折线(仅用于非shp文件)：on, off -->
-            <Draw>on</Draw>
-            <!-- 是否绘制：on, off -->
-          </Border>
-          <Border>
-            <File>C:\sample\border\门头沟区.txt</File>
-            <!-- 地图文件 -->
-            <Type>txt</Type>
-            <!-- 地图文件类型 -->
-            <LineWidth>0.5</LineWidth>
-            <!-- 线宽：float -->
-            <LineColor>#A2A2A2</LineColor>
-            <!-- 线颜色：str -->
-            <Polygon>on</Polygon>
-            <!-- 闭合折线(仅用于非shp文件)：on, off -->
-            <Draw>on</Draw>
-            <!-- 是否绘制：on, off -->
-          </Border>
-          <Border>
-            <File>C:\sample\border\密云区.txt</File>
-            <!-- 地图文件 -->
-            <Type>txt</Type>
-            <!-- 地图文件类型 -->
-            <LineWidth>0.5</LineWidth>
-            <!-- 线宽：float -->
-            <LineColor>#A2A2A2</LineColor>
-            <!-- 线颜色：str -->
-            <Polygon>on</Polygon>
-            <!-- 闭合折线(仅用于非shp文件)：on, off -->
-            <Draw>on</Draw>
-            <!-- 是否绘制：on, off -->
-          </Border>
-          <Border>
-            <File>C:\sample\border\平谷区.txt</File>
-            <!-- 地图文件 -->
-            <Type>txt</Type>
-            <!-- 地图文件类型 -->
-            <LineWidth>0.5</LineWidth>
-            <!-- 线宽：float -->
-            <LineColor>#A2A2A2</LineColor>
-            <!-- 线颜色：str -->
-            <Polygon>on</Polygon>
-            <!-- 闭合折线(仅用于非shp文件)：on, off -->
-            <Draw>on</Draw>
-            <!-- 是否绘制：on, off -->
-          </Border>
-          <Border>
-            <File>C:\sample\border\石景山区.txt</File>
-            <!-- 地图文件 -->
-            <Type>txt</Type>
-            <!-- 地图文件类型 -->
-            <LineWidth>0.5</LineWidth>
-            <!-- 线宽：float -->
-            <LineColor>#A2A2A2</LineColor>
-            <!-- 线颜色：str -->
-            <Polygon>on</Polygon>
-            <!-- 闭合折线(仅用于非shp文件)：on, off -->
-            <Draw>on</Draw>
-            <!-- 是否绘制：on, off -->
-          </Border>
-          <Border>
-            <File>C:\sample\border\顺义区.txt</File>
-            <!-- 地图文件 -->
-            <Type>txt</Type>
-            <!-- 地图文件类型 -->
-            <LineWidth>0.5</LineWidth>
-            <!-- 线宽：float -->
-            <LineColor>#A2A2A2</LineColor>
-            <!-- 线颜色：str -->
-            <Polygon>on</Polygon>
-            <!-- 闭合折线(仅用于非shp文件)：on, off -->
-            <Draw>on</Draw>
-            <!-- 是否绘制：on, off -->
-          </Border>
-          <Border>
-            <File>C:\sample\border\通州区.txt</File>
-            <!-- 地图文件 -->
-            <Type>txt</Type>
-            <!-- 地图文件类型 -->
-            <LineWidth>0.5</LineWidth>
-            <!-- 线宽：float -->
-            <LineColor>#A2A2A2</LineColor>
-            <!-- 线颜色：str -->
-            <Polygon>on</Polygon>
-            <!-- 闭合折线(仅用于非shp文件)：on, off -->
-            <Draw>on</Draw>
-            <!-- 是否绘制：on, off -->
-          </Border>
-          <Border>
-            <File>C:\sample\border\西城区.txt</File>
-            <!-- 地图文件 -->
-            <Type>txt</Type>
-            <!-- 地图文件类型 -->
-            <LineWidth>0.5</LineWidth>
-            <!-- 线宽：float -->
-            <LineColor>#A2A2A2</LineColor>
-            <!-- 线颜色：str -->
-            <Polygon>on</Polygon>
-            <!-- 闭合折线(仅用于非shp文件)：on, off -->
-            <Draw>on</Draw>
-            <!-- 是否绘制：on, off -->
-          </Border>
-          <Border>
-            <File>C:\sample\border\延庆区.txt</File>
-            <!-- 地图文件 -->
-            <Type>txt</Type>
-            <!-- 地图文件类型 -->
-            <LineWidth>0.5</LineWidth>
-            <!-- 线宽：float -->
-            <LineColor>#A2A2A2</LineColor>
-            <!-- 线颜色：str -->
-            <Polygon>on</Polygon>
-            <!-- 闭合折线(仅用于非shp文件)：on, off -->
-            <Draw>on</Draw>
-            <!-- 是否绘制：on, off -->
-          </Border>
+            <Border>
+                <File>D:\CODES\MicapsDataDraw2\shapefiles\bou2_4l.shp</File>
+                <!-- 地图文件 -->
+                <Type>shp</Type>
+                <!-- 地图文件类型 -->
+                <LineWidth>1</LineWidth>
+                <!-- 线宽：float -->
+                <LineColor>k</LineColor>
+                <!-- 线颜色：str -->
+                <Polygon>off</Polygon>
+                <!-- 闭合折线(仅用于非shp文件)：on, off -->
+                <Draw>on</Draw>
+                <!-- 是否绘制：on, off -->
+            </Border>
+
         </Borders>
 
         <!-- 裁剪边界文件路径，用于对色斑图进行裁剪
@@ -355,7 +147,7 @@
                 -->
 
             <ClipBorder>
-                <File>d:\codes\pyproject\shapefiles\bou2_4p</File>
+                <File>D:\CODES\MicapsDataDraw2\shapefiles\bou1_4p</File>
                 <!-- 地图文件 -->
                 <Type>shp</Type>
                 <!-- 地图文件类型 -->
@@ -364,13 +156,16 @@
                          330000,340000,350000,360000,370000,410000,420000,430000,440000,450000,
                          460000,500000,510000,520000,530000,540000,610000,620000,630000,640000,
                          650000,710000,810000,820000
-                        -->
-                <Code>360000,430000,440000,350000,330000,340000,420000,710000,810000,820000</Code>
+
+                         If the code is 100000, the cliped regions is whole polygons of the shp file.
+
+                -->
+                <Code>100000</Code>
                 <Using>on</Using>
                 <!-- 是否启用：on,off -->
-                <Draw>on</Draw>
+                <Draw>onf</Draw>
                 <!-- 是否绘制：on,off -->
-                <LineWidth>2</LineWidth>
+                <LineWidth>1</LineWidth>
                 <!-- 线宽：float -->
                 <LineColor>k</LineColor>
                 <!-- 线颜色：str Olive -->
@@ -426,7 +221,7 @@
                     M3 - K:\zdzjm\maxtemp\17011418.000 K:\zdzjm\rain24\17033115.000 data.txt
                     M11  K:\ecmwf\uv\850\17041020.000
                 -->
-                <FileName>  K:\GQEC\TP\r24\17032908.060 </FileName>
+                <FileName> K:\GQEC\TP\r24\17032908.060 </FileName>
             </File>
             <!-- 图例 -->
             <Legend>
@@ -513,7 +308,7 @@
                 <Grid>195,216</Grid>
                 <!-- 等值线配置 -->
                 <Contour>
-                    <Visible>True</Visible>     <!-- True False. default is False -->
+                    <Visible>True1</Visible>     <!-- True False. default is False -->
                     <LineWidth>1</LineWidth>  <!-- float. default is 1. -->
                     <LineColor>k</LineColor>    <!-- string. default is 'black' -->
                     <ColorLine>True1</ColorLine> <!-- 等值线渐变色 if True linecolor设置无效. default is False-->
@@ -521,7 +316,7 @@
                 <!-- <ContourVisible>True</ContourVisible>  -->
 
                 <!-- 是否显示色斑图 True False. default is False  -->
-                <ContourfVisible>True1</ContourfVisible>
+                <ContourfVisible>True</ContourfVisible>
 
                 <!-- 等值线标注配置 True False. default is False  -->
                 <ContourLabel>

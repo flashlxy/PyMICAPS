@@ -25,10 +25,12 @@ class Border:
 
         self.file = Projection.leaf_to_string(leaf, "File")
         self.filetype = str.upper(Projection.leaf_to_string(leaf, "Type", 'shp'))
-        # self.path = self.readPolygon(self.file) if self.filetype != 'SHP' else None
-        self.path = ClipBorder.readPath(self.file, 0) if self.filetype != 'SHP' else None
-        self.polygon = str.upper(Projection.leaf_to_string(leaf, "Polygon", 'on'))
         self.draw = Projection.leaf_to_bool(leaf, "Draw", False)
+        # self.path = self.readPolygon(self.file) if self.filetype != 'SHP' else None
+        if self.draw:
+            self.path = ClipBorder.readPath(self.file, 0) if self.filetype != 'SHP' else None
+        self.polygon = str.upper(Projection.leaf_to_string(leaf, "Polygon", 'on'))
+        # self.draw = Projection.leaf_to_bool(leaf, "Draw", False)
         self.linewidth = Projection.leaf_to_float(leaf, "LineWidth", 1)
         self.linecolor = Projection.leaf_to_string(leaf, "LineColor", 'k')
 
