@@ -86,9 +86,20 @@ class Micaps11Data(Micaps):
                 for i in range(self.sumlon):
                     for j in range(self.sumlat):
                         self.Z[j, i] = math.sqrt(self.U[j, i]**2 + self.V[j, i]**2)
+            if self.deltalat < 0:
+                self.TransposeYaxis()
 
         except Exception as err:
             print(u'【{0}】{1}-{2}'.format(self.filename, err, datetime.now()))
+
+    def TransposeYaxis(self):
+        self.beginlat, self.endlat = self.endlat, self.beginlat
+        self.deltalat = math.fabs(self.deltalat)
+        self.y = np.arange(self.beginlat, self.endlat + self.deltalat, self.deltalat)
+        self.X, self.Y = np.meshgrid(self.x, self.y)
+        self.U = self.U[::-1, ::]
+        self.V = self.V[::-1, ::]
+        self.Z = self.Z[::-1, ::]
 
     def UpdateData(self, products, micapsfile):
         self.UpdateExtents(products)
