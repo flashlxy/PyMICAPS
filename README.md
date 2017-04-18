@@ -86,7 +86,7 @@
 
     Micaps第11类数据-等经纬度投影：
 
-![](https://github.com/flashlxy/MicapsDataDraw/raw/master/images/17032520.001.png)
+![](https://github.com/flashlxy/MicapsDataDraw/raw/master/images/9.png)
 
     Micaps第11类数据-ortho投影：
 
