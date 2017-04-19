@@ -10,7 +10,7 @@
                  stere：极射赤面投影，npstere：北半球极射赤面投影, hammer，kav7，
                  merc：麦卡托投影，gnom, cyl：等经纬度投影
              -->
-            <Name>sall</Name>
+            <Name>lcc</Name>
 
             <!-- 为空或者为非数值则首先使用裁切区的中心经纬度，其次使用数据本身所在区域的中心经纬度-->
             <!-- central latitude (y-axis origin) - used by all projections. -->
@@ -55,7 +55,7 @@
 
             <!-- 坐标轴 -->
             <!-- 是否显示坐标轴 on off. default is off -->
-            <Axis>on</Axis>
+            <Axis>onf</Axis>
             <!-- 坐标轴粗细 float. default is 1. -->
             <AxisThick>1</AxisThick>
             <!-- 坐标轴文本显示格式 "%.1f°E","%.1f°N" , "%d°E","%d°N" default is 'd' -->
@@ -251,7 +251,8 @@
 
                 <!--
                 色标名称: 仅当MicapsLegendValue=True时有效。
-                支持NCL colorbar name. example: MPL_jet, ncl_default, MPL_RdBu MPL_cool etc. default is ncl_default
+                支持NCL colorbar name. example: MPL_jet, ncl_default, MPL_RdBu MPL_cool MPL_Oranges etc.
+                        default is ncl_default
                 参考链接：http://www.ncl.ucar.edu/Document/Graphics/color_table_gallery.shtml
                 -->
                 <MicapsLegendColor>ncl_default</MicapsLegendColor>
@@ -345,6 +346,12 @@
                 <!-- 彩色流线开关 on off. default is False -->
                 <OnColor>off</OnColor>
 
+                <!-- 有投影下 barbs网格 list. [x方向点数 y方向点数]  default is [31,31]  -->
+                <BarbsGrid>31, 31</BarbsGrid>
+
+                <!-- 有投影下 完全裁切 default is off  -->
+                <WholeClip>on</WholeClip>
+
                 <!-- effact projection on -->
                 <!-- 有投影时的尺寸 -->
                 <Scale>500</Scale>
@@ -425,8 +432,9 @@
 
              为空则默认用裁切区+外延所在的矩形范围 无裁切区则取数据本身的范围
              113.33273, 24.241938000000001, 118.74326600000001, 30.330926999999999
+             90, 15, 125, 45
         -->
-        <Extents>90, 15, 125, 45 </Extents>
+        <Extents> </Extents>
         <!-- 画布透明度 浮点数0-1之间 default is 1.-->
         <Opacity>1</Opacity>
         <!-- 生成的图片文件路径 default is mytest.png -->

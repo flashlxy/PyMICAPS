@@ -127,8 +127,9 @@ class Micaps:
             products.picture.extents = Bbox.from_extents(xmin, ymin, xmax, ymax)
         else:
             extents = products.picture.extents
-            products.picture.extents = Bbox.from_extents(extents[0], extents[1],
-                                                         extents[2], extents[3])
+            if isinstance(extents, list):
+                products.picture.extents = Bbox.from_extents(extents[0], extents[1],
+                                                             extents[2], extents[3])
 
     def UpdatePinLegendValue(self, micapsfile):
         pin = micapsfile.legend.pinlegendvalue
@@ -151,7 +152,7 @@ class Micaps:
             extend = 'neither'
         return extend
 
-    def DrawUV(self, fig, m, micapsfile, clipborder, patch):
+    def DrawUV(self, m, micapsfile, clipborder, patch):
         return
 
     def DrawCommon(self, products, debug=True):
@@ -210,9 +211,12 @@ class Micaps:
         # 坐标系统尽可能靠近绘图区边界
         fig.tight_layout(pad=products.picture.pad)
 
+        clipborder = products.map.clipborders[0]
+
         # 获得产品投影
         from Projection import Projection
         m = Projection.GetProjection(products)
+
         if m is not plt:
             # 用投影更新经纬度数据
             self.X, self.Y = Micaps.UpdateXY(m, self.X, self.Y)
@@ -221,14 +225,11 @@ class Micaps:
             # 画世界底图
             Map.DrawWorld(products, m)
 
-        # draw parallels and meridians.
-        Map.DrawGridLine(products, m)
-
         # 绘制裁切区域边界
         patch = Map.DrawClipBorders(products.map.clipborders)
 
-        # 绘制地图
-        Map.DrawBorders(m, products)
+        # draw parallels and meridians.
+        Map.DrawGridLine(products, m)
 
         cmap = nclcmaps.cmaps(micapsfile.legend.micapslegendcolor)  # cm.jet  temp_diff_18lev
         vmax = math.ceil(self.max)
@@ -242,7 +243,7 @@ class Micaps:
 
         # 绘制等值线 ------ 等值线和标注是一体的
         c = micapsfile.contour
-        clipborder = products.map.clipborders[0]
+
         Map.DrawContourAndMark(contour=c, x=self.X, y=self.Y, z=self.Z,
                                level=level, clipborder=clipborder, patch=patch, m=m)
 
@@ -257,7 +258,10 @@ class Micaps:
         # 绘制描述文本
         MicapsFile.MicapsFile.DrawTitle(m, micapsfile.title, self.title)
 
-        self.DrawUV(fig, m, micapsfile, clipborder, patch)
+        self.DrawUV(m, micapsfile, clipborder, patch)
+
+        # 绘制地图
+        Map.DrawBorders(m, products)
 
         # 绘制散点
         if micapsfile.contour.scatter:

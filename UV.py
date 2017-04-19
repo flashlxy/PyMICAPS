@@ -18,8 +18,10 @@ class UV:
 
         self.stream = Projection.leaf_to_bool(leaf, 'Stream', False)
         self.density = Projection.leaf_to_list(leaf, 'Density', [1, 1])
+        self.barbsgrid = Projection.leaf_to_list(leaf, 'BarbsGrid', [31, 31])
         self.color = Projection.leaf_to_string(leaf, 'Color', 'k')
         self.onspeed = Projection.leaf_to_bool(leaf, 'OnSpeed', False)
+        self.wholecilp = Projection.leaf_to_bool(leaf, 'WholeClip', False)
         self.oncolor = Projection.leaf_to_bool(leaf, 'OnColor', False)
         self.linewidth = Projection.leaf_to_float(leaf, 'LineWidth', 1.)
         self.scale = Projection.leaf_to_int(leaf, 'Scale', 700)

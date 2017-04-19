@@ -24,12 +24,14 @@ class Micaps11Data(Micaps):
         self.linewidth = 1
         self.color = 'k'
         self.density = [1, 1]
+        self.barbsgrid = [31, 31]
         self.cmap = None
         self.stream = None
         self.barbs = None
         self.length = 5
         self.scale = 700
         self.colorlist = ['k', 'b', 'r', 'g']
+        self.wholeclip = False
         self.ReadFromFile()
 
     def ReadFromFile(self):
@@ -119,6 +121,7 @@ class Micaps11Data(Micaps):
         else:
             self.linewidth = micapsfile.uv.linewidth
         self.density = micapsfile.uv.density
+        self.barbsgrid = micapsfile.uv.barbsgrid
 
         if micapsfile.uv.oncolor:
             self.color = self.Z
@@ -130,7 +133,9 @@ class Micaps11Data(Micaps):
         self.stream = micapsfile.uv.stream
         self.length = micapsfile.uv.length
         self.scale = micapsfile.uv.scale
+        self.wholeclip = micapsfile.uv.wholecilp
         self.colorlist = micapsfile.legend.legendcolor
+
 
     def GetPatches(self, paths):
         ps = []
@@ -159,7 +164,7 @@ class Micaps11Data(Micaps):
         plt.gca().add_patch(apatch)
         return apatch
 
-    def DrawUV(self, fig, m, micapsfile, clipborder, patch):
+    def DrawUV(self, m, micapsfile, clipborder, patch):
 
         if m is plt:
             if self.stream:
@@ -178,7 +183,7 @@ class Micaps11Data(Micaps):
         else:
             # transform vectors to projection grid.
             uproj, vproj, xx, yy = \
-                m.transform_vector(self.U, self.V, self.x, self.y, 31, 31,
+                m.transform_vector(self.U, self.V, self.x, self.y, self.barbsgrid[0], self.barbsgrid[1],
                                    returnxy=True, masked=True)
 
             if isinstance(self.color, np.ndarray):
@@ -203,21 +208,34 @@ class Micaps11Data(Micaps):
                                 barbcolor='k', flagcolor='r',
                                 linewidth=0.5)
 
-        if m is plt and self.stream:
-            if clipborder.path is not None and clipborder.using:
-                for ax in fig.axes:
-                    from matplotlib.patches import FancyArrowPatch
-                    artists = ax.get_children()
-                    for artist in artists:
-                        if isinstance(artist, FancyArrowPatch):
-                            artist.set_clip_path(patch)
-                plot.lines.set_clip_path(patch)
+        if clipborder.path is not None and clipborder.using:
+            from matplotlib.patches import FancyArrowPatch
+            from matplotlib.collections import PolyCollection
+            from matplotlib.lines import Line2D
+            for artist in plt.gca().get_children():
+                if self.wholeclip:
+                    # from matplotlib.patches import Polygon
+                    if not isinstance(artist, Line2D):
+                        artist.set_clip_path(patch)
+                else:
+                    from matplotlib.collections import LineCollection
+                    if isinstance(artist, FancyArrowPatch) or isinstance(artist, PolyCollection) or \
+                            isinstance(artist, LineCollection):
+                        artist.set_clip_path(patch)
 
-        if self.barbs or (m is not plt and self.stream):
-            if clipborder.path is not None and clipborder.using:
-                for ax in fig.axes:
-                    artists = ax.get_children()
-                    for artist in artists:
-                        from matplotlib.collections import PolyCollection
-                        if isinstance(artist, PolyCollection):
-                            artist.set_clip_path(patch)
+            # if m is plt and self.stream:
+            #     for ax in fig.axes:
+            #         from matplotlib.patches import FancyArrowPatch
+            #         artists = ax.get_children()
+            #         for artist in artists:
+            #             if isinstance(artist, FancyArrowPatch):
+            #                 artist.set_clip_path(patch)
+            #     plot.lines.set_clip_path(patch)
+            #
+            # if self.barbs or (m is not plt and self.stream):
+            #     for ax in fig.axes:
+            #         artists = ax.get_children()
+            #         for artist in artists:
+            #             from matplotlib.collections import PolyCollection
+            #             if isinstance(artist, PolyCollection):
+            #                 artist.set_clip_path(patch)
