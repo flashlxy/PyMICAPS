@@ -88,11 +88,11 @@
 
 ## 示例数据结合适当配置文件输出的图片
 
-    Micaps第11类数据 在等经纬度、自定义区域、中国区作为裁切区(流线风场也有效)
+    Micaps第11类数据 在等经纬度、自定义区域、中国区作为裁切区(流线风场也有效)
     
 ![](https://github.com/flashlxy/MicapsDataDraw/raw/master/images/10.png)
 
-    Micaps第11类数据-等经纬度投影：
+    Micaps第11类数据-等经纬度投影：
 
 ![](https://github.com/flashlxy/MicapsDataDraw/raw/master/images/9.png)
 
