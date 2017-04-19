@@ -125,6 +125,10 @@ class Micaps:
             ymax = maxlat + margin if maxlat + margin <= 90 else 90
             ymin = minlat - margin if minlat - margin >= -90 else -90
             products.picture.extents = Bbox.from_extents(xmin, ymin, xmax, ymax)
+        else:
+            extents = products.picture.extents
+            products.picture.extents = Bbox.from_extents(extents[0], extents[1],
+                                                         extents[2], extents[3])
 
     def UpdatePinLegendValue(self, micapsfile):
         pin = micapsfile.legend.pinlegendvalue
@@ -147,7 +151,7 @@ class Micaps:
             extend = 'neither'
         return extend
 
-    def DrawUV(self, m, products):
+    def DrawUV(self, fig, m, micapsfile, clipborder, patch):
         return
 
     def DrawCommon(self, products, debug=True):
@@ -156,6 +160,16 @@ class Micaps:
         # 更新绘图矩形区域
         # self.UpdateExtents(products)
         micapsfile = products.micapsfiles[0]
+
+    def Clip(self, clipborder, fig, patch):
+        if clipborder.path is not None and clipborder.using:
+            for ax in fig.axes:
+                if not isinstance(ax, Axes):
+                    # from matplotlib.patches import FancyArrowPatch
+                    artists = ax.get_children()
+                    for artist in artists:
+                        # if isinstance(artist, FancyArrowPatch):
+                        artist.set_clip_path(patch)
 
     def Draw(self, products, micapsfile, debug=True):
         """
@@ -243,7 +257,7 @@ class Micaps:
         # 绘制描述文本
         MicapsFile.MicapsFile.DrawTitle(m, micapsfile.title, self.title)
 
-        self.DrawUV(m, micapsfile)
+        self.DrawUV(fig, m, micapsfile, clipborder, patch)
 
         # 绘制散点
         if micapsfile.contour.scatter:
@@ -302,6 +316,10 @@ class Micaps:
                 plt.text(lon+deta, lat, sta[6],
                          fontproperties=font, rotation=0,
                          color=stations.font[3], ha='left', va='center')
+
+        # 接近收尾
+
+        # self.Clip(clipborder, fig, patch)
 
         # 存图
         Picture.savePicture(fig, products.picture.picfile)

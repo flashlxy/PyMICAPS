@@ -10,7 +10,7 @@
                  stere：极射赤面投影，npstere：北半球极射赤面投影, hammer，kav7，
                  merc：麦卡托投影，gnom, cyl：等经纬度投影
              -->
-            <Name>lcc</Name>
+            <Name>sall</Name>
 
             <!-- 为空或者为非数值则首先使用裁切区的中心经纬度，其次使用数据本身所在区域的中心经纬度-->
             <!-- central latitude (y-axis origin) - used by all projections. -->
@@ -30,38 +30,40 @@
                  The longitude lon_0 is at 6-o’clock,
                  and the latitude circle boundinglat is tangent to the edge of the map at lon_0.
             -->
-            <BoundingLat>0</BoundingLat>
+            <BoundingLat>45</BoundingLat>
 
             <!-- 左下角和右上角的经纬度任意一个为空或者为非数值
                  则首先使用裁切区的左下角和右上角的经纬度，
                  其次使用数据本身所在区域的左下角和右上角的经纬度。
                  对lcc, stere, merc很重要
                  5.13 85.86 53.51 174.69
-                 lcc stere merc 比较适合的配置 leftbottom:-4,75 righttop:55,188
+                 lcc stere merc 亚洲区配置 leftbottom:-4,75 righttop:55,188
+                                中国区配置 leftbottom:11.9,82.37 righttop:51.5,147.38
+                       lcc      中国区配置 leftbottom:11.,82.37 righttop:50.5,147.38
             -->
             <!-- latitude of lower left hand corner of the selected map domain. -->
-            <LlcrnrLat>-4a</LlcrnrLat>
+            <LlcrnrLat>11.</LlcrnrLat>
 
             <!--longitude of lower left hand corner of the selected map domain.-->
-            <LlcrnrLon>75</LlcrnrLon>
+            <LlcrnrLon>82.37</LlcrnrLon>
 
             <!--latitude of upper right hand corner of the selected map domain.-->
-            <UrcrnrLat>55</UrcrnrLat>
+            <UrcrnrLat>50.5</UrcrnrLat>
 
             <!--longitude of upper right hand corner of the selected map domain.-->
-            <UrcrnrLon>188</UrcrnrLon>
+            <UrcrnrLon>147.38</UrcrnrLon>
 
             <!-- 坐标轴 -->
             <!-- 是否显示坐标轴 on off. default is off -->
-            <Axis>onf</Axis>
+            <Axis>on</Axis>
             <!-- 坐标轴粗细 float. default is 1. -->
             <AxisThick>1</AxisThick>
             <!-- 坐标轴文本显示格式 "%.1f°E","%.1f°N" , "%d°E","%d°N" default is 'd' -->
             <AxisFmt>"%d°E","%d°N"</AxisFmt>
             <!-- 纬度方向坐标轴的文本 左 上 右 下 - 1,0,0,1 -->
-            <LatLabels>0,0,0,0</LatLabels>
+            <LatLabels>1,0,0,0</LatLabels>
             <!-- 经度方向坐标轴的文本 左 上 右 下 - 1,0,0,1 -->
-            <LonLabels>0,0,0,0</LonLabels>
+            <LonLabels>0,0,0,1</LonLabels>
 
             <!-- 是否显示海岸线 on off. default is off -->
             <Coastlines>onf</Coastlines>
@@ -96,7 +98,7 @@
                 <!-- 线颜色：str -->
                 <Polygon>off</Polygon>
                 <!-- 闭合折线(仅用于非shp文件)：on, off -->
-                <Draw>onf</Draw>
+                <Draw>on</Draw>
                 <!-- 是否绘制：on, off -->
             </Border>
 
@@ -147,7 +149,7 @@
                 -->
 
             <ClipBorder>
-                <File>D:\CODES\MicapsDataDraw2\shapefiles\bou2_4p</File>
+                <File>D:\CODES\MicapsDataDraw2\shapefiles\bou1_4p</File>
                 <!-- 地图文件 -->
                 <Type>shp</Type>
                 <!-- 地图文件类型 -->
@@ -160,14 +162,14 @@
                          If the code is 100000, the cliped regions is whole polygons of the shp file.
 
                 -->
-                <Code>360000</Code>
+                <Code>100000</Code>
                 <Using>on</Using>
                 <!-- 是否启用：on,off -->
-                <Draw>on</Draw>
+                <Draw>onf</Draw>
                 <!-- 是否绘制：on,off -->
                 <LineWidth>2</LineWidth>
                 <!-- 线宽：float -->
-                <LineColor>k</LineColor>
+                <LineColor>#df0029</LineColor>
                 <!-- 线颜色：str Olive -->
             </ClipBorder>
         </ClipBorders>
@@ -176,7 +178,7 @@
             <!-- Micaps 第17类数据格式 兼容小数点版-->
             <File>jxstation.txt</File>
             <!-- 是否标注 default is off-->
-            <Visible>on</Visible>
+            <Visible>onf</Visible>
             <!--
                 站点样式
                 filled_markers = ('o', 'v', '^', '<', '>', '8', 's', 'p', '*', 'h', 'H', 'D', 'd', 'P', 'X')
@@ -212,16 +214,18 @@
             <!-- micaps数据类型 -->
             <File>
                 <!-- M1：站点数据，M4：第4类格点数据，M11：第11类UV数据-->
-                <Type>M3</Type>
+                <Type>M11</Type>
 
                 <!--原始数据文件
                     M4 - K:\GQEC\TP\r24\17032908.060 16062908.012 K:\ecmwf\pressure\999\16122520.000
                          K:\ecmwf\height\500\17033108.240 K:\ecmwf\temper\850\16122520.000
                          K:\GQJP\HGT\500\17040514.084 K:\GQJP\24P\1010\17040514.078
                     M3 - K:\zdzjm\maxtemp\17011418.000 K:\zdzjm\rain24\17033115.000 data.txt
-                    M11  K:\ecmwf\uv\850\17041020.000
+                         K:\GD05\jxqy\20170417.012
+                    M11  K:\ecmwf\uv\850\17041020.000 K:\GQEC\uv\500\17041720.024
+                         K:\GQEC\10uv\999\17011408.186
                 -->
-                <FileName> K:\zdzjm\maxtemp\17011418.000 </FileName>
+                <FileName> K:\GQEC\uv\850\17041720.048 </FileName>
             </File>
             <!-- 图例 -->
             <Legend>
@@ -348,9 +352,9 @@
                 <MarkScaleLength>12</MarkScaleLength>
                 <!-- Barbs -->
                 <!-- 风场开关 on off. default is False -->
-                <Barbs>on</Barbs>
+                <Barbs>onf</Barbs>
                 <!-- 风杆长度 int. default is 5  -->
-                <Length>6</Length>
+                <Length>5</Length>
             </UV>
 
             <!-- 标题 -->
@@ -422,7 +426,7 @@
              为空则默认用裁切区+外延所在的矩形范围 无裁切区则取数据本身的范围
              113.33273, 24.241938000000001, 118.74326600000001, 30.330926999999999
         -->
-        <Extents> </Extents>
+        <Extents>90, 15, 125, 45 </Extents>
         <!-- 画布透明度 浮点数0-1之间 default is 1.-->
         <Opacity>1</Opacity>
         <!-- 生成的图片文件路径 default is mytest.png -->

@@ -164,13 +164,13 @@ class Map:
             # 用区域边界裁切等值线图
             if clipborder.path is not None and clipborder.using:
                 for collection in CS1.collections:
-                    collection.set_clip_on(True)
+                    # collection.set_clip_on(True)
                     collection.set_clip_path(patch)
 
                 for text in CS2:
-                    if not clipborder.path.contains_point((text._x, text._y)):
+                    if not clipborder.path.contains_point(text.get_position()):
                         text.remove()
-            print(CS2)
+            # print(CS2)
 
     @staticmethod
     def DrawClipBorders(clipborders):

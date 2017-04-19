@@ -85,7 +85,7 @@ class Micaps11Data(Micaps):
 
                 for i in range(self.sumlon):
                     for j in range(self.sumlat):
-                        self.Z[j, i] = math.sqrt(self.U[j, i]**2 + self.V[j, i]**2)
+                        self.Z[j, i] = math.sqrt(self.U[j, i] ** 2 + self.V[j, i] ** 2)
             if self.deltalat < 0:
                 self.TransposeYaxis()
 
@@ -115,7 +115,7 @@ class Micaps11Data(Micaps):
 
         from Main import equal
         if micapsfile.uv.onspeed and not equal(self.Z.max(), 0):
-            self.linewidth = 5*self.Z/self.Z.max()
+            self.linewidth = 5 * self.Z / self.Z.max()
         else:
             self.linewidth = micapsfile.uv.linewidth
         self.density = micapsfile.uv.density
@@ -132,21 +132,48 @@ class Micaps11Data(Micaps):
         self.scale = micapsfile.uv.scale
         self.colorlist = micapsfile.legend.legendcolor
 
-    def DrawUV(self, m, micapsfile):
+    def GetPatches(self, paths):
+        ps = []
+        for path in paths:
+            from matplotlib import patches
+            ps.append(patches.PathPatch(path, linewidth=1, facecolor='none', edgecolor='k'))
+        return ps
+
+    def ConvertPacth(self, ax, patch):
+        path = patch.get_path()
+        lon = []
+        lat = []
+        for points in path.vertices:
+            x, y = points[0], points[1]
+            xy_pixels = ax.transData.transform(np.vstack([x, y]).T)
+            xpix, ypix = xy_pixels.T
+            lon.append(xpix[0])
+            lat.append(ypix[0])
+        from matplotlib.path import Path
+        apath = Path(zip(lon, lat))
+        from matplotlib import patches
+        apatch = patches.PathPatch(apath,
+                                   linewidth=1,
+                                   facecolor='none',
+                                   edgecolor='k')
+        plt.gca().add_patch(apatch)
+        return apatch
+
+    def DrawUV(self, fig, m, micapsfile, clipborder, patch):
 
         if m is plt:
             if self.stream:
-                m.streamplot(self.X, self.Y, self.U, self.V,
-                             density=self.density,
-                             linewidth=self.linewidth,
-                             color=self.color,
-                             cmap=self.cmap
-                             )
-
+                plot = m.streamplot(self.X, self.Y, self.U, self.V,
+                                    density=self.density,
+                                    linewidth=self.linewidth,
+                                    color=self.color,
+                                    cmap=self.cmap
+                                    )
             if self.barbs:
-                m.barbs(self.X, self.Y, self.U, self.V,
-                        length=self.length, barb_increments=dict(half=2, full=4, flag=20),
-                        sizes=dict(emptybarb=0))
+                barbs = m.barbs(self.X, self.Y, self.U, self.V,
+                                length=self.length, barb_increments=dict(half=2, full=4, flag=20),
+                                sizes=dict(emptybarb=0))
+                pass
 
         else:
             # transform vectors to projection grid.
@@ -158,6 +185,12 @@ class Micaps11Data(Micaps):
                 self.color = self.colorlist
 
             if self.stream:
+                # plot = m.streamplot(xx, yy, uproj, vproj  # , latlon=True
+                #                     # density=self.density,
+                #                     # linewidth=self.linewidth,
+                #                     # color=self.color
+                #                     # cmap=self.cmap
+                #                     )
                 # now plot.
                 Q = m.quiver(xx, yy, uproj, vproj, color=self.color, scale=self.scale)
                 # make quiver key.
@@ -170,3 +203,21 @@ class Micaps11Data(Micaps):
                                 barbcolor='k', flagcolor='r',
                                 linewidth=0.5)
 
+        if m is plt and self.stream:
+            if clipborder.path is not None and clipborder.using:
+                for ax in fig.axes:
+                    from matplotlib.patches import FancyArrowPatch
+                    artists = ax.get_children()
+                    for artist in artists:
+                        if isinstance(artist, FancyArrowPatch):
+                            artist.set_clip_path(patch)
+                plot.lines.set_clip_path(patch)
+
+        if self.barbs or (m is not plt and self.stream):
+            if clipborder.path is not None and clipborder.using:
+                for ax in fig.axes:
+                    artists = ax.get_children()
+                    for artist in artists:
+                        from matplotlib.collections import PolyCollection
+                        if isinstance(artist, PolyCollection):
+                            artist.set_clip_path(patch)

@@ -45,6 +45,7 @@ def main(debug):
             sys.exit()
         xml = sys.argv[1]
 
+    # try:
     start = ttime.clock()
 
     from Products import Products
@@ -55,6 +56,8 @@ def main(debug):
             # break
 
     print('Micaps data contour and save picture seconds:', ttime.clock() - start)
+    # except Exception as err:
+    #     print(err)
 
 
 if __name__ == '__main__':
