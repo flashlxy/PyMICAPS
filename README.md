@@ -8,7 +8,7 @@
 
     并自动输出相应图像到指定文件。
     
-###### Author：Xianyao Liu | Version：2.1.20170414 | E-mail：flashlxy@qq.com | Language：Python2.7
+###### Author：Xianyao Liu | Version：2.1.20170419 | E-mail：flashlxy@qq.com | Language：Python2.7
 
 ## 更新日志
 
