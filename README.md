@@ -118,7 +118,9 @@
 
 ![](https://github.com/flashlxy/MicapsDataDraw/raw/master/images/4.png)
 
+    Micaps第三类数据-Lambert投影：
+    
+![](https://github.com/flashlxy/MicapsDataDraw/raw/master/images/lcc.png)
 
-   
    
    
