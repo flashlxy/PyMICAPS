@@ -61,9 +61,9 @@
             <!-- 坐标轴文本显示格式 "%.1f°E","%.1f°N" , "%d°E","%d°N" default is 'd' -->
             <AxisFmt>"%d°E","%d°N"</AxisFmt>
             <!-- 纬度方向坐标轴的文本 左 上 右 下 - 1,0,0,1 -->
-            <LatLabels>1,0,0,0</LatLabels>
+            <LatLabels>0,0,0,0</LatLabels>
             <!-- 经度方向坐标轴的文本 左 上 右 下 - 1,0,0,1 -->
-            <LonLabels>0,0,0,1</LonLabels>
+            <LonLabels>0,0,0,0</LonLabels>
 
             <!-- 是否显示海岸线 on off. default is off -->
             <Coastlines>onf</Coastlines>
@@ -147,7 +147,21 @@
                 810000     香港特别行政区
                 820000     澳门特别行政区
                 -->
-
+            <ClipBorder>
+                <File>D:\CODES\MicapsDataDraw2\border\咸阳市界.txt</File>
+                <!-- 地图文件 -->
+                <Type>txt</Type>
+                <!-- 地图文件类型 -->
+                <Code>360000</Code>
+                <Using>on</Using>
+                <!-- 是否启用：on,off -->
+                <Draw>on</Draw>
+                <!-- 是否绘制：on,off -->
+                <LineWidth>2</LineWidth>
+                <!-- 线宽：float -->
+                <LineColor>Olive</LineColor>
+                <!-- 线颜色：str Olive -->
+            </ClipBorder>
             <ClipBorder>
                 <File>D:\CODES\MicapsDataDraw2\shapefiles\bou1_4p</File>
                 <!-- 地图文件 -->
@@ -163,7 +177,7 @@
 
                 -->
                 <Code>100000</Code>
-                <Using>on</Using>
+                <Using>onf</Using>
                 <!-- 是否启用：on,off -->
                 <Draw>onf</Draw>
                 <!-- 是否绘制：on,off -->
@@ -235,8 +249,8 @@
                 -->
                 <LegendPic> </LegendPic>
 
-                <!-- 图例的延展类型:neither,min,max default is neither-->
-                <Extend>max</Extend>
+                <!-- 图例的延展类型:neither,min,max,both default is neither-->
+                <Extend>neither</Extend>
 
                 <!-- 是否取MICAPS数据本身的图例值 True False default is True-->
                 <MicapsLegendValue>True</MicapsLegendValue>
@@ -266,18 +280,22 @@
                      单个样式有'', '/', '\\', '|', '-', '+', 'x', 'o', 'O', '.', '*'共10种.
                 -->
                 <Hatches></Hatches>
+				
                 <!-- 图例等级值 0, 0.01, 10, 25, 50, 100, 250, 9999. default is None -->
-                <LegendValue>0.01, 10, 25, 50, 100, 250</LegendValue>
+                <LegendValue>0.01, 10, 25, 50, 100, 250, 999999</LegendValue>
+                <!-- 实际显示在图例上的值：支持字符和数字类型混杂 0, 0.01, 10, 25, 50, 100, 250, 9999. default is None -->
+                <LegendValueAlias>0, 10, 25, 50, 100, '250', ''</LegendValueAlias>
                 <!-- 图例颜色值 'none', '#A6F28F', '#3DBA3D', '#61B8FF', '#0000FF', '#FF00FA', '#800040', '#000000'. default is None-->
-                <LegendColor>'#A6F28F', '#3DBA3D', '#61B8FF', '#0000FF', '#FF00FA', '#800040'</LegendColor>
+                <LegendColor>'#A6F28F', '#3DBA3D', '#61B8FF', '#0000FF', '#FF00FA', '#800040', 'k'</LegendColor>
+
 
                 <!-- 无投影时的图例配置 start -->
                 <!-- 图例放置方式 vertical：竖 or horizontal：横 default is vertical-->
                 <Orientation>vertical</Orientation>
                 <!-- 图例离边框位置 default is [0, 0]-->
-                <Anchor>0.6, 0.15</Anchor>
+                <Anchor>0.5, 0.15</Anchor>
                 <!-- 图例收缩系数 0-1 之间 default is 1-->
-                <Shrink>0.5</Shrink>
+                <Shrink>0.38</Shrink>
                 <!-- fraction of original axes to use for colorbar. default is 0.15-->
                 <Fraction>0.025</Fraction>
                 <!-- 无投影时的图例配置 stop -->
@@ -423,11 +441,11 @@
         <!-- dpi:int dots per inch default is 72 -->
         <Dpi>72</Dpi>
         <!-- 图像宽度缩小比率：0-1 之间,0.8 default is 1-->
-        <WidthShrink>1</WidthShrink>
-        <!-- 裁切区的外延：浮点数 default is 0-->
-        <Margin>0.1</Margin>
+        <WidthShrink>0.8</WidthShrink>
+        <!-- 裁切区的外延：单位经纬度，左 上 右 下 浮点数(当自定义的绘图区配置有效时该属性无效) 0.1 default is [0,0,0,0] -->
+        <Margin>0.05, 0.05, 0.2, 0.05</Margin>
         <!-- 图像内边距 default is 0-->
-        <Pad>3</Pad>
+        <Pad>1.5</Pad>
         <!-- 绘图区域范围 - 左下角经纬度坐标 右上角经纬度坐标
 
              为空则默认用裁切区+外延所在的矩形范围 无裁切区则取数据本身的范围

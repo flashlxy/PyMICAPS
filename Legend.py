@@ -55,6 +55,9 @@ class Legend:
         self.validhatches(self.hatches)
         # 图例等级值
         self.legendvalue = Projection.leaf_to_list(p, "LegendValue", None)
+		
+		# 实际显示在图例上的值
+        self.legendvaluealias = Projection.leaf_to_list(p, "LegendValueAlias", None)
 
         # 图例颜色值
         self.legendcolor = Projection.leaf_to_list(p, "LegendColor", None)

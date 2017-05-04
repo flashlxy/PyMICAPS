@@ -120,10 +120,10 @@ class Micaps:
             maxlat = max(self.endlat, self.beginlat)
             minlat = min(self.endlat, self.beginlat)
             margin = products.picture.margin
-            xmax = maxlon + margin if maxlon + margin <= 180 else 180
-            xmin = minlon - margin if minlon - margin >= -180 else -180
-            ymax = maxlat + margin if maxlat + margin <= 90 else 90
-            ymin = minlat - margin if minlat - margin >= -90 else -90
+            xmax = maxlon + margin[2] if maxlon + margin[2] <= 180 else 180
+            xmin = minlon - margin[0] if minlon - margin[0] >= -180 else -180
+            ymax = maxlat + margin[1] if maxlat + margin[1] <= 90 else 90
+            ymin = minlat - margin[3] if minlat - margin[3] >= -90 else -90
             products.picture.extents = Bbox.from_extents(xmin, ymin, xmax, ymax)
         else:
             extents = products.picture.extents

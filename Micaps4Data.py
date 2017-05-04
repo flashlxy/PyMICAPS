@@ -56,8 +56,8 @@ class Micaps4Data(Micaps):
             self.def1 = contents[20].strip()
             self.def2 = contents[21].strip()
 
-            x = np.arange(self.beginlon, self.endlon + self.deltalon, self.deltalon)
-            y = np.arange(self.beginlat, self.endlat + self.deltalat, self.deltalat)
+            x = np.arange(self.beginlon, self.endlon + 0.9*self.deltalon, self.deltalon)
+            y = np.arange(self.beginlat, self.endlat + 0.9*self.deltalat, self.deltalat)
             self.X, self.Y = np.meshgrid(x, y)
 
             if self.dataflag == 'diamond' and self.style == '4':

@@ -135,6 +135,9 @@ class Map:
                 CB = m.colorbar(CS, location=legend.location, size=legend.size,
                                 pad=legend.pad
                                 )
+								
+            if not legend.micapslegendvalue:
+                CB.set_ticklabels(legend.legendvaluealias, update_ticks=True)
 
             if CB is not None:
                 CB.ax.tick_params(axis='y', direction='in', length=0)

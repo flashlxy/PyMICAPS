@@ -31,8 +31,8 @@ class Picture:
         self.widthshrink = Projection.leaf_to_float(p, "WidthShrink", 1.0)
 
         # 绘图区外延
-        self.margin = Projection.leaf_to_float(p, "Margin", 0.0)
-
+        self.margin = Projection.leaf_to_list(p, "Margin", [0, 0, 0, 0])
+		
         # 绘图区内边距
         self.pad = Projection.leaf_to_float(p, "Pad", 0.0)
 
@@ -45,10 +45,10 @@ class Picture:
             else:
                 jxextend = clipborders[0].path.get_extents()
                 delta = self.margin
-                xmax = jxextend.xmax + delta
-                xmin = jxextend.xmin - delta
-                ymax = jxextend.ymax + delta
-                ymin = jxextend.ymin - delta
+                xmax = jxextend.xmax + delta[2]
+                xmin = jxextend.xmin - delta[0]
+                ymax = jxextend.ymax + delta[1]
+                ymin = jxextend.ymin - delta[3]
                 self.extents = Bbox.from_extents(xmin, ymin, xmax, ymax)
         else:
             self.extents = Projection.leaf_to_list(p, "Extents", None)
