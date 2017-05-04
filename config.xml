@@ -288,6 +288,23 @@
                 <!-- 图例颜色值 'none', '#A6F28F', '#3DBA3D', '#61B8FF', '#0000FF', '#FF00FA', '#800040', '#000000'. default is None-->
                 <LegendColor>'#A6F28F', '#3DBA3D', '#61B8FF', '#0000FF', '#FF00FA', '#800040', 'k'</LegendColor>
 
+				<!--colorbar yaxis ticklabels 图例ticklabel字体
+                    font = {'family': 'serif', 'color': 'darkred', 'weight': 'normal', 'size': 12}
+                -->
+                <Font>{'family': 'msyhbd.ttc', 'color': 'k', 'weight': 'normal', 'size': 10}</Font>
+				
+				<!-- 图例标题 str , default is '' -->
+                <Title>雨量:mm</Title>
+
+                <!-- 图例标题字体 dict -->
+                <TitleFont>{'family': 'msyhbd.ttc', 'color': 'k', 'weight': 'normal', 'size': 12}</TitleFont>
+
+                <!-- 图例标题位置 dict
+                     上:    {'rotation': 0, 'va': 'center', 'ha': 'right', 'ypercent': 1.1}
+                     下:    {'rotation': 0, 'va': 'center', 'ha': 'right', 'ypercent': -.1}
+                     右中:  {'rotation': 90, 'va': 'top', 'ha': 'center', 'ypercent': 0.5}
+                -->
+                <TitlePos>{'rotation': 0, 'va': 'center', 'ha': 'right', 'ypercent': 1.1}</TitlePos>
 
                 <!-- 无投影时的图例配置 start -->
                 <!-- 图例放置方式 vertical：竖 or horizontal：横 default is vertical-->

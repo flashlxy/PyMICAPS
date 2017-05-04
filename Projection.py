@@ -233,3 +233,16 @@ class Projection:
                 return labels
         except Exception as err:
             return defvalue
+	
+	@staticmethod
+    def leaf_to_dict(leaf, code, defvalue=None):
+        #
+        try:
+            tpos = leaf.find(code)
+            if tpos is None or tpos.text.strip() == '':
+                return defvalue
+            else:
+                labels = eval('{0}'.format(tpos.text.strip()))
+                return labels
+        except Exception as err:
+            return defvalue

@@ -61,6 +61,19 @@ class Legend:
 
         # 图例颜色值
         self.legendcolor = Projection.leaf_to_list(p, "LegendColor", None)
+		
+		# 图例字体
+        self.font = Projection.leaf_to_dict(p, "Font", None)
+		
+		# 图例标题
+        self.title = Projection.leaf_to_string(p, 'Title', '')
+
+        # 图例标题字体
+        self.titlefont = Projection.leaf_to_dict(p, "TitleFont", None)
+
+        # 图例标题位置
+        self.titlepos = Projection.leaf_to_dict(p, "TitlePos",
+                                                {'rotation': 90, 'va': 'top', 'ha': 'center', 'ypercent': 0.5})
 
         # ---------- 无投影时的图例配置 start --------
         # 图例放置方式

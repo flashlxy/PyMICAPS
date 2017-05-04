@@ -135,12 +135,24 @@ class Map:
                 CB = m.colorbar(CS, location=legend.location, size=legend.size,
                                 pad=legend.pad
                                 )
-								
-            if not legend.micapslegendvalue:
-                CB.set_ticklabels(legend.legendvaluealias, update_ticks=True)
 
             if CB is not None:
-                CB.ax.tick_params(axis='y', direction='in', length=0)
+                fp = Map.GetFontProperties(legend.font)
+				fp_title = Map.GetFontProperties(legend.titlefont)
+				CB.set_label(legend.title, fontproperties=fp_title, color=legend.titlefont['color'])
+
+				ylab = CB.ax.yaxis.get_label()
+				ylab.set_rotation(legend.titlepos['rotation'])
+				ylab.set_va(legend.titlepos['va'])
+				ylab.set_ha(legend.titlepos['ha'])
+				ylab.set_y(legend.titlepos['ypercent'])
+
+				if not legend.micapslegendvalue and legend.legendvaluealias:
+					CB.set_ticklabels(legend.legendvaluealias, update_ticks=True)
+				CB.ax.tick_params(axis='y', direction='in', length=0)
+				for label in CB.ax.xaxis.get_ticklabels() + CB.ax.yaxis.get_ticklabels():
+					label.set_color(legend.font['color'])
+					label.set_fontproperties(fp)
 
     @staticmethod
     def DrawContourAndMark(contour, x, y, z, level, clipborder, patch, m):
@@ -306,3 +318,13 @@ class Map:
                                 labels=pj.lonlabels,
                                 family='DejaVu Sans',
                                 fontsize=10)
+
+    @staticmethod
+    def GetFontProperties(font):
+        fontfile = r"C:\WINDOWS\Fonts\{0}".format(font['family'])
+        if not os.path.exists(fontfile):
+            fp = FontProperties(family=font['family'], weight=font['weight'], size=font['size'])
+        else:
+            fp = FontProperties(fname=fontfile, weight=font['weight'], size=font['size'])
+        return fp
+		
