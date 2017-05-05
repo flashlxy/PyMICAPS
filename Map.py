@@ -137,7 +137,7 @@ class Map:
                                 )
 
             if CB is not None:
-                fp = Map.GetFontProperties(legend.font)
+				fp = Map.GetFontProperties(legend.font)
 				fp_title = Map.GetFontProperties(legend.titlefont)
 				CB.set_label(legend.title, fontproperties=fp_title, color=legend.titlefont['color'])
 
