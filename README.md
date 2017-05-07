@@ -122,5 +122,9 @@
     
 ![](https://github.com/flashlxy/MicapsDataDraw/raw/master/images/lcc.png)
 
+    Micaps第三类数据-等经纬度投影：
+    
+![](https://github.com/flashlxy/MicapsDataDraw/raw/master/images/xz.png)
+
    
    
