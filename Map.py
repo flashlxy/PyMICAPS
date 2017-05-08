@@ -13,6 +13,7 @@ from datetime import datetime
 
 import matplotlib
 from matplotlib._png import read_png
+from matplotlib.font_manager import FontProperties
 from matplotlib.offsetbox import OffsetImage, AnnotationBbox
 from matplotlib.path import Path
 from matplotlib.ticker import FormatStrFormatter
