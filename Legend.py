@@ -56,16 +56,16 @@ class Legend:
         # 图例等级值
         self.legendvalue = Projection.leaf_to_list(p, "LegendValue", None)
 		
-		# 实际显示在图例上的值
+	# 实际显示在图例上的值
         self.legendvaluealias = Projection.leaf_to_list(p, "LegendValueAlias", None)
 
         # 图例颜色值
         self.legendcolor = Projection.leaf_to_list(p, "LegendColor", None)
 		
-		# 图例字体
+	# 图例字体
         self.font = Projection.leaf_to_dict(p, "Font", None)
 		
-		# 图例标题
+	# 图例标题
         self.title = Projection.leaf_to_string(p, 'Title', '')
 
         # 图例标题字体
