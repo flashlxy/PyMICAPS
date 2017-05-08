@@ -118,9 +118,9 @@ class Map:
                     ab = AnnotationBbox(image_box, legend.legendpos, frameon=False)
                     plt.gca().add_artist(ab)
                 else:
-                    ticks = fmt = None
+                    fmt = None
                     CB = plt.colorbar(CS, cmap='RdBu', anchor=legend.anchor, shrink=legend.shrink,
-                                      ticks=ticks,
+                                      # ticks=ticks,
                                       # fraction=0.15,  # products.fraction,
                                       drawedges=True,  # not products.micapslegendvalue,
                                       filled=False,
