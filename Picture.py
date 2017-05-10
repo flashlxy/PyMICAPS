@@ -6,7 +6,6 @@
 #     Copyright:  ©江西省气象台 2017
 #     Version:    2.0.20170411
 from __future__ import print_function
-from __future__ import print_function
 
 import os
 
@@ -60,7 +59,7 @@ class Picture:
 
         # 生成的图片文件存放路径
         self.picfile = Projection.leaf_to_string(p, 'PicFile', 'mytest.png')
-        Picture.checkFilename(self.picfile)
+        self.checkFilename()
 
 
         return
@@ -71,14 +70,16 @@ class Picture:
         fig.savefig(filename, format='png', transparent=False)
         # return
 
-    @staticmethod
-    def checkFilename(filepath):
+    def checkFilename(self):
         """
         创建数据文件夹
         :param filepath: 文件路径
         :return: 
         """
+        try:
+            path = os.path.dirname(self.picfile)
+            if not os.path.isdir(path):
+                os.makedirs(path)
+        except:
+            self.picfile = 'mytest.png'
 
-        path = os.path.dirname(filepath)
-        if not os.path.isdir(path):
-            os.makedirs(path)
