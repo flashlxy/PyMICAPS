@@ -6,7 +6,6 @@
 #     Copyright:  ©江西省气象台 2017
 #     Version:    2.0.20170411
 from __future__ import print_function
-from __future__ import print_function
 
 from Projection import Projection
 
@@ -61,7 +60,10 @@ class Legend:
 
         # 图例颜色值
         self.legendcolor = Projection.leaf_to_list(p, "LegendColor", None)
-		
+
+	# 图例抽稀间隔
+        self.thinning = Projection.leaf_to_int(p, "Thinning", 1)
+	
 	# 图例字体
         self.font = Projection.leaf_to_dict(p, "Font", None)
 		
