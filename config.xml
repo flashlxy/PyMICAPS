@@ -282,7 +282,7 @@
                 <Hatches></Hatches>
 		    
 		<!-- 图例按以下间隔抽稀 -->
-                <Thinning>2</Thinning>
+                <Thinning>1</Thinning>
 		    
                 <!-- 图例等级值 0, 0.01, 10, 25, 50, 100, 250, 9999. default is None -->
                 <LegendValue>0.01, 10, 25, 50, 100, 250, 999999</LegendValue>
