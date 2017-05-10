@@ -149,8 +149,11 @@ class Map:
 		ylab.set_y(legend.titlepos['ypercent'])
 
 		if not legend.micapslegendvalue and legend.legendvaluealias:
-		    CB.set_ticks(legend.legendvalue, update_ticks=True)
-		    CB.set_ticklabels(legend.legendvaluealias, update_ticks=True)
+		    legendvalue = [v for i, v in enumerate(legend.legendvalue) if i % legend.thinning == 0]
+                    legendvaluealias = [v for i, v in enumerate(legend.legendvaluealias) if i % legend.thinning == 0]
+                    CB.set_ticks(legendvalue, update_ticks=True)
+                    CB.set_ticklabels(legendvaluealias, update_ticks=True)
+			
 		CB.ax.tick_params(axis='y', direction='in', length=0)
 		for label in CB.ax.xaxis.get_ticklabels() + CB.ax.yaxis.get_ticklabels():
 		    label.set_color(legend.font['color'])
