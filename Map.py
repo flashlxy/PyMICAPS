@@ -153,8 +153,8 @@ class Map:
 		    CB.set_ticklabels(legend.legendvaluealias, update_ticks=True)
 		CB.ax.tick_params(axis='y', direction='in', length=0)
 		for label in CB.ax.xaxis.get_ticklabels() + CB.ax.yaxis.get_ticklabels():
-			label.set_color(legend.font['color'])
-			label.set_fontproperties(fp)
+		    label.set_color(legend.font['color'])
+		    label.set_fontproperties(fp)
 
     @staticmethod
     def DrawContourAndMark(contour, x, y, z, level, clipborder, patch, m):
