@@ -4,7 +4,7 @@
 
     利用配置文件config.xml定制参数，结合micaps具体数据，
     
-    可实现一种或多种类型（in the future）的micaps数据的叠加绘制
+    可实现多种micaps数据类型的单独绘制或叠加绘制（in the future）
 
     并自动输出相应图像到指定文件。
     
