@@ -82,7 +82,7 @@
 
     作者的一个支持NCL colorbar的python库。
     
-    matplotlib，basemap，numpy，natgrid，scipy，sympy，shapefile，nclcmaps
+    matplotlib，basemap，numpy，natgrid，scipy，sympy，pyshp，nclcmaps
     
     欢迎大家star和fork，一并感谢2位作者！
 
