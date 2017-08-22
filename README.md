@@ -85,6 +85,8 @@
     matplotlib，basemap，numpy，natgrid，scipy，sympy，pyshp，nclcmaps
     
     欢迎大家star和fork，一并感谢2位作者！
+    
+## 如果你觉得代码对你有所帮助，请[打赏作者](https://github.com/flashlxy/MicapsDataDraw/issues/8)
 
 ## 示例数据结合适当配置文件输出的图片
 
