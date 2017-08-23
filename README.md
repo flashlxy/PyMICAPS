@@ -9,9 +9,9 @@
     并自动输出相应图像到指定文件。
     
 ###### Author：Xianyao Liu | Version：2.1.20170419 | E-mail：flashlxy@qq.com | Language：Python2.7
-#### 如果你想捐助项目或者你觉得代码对你有所帮助，请
+###### 如果你想捐助项目或者你觉得代码对你有所帮助，请
 
-#### [![立即捐助](https://github.com/flashlxy/MicapsDataDraw/raw/master/images/sh1.png)](https://github.com/flashlxy/MicapsDataDraw/issues/8)
+###### [![立即捐助](https://github.com/flashlxy/MicapsDataDraw/raw/master/images/sh1.png)](https://github.com/flashlxy/MicapsDataDraw/issues/8)
 
 ## 更新日志
 
