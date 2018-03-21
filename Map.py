@@ -13,6 +13,7 @@ from datetime import datetime
 
 import matplotlib
 from matplotlib._png import read_png
+from matplotlib.collections import LineCollection
 from matplotlib.font_manager import FontProperties
 from matplotlib.offsetbox import OffsetImage, AnnotationBbox
 from matplotlib.path import Path
@@ -20,7 +21,7 @@ from matplotlib.ticker import FormatStrFormatter
 from mpl_toolkits.axes_grid1.inset_locator import inset_axes
 
 import shapefile
-from matplotlib import patches
+from matplotlib import patches, dedent
 
 from Border import Border
 from ClipBorder import ClipBorder
@@ -223,7 +224,10 @@ class Map:
                     continue
                 if area.filetype == 'SHP':  # shp文件
                     if m is plt:
-                        Map.DrawShapeFile(area)
+                        # Map.DrawShapeFile(area)
+                        Map.readshapefile(area.file.replace('.shp', ''),
+                                          os.path.basename(area.file),
+                                          color=area.linecolor, linewidth=area.linewidth)
                     else:
                         m.readshapefile(area.file.replace('.shp', ''),
                                         os.path.basename(area.file),
@@ -333,3 +337,180 @@ class Map:
             fp = FontProperties(fname=fontfile, weight=font['weight'], size=font['size'])
         return fp
 		
+    @staticmethod
+    def readshapefile(shapefile, name, is_web_merc=False, drawbounds=True, zorder=None,
+                      linewidth=0.5, linestyle=(0, ()), color='k', antialiased=1, ax=None,
+                      default_encoding='utf-8'):
+        """
+        Read in shape file, optionally draw boundaries on map.
+
+        .. note::
+          - Assumes shapes are 2D
+          - only works for Point, MultiPoint, Polyline and Polygon shapes.
+          - vertices/points must be in geographic (lat/lon) coordinates.
+
+        Mandatory Arguments:
+
+        .. tabularcolumns:: |l|L|
+
+        ==============   ====================================================
+        Argument         Description
+        ==============   ====================================================
+        shapefile        path to shapefile components.  Example:
+                         shapefile='/home/jeff/esri/world_borders' assumes
+                         that world_borders.shp, world_borders.shx and
+                         world_borders.dbf live in /home/jeff/esri.
+        name             name for Basemap attribute to hold the shapefile
+                         vertices or points in map projection
+                         coordinates. Class attribute name+'_info' is a list
+                         of dictionaries, one for each shape, containing
+                         attributes of each shape from dbf file, For
+                         example, if name='counties', self.counties
+                         will be a list of x,y vertices for each shape in
+                         map projection  coordinates and self.counties_info
+                         will be a list of dictionaries with shape
+                         attributes.  Rings in individual Polygon
+                         shapes are split out into separate polygons, and
+                         additional keys 'RINGNUM' and 'SHAPENUM' are added
+                         to the shape attribute dictionary.
+        ==============   ====================================================
+
+        The following optional keyword arguments are only relevant for Polyline
+        and Polygon shape types, for Point and MultiPoint shapes they are
+        ignored.
+
+        .. tabularcolumns:: |l|L|
+
+        ==============   ====================================================
+        Keyword          Description
+        ==============   ====================================================
+        drawbounds       draw boundaries of shapes (default True).
+        zorder           shape boundary zorder (if not specified,
+                         default for mathplotlib.lines.LineCollection
+                         is used).
+        linewidth        shape boundary line width (default 0.5)
+        color            shape boundary line color (default black)
+        antialiased      antialiasing switch for shape boundaries
+                         (default True).
+        ax               axes instance (overrides default axes instance)
+        ==============   ====================================================
+
+        A tuple (num_shapes, type, min, max) containing shape file info
+        is returned.
+        num_shapes is the number of shapes, type is the type code (one of
+        the SHPT* constants defined in the shapelib module, see
+        http://shapelib.maptools.org/shp_api.html) and min and
+        max are 4-element lists with the minimum and maximum values of the
+        vertices. If ``drawbounds=True`` a
+        matplotlib.patches.LineCollection object is appended to the tuple.
+        """
+        import shapefile as shp
+        from shapefile import Reader
+        shp.default_encoding = default_encoding
+        if not os.path.exists('%s.shp' % shapefile):
+            raise IOError('cannot locate %s.shp' % shapefile)
+        if not os.path.exists('%s.shx' % shapefile):
+            raise IOError('cannot locate %s.shx' % shapefile)
+        if not os.path.exists('%s.dbf' % shapefile):
+            raise IOError('cannot locate %s.dbf' % shapefile)
+        # open shapefile, read vertices for each object, convert
+        # to map projection coordinates (only works for 2D shape types).
+        try:
+            shf = Reader(shapefile)
+        except:
+            raise IOError('error reading shapefile %s.shp' % shapefile)
+        fields = shf.fields
+        coords = []
+        attributes = []
+        msg = dedent("""
+        shapefile must have lat/lon vertices  - it looks like this one has vertices
+        in map projection coordinates. You can convert the shapefile to geographic
+        coordinates using the shpproj utility from the shapelib tools
+        (http://shapelib.maptools.org/shapelib-tools.html)""")
+        shapes = shf.shapes()
+        if len(shapes) == 0:
+            raise IndexError('%s shapes is null' % shapefile)
+        shptype = shapes[0].shapeType
+        bbox = shf.bbox.tolist()
+        info = dict()
+        info['info'] = (shf.numRecords, shptype, bbox[0:2] + [0., 0.], bbox[2:] + [0., 0.])
+        npoly = 0
+        for shprec in shf.shapeRecords():
+            shp = shprec.shape
+            rec = shprec.record
+            npoly = npoly + 1
+            if shptype != shp.shapeType:
+                raise ValueError('readshapefile can only handle a single shape type per file')
+            if shptype not in [1, 3, 5, 8]:
+                raise ValueError('readshapefile can only handle 2D shape types')
+            verts = shp.points
+            if shptype in [1, 8]:  # a Point or MultiPoint shape.
+                lons, lats = list(zip(*verts))
+                if max(lons) > 721. or min(lons) < -721. or max(lats) > 90.01 or min(lats) < -90.01:
+                    raise ValueError(msg)
+                # if latitude is slightly greater than 90, truncate to 90
+                lats = [max(min(lat, 90.0), -90.0) for lat in lats]
+                if len(verts) > 1:  # MultiPoint
+                    if is_web_merc:
+                        # x, y = Projection.ToMerc(lons, lats)
+                        pass
+                    else:
+                        x, y = lons, lats
+                    coords.append(list(zip(x, y)))
+                else:  # single Point
+                    if is_web_merc:
+                        pass
+                        # x, y = Projection.ToMerc(lons[0], lats[0])
+                    else:
+                        x, y = lons[0], lats[0]
+                    coords.append((x, y))
+                attdict = {}
+                for r, key in zip(rec, fields[1:]):
+                    attdict[key[0]] = r
+                attributes.append(attdict)
+            else:  # a Polyline or Polygon shape.
+                parts = shp.parts.tolist()
+                ringnum = 0
+                for indx1, indx2 in zip(parts, parts[1:] + [len(verts)]):
+                    ringnum = ringnum + 1
+                    lons, lats = list(zip(*verts[indx1:indx2]))
+                    if max(lons) > 721. or min(lons) < -721. or max(lats) > 90.01 or min(lats) < -90.01:
+                        raise ValueError(msg)
+                    # if latitude is slightly greater than 90, truncate to 90
+                    lats = [max(min(lat, 90.0), -90.0) for lat in lats]
+                    if is_web_merc:
+                        # x, y = Projection.ToMerc(lons, lats)
+                        pass
+                    else:
+                        x, y = lons, lats
+                    coords.append(list(zip(x, y)))
+                    attdict = {}
+                    for r, key in zip(rec, fields[1:]):
+                        attdict[key[0]] = r
+                    # add information about ring number to dictionary.
+                    attdict['RINGNUM'] = ringnum
+                    attdict['SHAPENUM'] = npoly
+                    attributes.append(attdict)
+        # draw shape boundaries for polylines, polygons  using LineCollection.
+        if shptype not in [1, 8] and drawbounds:
+            # get current axes instance (if none specified).
+            import matplotlib.pyplot as plt
+            ax = ax or plt.gca()
+            # make LineCollections for each polygon.
+            lines = LineCollection(coords, antialiaseds=(antialiased,))
+            lines.set_color(color)
+            lines.set_linewidth(linewidth)
+            lines.set_linestyle(linestyle)
+            lines.set_label('_nolabel_')
+            if zorder is not None:
+                lines.set_zorder(zorder)
+            ax.add_collection(lines)
+            # set axes limits to fit map region.
+            # self.set_axes_limits(ax=ax)
+            # # clip boundaries to map limbs
+            # lines,c = self._cliplimb(ax,lines)
+            # info = info + (lines,)
+            info['lines'] = lines
+        info[name] = coords
+        info[name + '_info'] = attributes
+        return info
