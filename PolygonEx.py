@@ -8,17 +8,20 @@
 # ##############################################
 
 import sys
-reload(sys)
-sys.setdefaultencoding('utf-8')
+
+#reload(sys)
+#sys.setdefaultencoding('utf-8')
 import scipy
 import scipy.linalg
+import scipy.integrate
 import scipy.spatial
 import scipy.spatial._procrustes
+import scipy.special._ufuncs_cxx
+import scipy.optimize._lbfgsb
 import scipy.linalg.cython_blas
 import scipy.linalg.cython_lapack
 from sympy import *
 from pylab import *
-
 
 
 class PolygonEx:
@@ -51,11 +54,14 @@ class PolygonEx:
 
         for simplex in hull.simplices:
             # 设置初值 以获得两个解
+            if simplex[1] == 0:
+                continue
             pairs = [True, False]
             for pair in pairs:
+                # print(pair)
                 extend_point = self.equations(points[simplex], pair)
                 # 在边界内的点排除
-                if not self.point_in_path(extend_point):
+                if extend_point and not self.point_in_path(extend_point):
                     ext_points.append([extend_point[0], extend_point[1], self.zvalues[simplex[0]]])
         return ext_points
 
@@ -72,18 +78,21 @@ class PolygonEx:
         :return:返回一个解（x,y)
         :rtype: object
         """
-        x1 = point_pairs[0][0]
-        y1 = point_pairs[0][1]
-        x2 = point_pairs[1][0]
-        y2 = point_pairs[1][1]
-        deta = 0.05
-        if is_less:
-            init_pairs = [x1 - deta, y1]
-        else:
-            init_pairs = [x1 + deta, y1]
+        try:
+            x1 = point_pairs[0][0]
+            y1 = point_pairs[0][1]
+            x2 = point_pairs[1][0]
+            y2 = point_pairs[1][1]
+            deta = 0.05
+            if is_less:
+                init_pairs = [x1 - deta, y1]
+            else:
+                init_pairs = [x1 + deta, y1]
 
-        x = Symbol('x')
-        y = Symbol('y')
-        func = [(x2-x1)*(x-x1) + (y2-y1)*(y-y1),
-                (x-x1)**2 + (y-y1)**2 - self.d**2]
-        return nsolve(func, [x, y], init_pairs)
+            x = Symbol('x')
+            y = Symbol('y')
+            func = [(x2 - x1) * (x - x1) + (y2 - y1) * (y - y1),
+                    (x - x1) ** 2 + (y - y1) ** 2 - self.d ** 2]
+            return nsolve(func, [x, y], init_pairs)
+        except Exception as err:
+            return None
