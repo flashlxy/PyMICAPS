@@ -1,4 +1,4 @@
-## MicapsDataDraw
+## PyMICAPS（原名：MicapsDataDraw）
 
 #### 一个超级实用生产图片工具，用matplotlib和basemap绘制micaps数据
 
@@ -14,6 +14,8 @@
 ###### Author：Xianyao Liu | Version：2.1.20170419 | E-mail：flashlxy@qq.com | Language：Python2.7
 
 ## 更新日志
+
+    2018-07-09 更改工程名称为PyMicaps
 
     2018-03-25 修复一个扩大多边形区域类PolygonEx.py中的bug
 
