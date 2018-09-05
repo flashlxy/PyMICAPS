@@ -99,7 +99,7 @@ class Map:
                 for collection in CS.collections:
                     collection.set_clip_on(True)
                     collection.set_clip_path(patch)
-
+            CB = None
             if m is plt:
                 # 插入一个新坐标系 以使图例在绘图区内部显示
                 ax2 = plt.gca()
@@ -139,26 +139,26 @@ class Map:
                                 )
 
             if CB is not None:
-		fp = Map.GetFontProperties(legend.font)
-		fp_title = Map.GetFontProperties(legend.titlefont)
-		CB.set_label(legend.title, fontproperties=fp_title, color=legend.titlefont['color'])
+                fp = Map.GetFontProperties(legend.font)
+                fp_title = Map.GetFontProperties(legend.titlefont)
+                CB.set_label(legend.title, fontproperties=fp_title, color=legend.titlefont['color'])
 
-		ylab = CB.ax.yaxis.get_label()
-		ylab.set_rotation(legend.titlepos['rotation'])
-		ylab.set_va(legend.titlepos['va'])
-		ylab.set_ha(legend.titlepos['ha'])
-		ylab.set_y(legend.titlepos['ypercent'])
+                ylab = CB.ax.yaxis.get_label()
+                ylab.set_rotation(legend.titlepos['rotation'])
+                ylab.set_va(legend.titlepos['va'])
+                ylab.set_ha(legend.titlepos['ha'])
+                ylab.set_y(legend.titlepos['ypercent'])
 
-		if not legend.micapslegendvalue and legend.legendvaluealias:
-		    legendvalue = [v for i, v in enumerate(legend.legendvalue) if i % legend.thinning == 0]
+                if not legend.micapslegendvalue and legend.legendvaluealias:
+                    legendvalue = [v for i, v in enumerate(legend.legendvalue) if i % legend.thinning == 0]
                     legendvaluealias = [v for i, v in enumerate(legend.legendvaluealias) if i % legend.thinning == 0]
                     CB.set_ticks(legendvalue, update_ticks=True)
                     CB.set_ticklabels(legendvaluealias, update_ticks=True)
 			
-		CB.ax.tick_params(axis='y', direction='in', length=0)
-		for label in CB.ax.xaxis.get_ticklabels() + CB.ax.yaxis.get_ticklabels():
-		    label.set_color(legend.font['color'])
-		    label.set_fontproperties(fp)
+                CB.ax.tick_params(axis='y', direction='in', length=0)
+                for label in CB.ax.xaxis.get_ticklabels() + CB.ax.yaxis.get_ticklabels():
+                    label.set_color(legend.font['color'])
+                    label.set_fontproperties(fp)
 
     @staticmethod
     def DrawContourAndMark(contour, x, y, z, level, clipborder, patch, m):
