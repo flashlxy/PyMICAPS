@@ -21,8 +21,9 @@ from matplotlib.mlab import griddata
 
 
 class Micaps3Data(Micaps):
-    def __init__(self, filename):
-        self.filename = filename
+
+    def __init__(self, filename, encoding='GBK'):
+        Micaps.__init__(self, filename, encoding=encoding)
         self.contoursum = None
         self.smoothindex = None
         self.boldvalue = None
@@ -52,7 +53,7 @@ class Micaps3Data(Micaps):
         :return: 
         """
         try:
-            file_object = codecs.open(self.filename, mode='r', encoding='GBK')
+            file_object = codecs.open(self.filename, mode='r', encoding=self.encoding)
             all_the_text = file_object.read().strip()
             file_object.close()
             contents = re.split('[\s]+', all_the_text)

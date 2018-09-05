@@ -7,8 +7,10 @@
 #     Version:    2.0.20170411
 from __future__ import print_function
 
+import codecs
 import sys
 
+import chardet
 from matplotlib.font_manager import FontProperties
 from matplotlib.markers import MarkerStyle
 
@@ -38,8 +40,9 @@ matplotlib.rcParams["savefig.dpi"] = 72
 
 
 class Micaps:
-    def __init__(self, filename):
+    def __init__(self, filename, encoding='utf-8', **kwargs):
         self.filename = filename
+        self.encoding = encoding
         self.dataflag = None
         self.style = None
         self.title = None
@@ -68,6 +71,38 @@ class Micaps:
         self.Y = None
         self.Z = None
         self.outPath = os.path.dirname(os.path.abspath(__file__))
+
+        self.SetCheckSize(self.filename, **kwargs)
+        self.SetEncoding()
+        pass
+
+    def SetCheckSize(self, filename, **kwargs):
+        if 'check_bytes' in kwargs.keys():
+            self.check_bytes = kwargs['check_bytes']
+        else:
+            if os.path.isfile(filename):
+                self.check_bytes = os.path.getsize(self.filename)
+            else:
+                self.check_bytes = 1024
+
+    def SetEncoding(self):
+        if os.path.isfile(self.filename):
+            # bytes = min(32, os.path.getsize(self.filename))
+            # raw = open(self.filename, 'rb').read(bytes)
+            # result = chardet.detect(raw)
+            # self.encoding = result['encoding']
+
+            bytes = min(self.check_bytes, os.path.getsize(self.filename))
+            # bytes = os.path.getsize(self.filename)
+            if bytes == 0: return
+            raw = open(self.filename, 'rb').read(bytes)
+
+            if raw.startswith(codecs.BOM_UTF8):
+                self.encoding = 'utf-8-sig'
+            else:
+                result = chardet.detect(raw)
+                if result['encoding'] is not None:
+                    self.encoding = result['encoding']
 
     @staticmethod
     def UpdatePath(path, projection):
@@ -312,12 +347,12 @@ class Micaps:
             for sta in stations.micapsdata.stations:
                 if m is not plt:
                     lon, lat = Micaps.UpdateXY(m, sta[2], sta[1])
-                    lon1, lat1 = Micaps.UpdateXY(m, sta[2]+stations.detax, sta[1])
-                    deta = lon1-lon
+                    lon1, lat1 = Micaps.UpdateXY(m, sta[2] + stations.detax, sta[1])
+                    deta = lon1 - lon
                 else:
                     lon, lat = sta[2], sta[1]
                     deta = stations.detax
-                plt.text(lon+deta, lat, sta[6],
+                plt.text(lon + deta, lat, sta[6],
                          fontproperties=font, rotation=0,
                          color=stations.font[3], ha='left', va='center')
 

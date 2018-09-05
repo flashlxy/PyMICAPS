@@ -17,8 +17,8 @@ from MicapsData import Micaps
 
 
 class Micaps11Data(Micaps):
-    def __init__(self, filename):
-        self.filename = filename
+    def __init__(self, filename, encoding='GBK'):
+        Micaps.__init__(self, filename, encoding=encoding)
         self.U = None
         self.V = None
         self.linewidth = 1
@@ -41,7 +41,7 @@ class Micaps11Data(Micaps):
         """
         try:
             begin = 17
-            file_object = codecs.open(self.filename, mode='r', encoding='GBK')
+            file_object = codecs.open(self.filename, mode='r', encoding=self.encoding)
             all_the_text = file_object.read().strip()
             file_object.close()
             contents = re.split('[\s]+', all_the_text)
