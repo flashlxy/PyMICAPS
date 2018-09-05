@@ -176,6 +176,7 @@ class Map:
                                 linewidths=contour.contour['linewidth'], colors=contour.contour['linecolor'])
 
             # 是否绘制等值线标注
+            CS2 = None
             if contour.contourlabel['visible']:
                 CS2 = plt.clabel(CS1, inline=1, fmt=contour.contourlabel['fmt'],
                                  inline_spacing=contour.contourlabel['inlinespacing'],
@@ -188,10 +189,10 @@ class Map:
                     # collection.set_clip_on(True)
                     collection.set_clip_path(patch)
 
-                for text in CS2:
-                    if not clipborder.path.contains_point(text.get_position()):
-                        text.remove()
-            # print(CS2)
+                if CS2 is not None:
+                    for text in CS2:
+                        if not clipborder.path.contains_point(text.get_position()):
+                            text.remove()
 
     @staticmethod
     def DrawClipBorders(clipborders):
