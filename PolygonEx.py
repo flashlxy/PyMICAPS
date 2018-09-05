@@ -9,8 +9,8 @@
 
 import sys
 
-#reload(sys)
-#sys.setdefaultencoding('utf-8')
+# reload(sys)
+# sys.setdefaultencoding('utf-8')
 import scipy
 import scipy.linalg
 import scipy.integrate
@@ -20,8 +20,10 @@ import scipy.special._ufuncs_cxx
 import scipy.optimize._lbfgsb
 import scipy.linalg.cython_blas
 import scipy.linalg.cython_lapack
-from sympy import *
-from pylab import *
+import numpy as np
+# from sympy import *
+# from pylab import *
+from sympy import Symbol, nsolve
 
 
 class PolygonEx:
@@ -32,7 +34,6 @@ class PolygonEx:
         :param zvalues: 坐标数组对应的点值
         :param d: 扩大选取的距离
         :param path: 切图所用的path
-        :type self: object
         """
         self.lons = lons
         self.lats = lats

@@ -73,8 +73,7 @@ class Picture:
     def checkFilename(self):
         """
         创建数据文件夹
-        :param filepath: 文件路径
-        :return: 
+        :return:
         """
         try:
             path = os.path.dirname(self.picfile)

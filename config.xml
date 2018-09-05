@@ -147,23 +147,23 @@
                 810000     香港特别行政区
                 820000     澳门特别行政区
                 -->
+            <!--<ClipBorder>-->
+                <!--<File>D:\CODES\MicapsDataDraw2\border\咸阳市界.txt</File>-->
+                <!--&lt;!&ndash; 地图文件 &ndash;&gt;-->
+                <!--<Type>txt</Type>-->
+                <!--&lt;!&ndash; 地图文件类型 &ndash;&gt;-->
+                <!--<Code>360000</Code>-->
+                <!--<Using>on</Using>-->
+                <!--&lt;!&ndash; 是否启用：on,off &ndash;&gt;-->
+                <!--<Draw>on</Draw>-->
+                <!--&lt;!&ndash; 是否绘制：on,off &ndash;&gt;-->
+                <!--<LineWidth>2</LineWidth>-->
+                <!--&lt;!&ndash; 线宽：float &ndash;&gt;-->
+                <!--<LineColor>Olive</LineColor>-->
+                <!--&lt;!&ndash; 线颜色：str Olive &ndash;&gt;-->
+            <!--</ClipBorder>-->
             <ClipBorder>
-                <File>D:\CODES\MicapsDataDraw2\border\咸阳市界.txt</File>
-                <!-- 地图文件 -->
-                <Type>txt</Type>
-                <!-- 地图文件类型 -->
-                <Code>360000</Code>
-                <Using>on</Using>
-                <!-- 是否启用：on,off -->
-                <Draw>on</Draw>
-                <!-- 是否绘制：on,off -->
-                <LineWidth>2</LineWidth>
-                <!-- 线宽：float -->
-                <LineColor>Olive</LineColor>
-                <!-- 线颜色：str Olive -->
-            </ClipBorder>
-            <ClipBorder>
-                <File>D:\CODES\MicapsDataDraw2\shapefiles\bou1_4p</File>
+                <File>D:\CODES\MicapsDataDraw2\shapefiles\bou2_4p</File>
                 <!-- 地图文件 -->
                 <Type>shp</Type>
                 <!-- 地图文件类型 -->
@@ -176,10 +176,10 @@
                          If the code is 100000, the cliped regions is whole polygons of the shp file.
 
                 -->
-                <Code>100000</Code>
-                <Using>onf</Using>
+                <Code>360000</Code>
+                <Using>on</Using>
                 <!-- 是否启用：on,off -->
-                <Draw>onf</Draw>
+                <Draw>on</Draw>
                 <!-- 是否绘制：on,off -->
                 <LineWidth>2</LineWidth>
                 <!-- 线宽：float -->
@@ -228,18 +228,19 @@
             <!-- micaps数据类型 -->
             <File>
                 <!-- M1：站点数据，M4：第4类格点数据，M11：第11类UV数据-->
-                <Type>M11</Type>
+                <Type>M3</Type>
 
                 <!--原始数据文件
                     M4 - K:\GQEC\TP\r24\17032908.060 16062908.012 K:\ecmwf\pressure\999\16122520.000
                          K:\ecmwf\height\500\17033108.240 K:\ecmwf\temper\850\16122520.000
                          K:\GQJP\HGT\500\17040514.084 K:\GQJP\24P\1010\17040514.078
+                         K:\GQEC\TP\r24\18090508.240
                     M3 - K:\zdzjm\maxtemp\17011418.000 K:\zdzjm\rain24\17033115.000 data.txt
                          K:\GD05\jxqy\20170417.012
                     M11  K:\ecmwf\uv\850\17041020.000 K:\GQEC\uv\500\17041720.024
-                         K:\GQEC\10uv\999\17011408.186
+                         K:\GQEC\10uv\999\17011408.186 K:\GQEC\uv\850\18020108.003
                 -->
-                <FileName> K:\GQEC\uv\850\18020108.003 </FileName>
+                <FileName> K:\zdzjm\rain24\18041313.000 </FileName>
             </File>
             <!-- 图例 -->
             <Legend>
@@ -253,7 +254,7 @@
                 <Extend>neither</Extend>
 
                 <!-- 是否取MICAPS数据本身的图例值 True False default is True-->
-                <MicapsLegendValue>True</MicapsLegendValue>
+                <MicapsLegendValue>True1</MicapsLegendValue>
 
                 <!--
                      When micapslegendvalue is true, the setting is working.
@@ -281,7 +282,7 @@
                 -->
                 <Hatches></Hatches>
 		    
-		<!-- 图例按以下间隔抽稀 -->
+		        <!-- 图例按以下间隔抽稀 -->
                 <Thinning>1</Thinning>
 		    
                 <!-- 图例等级值 0, 0.01, 10, 25, 50, 100, 250, 9999. default is None -->
