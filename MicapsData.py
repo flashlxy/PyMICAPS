@@ -87,23 +87,18 @@ class Micaps:
 
     def SetEncoding(self):
         if os.path.isfile(self.filename):
-            # bytes = min(32, os.path.getsize(self.filename))
-            # raw = open(self.filename, 'rb').read(bytes)
-            # result = chardet.detect(raw)
-            # self.encoding = result['encoding']
-
-            bytes = min(self.check_bytes, os.path.getsize(self.filename))
-            # bytes = os.path.getsize(self.filename)
-            if bytes == 0: return
-            raw = open(self.filename, 'rb').read(bytes)
-
-            if raw.startswith(codecs.BOM_UTF8):
-                self.encoding = 'utf-8-sig'
-            else:
-                result = chardet.detect(raw)
-                if result['encoding'] is not None:
-                    self.encoding = result['encoding']
-
+            bigdata = open(filename, "rb")
+            from cchardet import UniversalDetector
+            detector = UniversalDetector()
+            for line in bigdata.readlines():
+                detector.feed(line)
+                if detector.done:
+                    break
+            detector.close()
+            bigdata.close()
+            result = detector.result
+            self.encoding = result.get('encoding', self.encoding)
+            
     @staticmethod
     def UpdatePath(path, projection):
         """
