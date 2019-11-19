@@ -7,14 +7,10 @@
 #     Version:    2.0.20170411
 
 import sys
-
 import math
-
-reload(sys)
-sys.setdefaultencoding('utf-8')
-
 from itertools import takewhile
 import time as ttime
+from FnTime import fn_timer
 
 
 def parseInt(s):
@@ -23,14 +19,14 @@ def parseInt(s):
     :param s: 字符串
     :return: 整数
     """
-    assert isinstance(s, basestring)
+    assert isinstance(s, str)
     return int(''.join(list(takewhile(lambda x: x.isdigit(), s)))) if s[0].isdigit() else None
 
 
 def equal(value1, value2):
     return math.fabs(value1 - value2) < 10e-5
 
-
+@fn_timer
 def main(debug):
     """
     主程序
@@ -45,8 +41,6 @@ def main(debug):
             sys.exit()
         xml = sys.argv[1]
 
-    # try:
-    start = ttime.clock()
 
     from Products import Products
     products = Products(xml)
@@ -54,10 +48,6 @@ def main(debug):
         for micapsfile in products.micapsfiles:
             micapsfile.file.micapsdata.Draw(products, micapsfile, debug)
             # break
-
-    print('Micaps data contour and save picture seconds:', ttime.clock() - start)
-    # except Exception as err:
-    #     print(err)
 
 
 if __name__ == '__main__':

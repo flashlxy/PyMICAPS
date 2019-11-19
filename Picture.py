@@ -31,7 +31,7 @@ class Picture:
 
         # 绘图区外延
         self.margin = Projection.leaf_to_list(p, "Margin", [0, 0, 0, 0])
-		
+
         # 绘图区内边距
         self.pad = Projection.leaf_to_float(p, "Pad", 0.0)
 
@@ -61,7 +61,6 @@ class Picture:
         self.picfile = Projection.leaf_to_string(p, 'PicFile', 'mytest.png')
         self.checkFilename()
 
-
         return
 
     @staticmethod
@@ -81,4 +80,3 @@ class Picture:
                 os.makedirs(path)
         except:
             self.picfile = 'mytest.png'
-

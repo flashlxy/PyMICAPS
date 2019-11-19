@@ -34,7 +34,6 @@ class Map:
     """
     地图类
     """
-
     def __init__(self, root):
 
         # 地图投影
@@ -61,7 +60,6 @@ class Map:
     @staticmethod
     def DrawContourfAndLegend(contourf, legend, clipborder, patch, cmap, levels, extend, extents, x, y, z, m):
         """
-        
         :param contourf: 
         :param legend: 
         :param clipborder: 
@@ -84,15 +82,16 @@ class Map:
         if contourf.contourfvisible:
             # 绘制色斑图
             if legend.micapslegendvalue:
-
-                CS = m.contourf(x, y, z, cmap=cmap,
-                                levels=levels,
-                                extend=extend, orientation='vertical')
+                CS = m.contourf(x, y, z, cmap=cmap, levels=levels, extend=extend)
             else:
-
-                CS = m.contourf(x, y, z,  # cax=axins,
-                                levels=legend.legendvalue, colors=legend.legendcolor,
-                                extend=extend, orientation='vertical', hatches=legend.hatches)
+                CS = m.contourf(
+                    x,
+                    y,
+                    z,  # cax=axins,
+                    levels=legend.legendvalue,
+                    colors=legend.legendcolor,
+                    extend=extend,
+                    hatches=legend.hatches)
 
             # 用区域边界裁切色斑图
             if clipborder.path is not None and clipborder.using:
@@ -120,23 +119,24 @@ class Map:
                     plt.gca().add_artist(ab)
                 else:
                     fmt = None
-                    CB = plt.colorbar(CS, cmap='RdBu', anchor=legend.anchor, shrink=legend.shrink,
-                                      # ticks=ticks,
-                                      # fraction=0.15,  # products.fraction,
-                                      drawedges=True,  # not products.micapslegendvalue,
-                                      filled=False,
-                                      spacing='uniform',
-                                      use_gridspec=False,
-                                      orientation=legend.orientation,
-                                      # extendfrac='auto',
-                                      format=fmt
-                                      )
+                    CB = plt.colorbar(
+                        CS,
+                        cmap='RdBu',
+                        anchor=tuple(legend.anchor),
+                        shrink=legend.shrink,
+                        # ticks=ticks,
+                        # fraction=0.15,  # products.fraction,
+                        drawedges=True,  # not products.micapslegendvalue,
+                        filled=False,
+                        spacing='uniform',
+                        use_gridspec=False,
+                        orientation=legend.orientation,
+                        # extendfrac='auto',
+                        format=fmt)
 
             else:
 
-                CB = m.colorbar(CS, location=legend.location, size=legend.size,
-                                pad=legend.pad
-                                )
+                CB = m.colorbar(CS, location=legend.location, size=legend.size, pad=legend.pad)
 
             if CB is not None:
                 fp = Map.GetFontProperties(legend.font)
@@ -154,7 +154,7 @@ class Map:
                     legendvaluealias = [v for i, v in enumerate(legend.legendvaluealias) if i % legend.thinning == 0]
                     CB.set_ticks(legendvalue, update_ticks=True)
                     CB.set_ticklabels(legendvaluealias, update_ticks=True)
-			
+
                 CB.ax.tick_params(axis='y', direction='in', length=0)
                 for label in CB.ax.xaxis.get_ticklabels() + CB.ax.yaxis.get_ticklabels():
                     label.set_color(legend.font['color'])
@@ -169,16 +169,21 @@ class Map:
 
             matplotlib.rcParams['contour.negative_linestyle'] = 'dashed'
             if contour.contour['colorline']:
-                CS1 = m.contour(x, y, z, levels=level,
-                                linewidths=contour.contour['linewidth'])
+                CS1 = m.contour(x, y, z, levels=level, linewidths=contour.contour['linewidth'])
             else:
-                CS1 = m.contour(x, y, z, levels=level,
-                                linewidths=contour.contour['linewidth'], colors=contour.contour['linecolor'])
+                CS1 = m.contour(x,
+                                y,
+                                z,
+                                levels=level,
+                                linewidths=contour.contour['linewidth'],
+                                colors=contour.contour['linecolor'])
 
             # 是否绘制等值线标注
             CS2 = None
             if contour.contourlabel['visible']:
-                CS2 = plt.clabel(CS1, inline=1, fmt=contour.contourlabel['fmt'],
+                CS2 = plt.clabel(CS1,
+                                 inline=1,
+                                 fmt=contour.contourlabel['fmt'],
                                  inline_spacing=contour.contourlabel['inlinespacing'],
                                  fontsize=contour.contourlabel['fontsize'],
                                  colors=contour.contourlabel['fontcolor'])
@@ -202,10 +207,7 @@ class Map:
         linewidth = clipborders[0].linewidth
         linecolor = clipborders[0].linecolor
         if path is not None:
-            patch = patches.PathPatch(path,
-                                      linewidth=linewidth,
-                                      facecolor='none',
-                                      edgecolor=linecolor)
+            patch = patches.PathPatch(path, linewidth=linewidth, facecolor='none', edgecolor=linecolor)
             plt.gca().add_patch(patch)
         else:
             patch = None
@@ -228,7 +230,8 @@ class Map:
                         # Map.DrawShapeFile(area)
                         Map.readshapefile(area.file.replace('.shp', ''),
                                           os.path.basename(area.file),
-                                          color=area.linecolor, linewidth=area.linewidth)
+                                          color=area.linecolor,
+                                          linewidth=area.linewidth)
                     else:
                         m.readshapefile(area.file.replace('.shp', ''),
                                         os.path.basename(area.file),
@@ -237,11 +240,14 @@ class Map:
                     if area.path is None:
                         continue
                     if area.polygon == 'ON':
-                        area_patch = patches.PathPatch(area.path, linewidth=area.linewidth, linestyle='solid',
-                                                       facecolor='none', edgecolor=area.linecolor)
+                        area_patch = patches.PathPatch(area.path,
+                                                       linewidth=area.linewidth,
+                                                       linestyle='solid',
+                                                       facecolor='none',
+                                                       edgecolor=area.linecolor)
                         plt.gca().add_patch(area_patch)
                     else:
-                        x, y = zip(*area.path.vertices)
+                        x, y = list(zip(*area.path.vertices))
                         m.plot(x, y, 'k-', linewidth=area.linewidth, color=area.linecolor)
         except Exception as err:
             print(u'【{0}】{1}-{2}'.format(products.xmlfile, err, datetime.now()))
@@ -272,9 +278,9 @@ class Map:
                 trans = (Path.CLOSEPOLY, (cell_end[0], cell_end[1]))
                 path_data += [trans]
 
-                codes, verts = zip(*path_data)
+                codes, verts = list(zip(*path_data))
                 path = Path(verts, codes)
-                x, y = zip(*path.vertices)
+                x, y = list(zip(*path.vertices))
                 plt.plot(x, y, 'k-', linewidth=area.linewidth, color=area.linecolor)
         except Exception as err:
             print(u'【{0}】{1}-{2}'.format(area['file'], err, datetime.now()))
@@ -288,8 +294,7 @@ class Map:
             m.drawcountries(linewidth=0.25)
 
         if pj.lsmask['visible']:
-            m.drawlsmask(land_color=pj.lsmask['land_color'],
-                         ocean_color=pj.lsmask['ocean_color'], resolution='l')
+            m.drawlsmask(land_color=pj.lsmask['land_color'], ocean_color=pj.lsmask['ocean_color'], resolution='l')
 
     @staticmethod
     def DrawGridLine(products, m):
@@ -320,14 +325,8 @@ class Map:
         else:
             # draw parallels and meridians.
             if pj.axis == 'on':
-                m.drawparallels(np.arange(-80., 81., 10.),
-                                labels=pj.latlabels,
-                                family='DejaVu Sans',
-                                fontsize=10)
-                m.drawmeridians(np.arange(-180., 181., 10.),
-                                labels=pj.lonlabels,
-                                family='DejaVu Sans',
-                                fontsize=10)
+                m.drawparallels(np.arange(-80., 81., 10.), labels=pj.latlabels, family='DejaVu Sans', fontsize=10)
+                m.drawmeridians(np.arange(-180., 181., 10.), labels=pj.lonlabels, family='DejaVu Sans', fontsize=10)
 
     @staticmethod
     def GetFontProperties(font):
@@ -337,10 +336,18 @@ class Map:
         else:
             fp = FontProperties(fname=fontfile, weight=font['weight'], size=font['size'])
         return fp
-		
+
     @staticmethod
-    def readshapefile(shapefile, name, is_web_merc=False, drawbounds=True, zorder=None,
-                      linewidth=0.5, linestyle=(0, ()), color='k', antialiased=1, ax=None,
+    def readshapefile(shapefile,
+                      name,
+                      is_web_merc=False,
+                      drawbounds=True,
+                      zorder=None,
+                      linewidth=0.5,
+                      linestyle=(0, ()),
+                      color='k',
+                      antialiased=1,
+                      ax=None,
                       default_encoding='utf-8'):
         """
         Read in shape file, optionally draw boundaries on map.
@@ -498,7 +505,7 @@ class Map:
             import matplotlib.pyplot as plt
             ax = ax or plt.gca()
             # make LineCollections for each polygon.
-            lines = LineCollection(coords, antialiaseds=(antialiased,))
+            lines = LineCollection(coords, antialiaseds=(antialiased, ))
             lines.set_color(color)
             lines.set_linewidth(linewidth)
             lines.set_linestyle(linestyle)

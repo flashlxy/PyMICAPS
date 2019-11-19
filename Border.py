@@ -45,7 +45,7 @@ class Border:
             file_object = open(filename)
             all_the_text = file_object.read().strip()
             file_object.close()
-            poses = re.split('[,]+|[\s]+', all_the_text)
+            poses = re.split(r'[,]+|[\s]+', all_the_text)
             lon = [float(p) for p in poses[0::2]]
             lat = [float(p) for p in poses[1::2]]
             path = Path(zip(lon, lat))

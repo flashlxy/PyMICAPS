@@ -10,7 +10,7 @@
                  stere：极射赤面投影，npstere：北半球极射赤面投影, hammer，kav7，
                  merc：麦卡托投影，gnom, cyl：等经纬度投影
              -->
-            <Name>lcc</Name>
+            <Name>sall</Name>
 
             <!-- 为空或者为非数值则首先使用裁切区的中心经纬度，其次使用数据本身所在区域的中心经纬度-->
             <!-- central latitude (y-axis origin) - used by all projections. -->
@@ -73,9 +73,9 @@
 
             <!-- 海洋陆地设置 -->
             <Lsmask>
-                <Visible>on</Visible>                         <!-- 海洋陆地配色开关 default is off -->
-                <Land_color>#ddaa66</Land_color>              <!-- 陆地颜色 default is '#689CD2' -->
-                <Ocean_color>#7777ff</Ocean_color>            <!-- 海洋颜色 default is '#689CD2' -->
+                <Visible>on</Visible>                <!-- 海洋陆地配色开关 default is off -->
+                <Land_color>#ddaa66</Land_color>                <!-- 陆地颜色 default is '#689CD2' -->
+                <Ocean_color>#7777ff</Ocean_color>                <!-- 海洋颜色 default is '#689CD2' -->
             </Lsmask>
 
         </Projection>
@@ -88,7 +88,7 @@
         -->
         <Borders>
             <Border>
-                <File>D:\CODES\MicapsDataDraw2\shapefiles\bou2_4l.shp</File>
+                <File>.\shapefile\bou2_4l.shp</File>
                 <!-- 地图文件 -->
                 <Type>shp</Type>
                 <!-- 地图文件类型 -->
@@ -110,7 +110,7 @@
         C:\sample\clipborder\北京市.txt
         -->
         <ClipBorders>
-          <!--shp地图文件路径|裁切区编码数组(支持多省合并)|线宽
+            <!--shp地图文件路径|裁切区编码数组(支持多省合并)|线宽
                 各省、直辖市、港澳台行政区划码说明：
                 110000     北京市
                 120000     天津市
@@ -148,22 +148,22 @@
                 820000     澳门特别行政区
                 -->
             <!--<ClipBorder>-->
-                <!--<File>D:\CODES\MicapsDataDraw2\border\咸阳市界.txt</File>-->
-                <!--&lt;!&ndash; 地图文件 &ndash;&gt;-->
-                <!--<Type>txt</Type>-->
-                <!--&lt;!&ndash; 地图文件类型 &ndash;&gt;-->
-                <!--<Code>360000</Code>-->
-                <!--<Using>on</Using>-->
-                <!--&lt;!&ndash; 是否启用：on,off &ndash;&gt;-->
-                <!--<Draw>on</Draw>-->
-                <!--&lt;!&ndash; 是否绘制：on,off &ndash;&gt;-->
-                <!--<LineWidth>2</LineWidth>-->
-                <!--&lt;!&ndash; 线宽：float &ndash;&gt;-->
-                <!--<LineColor>Olive</LineColor>-->
-                <!--&lt;!&ndash; 线颜色：str Olive &ndash;&gt;-->
+            <!--<File>D:\CODES\MicapsDataDraw2\border\咸阳市界.txt</File>-->
+            <!--&lt;!&ndash; 地图文件 &ndash;&gt;-->
+            <!--<Type>txt</Type>-->
+            <!--&lt;!&ndash; 地图文件类型 &ndash;&gt;-->
+            <!--<Code>360000</Code>-->
+            <!--<Using>on</Using>-->
+            <!--&lt;!&ndash; 是否启用：on,off &ndash;&gt;-->
+            <!--<Draw>on</Draw>-->
+            <!--&lt;!&ndash; 是否绘制：on,off &ndash;&gt;-->
+            <!--<LineWidth>2</LineWidth>-->
+            <!--&lt;!&ndash; 线宽：float &ndash;&gt;-->
+            <!--<LineColor>Olive</LineColor>-->
+            <!--&lt;!&ndash; 线颜色：str Olive &ndash;&gt;-->
             <!--</ClipBorder>-->
             <ClipBorder>
-                <File>D:\CODES\MicapsDataDraw2\shapefiles\bou2_4p</File>
+                <File>.\shapefile\bou2_4p</File>
                 <!-- 地图文件 -->
                 <Type>shp</Type>
                 <!-- 地图文件类型 -->
@@ -177,7 +177,7 @@
 
                 -->
                 <Code>360000</Code>
-                <Using>on</Using>
+                <Using>onf</Using>
                 <!-- 是否启用：on,off -->
                 <Draw>on</Draw>
                 <!-- 是否绘制：on,off -->
@@ -190,9 +190,9 @@
 
         <Stations>
             <!-- Micaps 第17类数据格式 兼容小数点版-->
-            <File>jxstation.txt</File>
+            <File>.\SampleData\jxstation.txt</File>
             <!-- 是否标注 default is off-->
-            <Visible>onf</Visible>
+            <Visible>on</Visible>
             <!--
                 站点样式
                 filled_markers = ('o', 'v', '^', '<', '>', '8', 's', 'p', '*', 'h', 'H', 'D', 'd', 'P', 'X')
@@ -228,19 +228,19 @@
             <!-- micaps数据类型 -->
             <File>
                 <!-- M1：站点数据，M4：第4类格点数据，M11：第11类UV数据-->
-                <Type>M3</Type>
+                <Type>M11</Type>
 
                 <!--原始数据文件
                     M4 - K:\GQEC\TP\r24\17032908.060 16062908.012 K:\ecmwf\pressure\999\16122520.000
                          K:\ecmwf\height\500\17033108.240 K:\ecmwf\temper\850\16122520.000
-                         K:\GQJP\HGT\500\17040514.084 K:\GQJP\24P\1010\17040514.078
+                         K:\GQJP\HGT\500\17040514.084 K:\GQJP\24P\1010\17040514.078 K:\GQEC\GH\500\19111920.240
                          K:\GQEC\TP\r24\18090508.240
                     M3 - K:\zdzjm\maxtemp\17011418.000 K:\zdzjm\rain24\17033115.000 data.txt
-                         K:\GD05\jxqy\20170417.012
+                         K:\GD05\jxqy\20191118.012 K:\GD05\jxqy\20191118.024
                     M11  K:\ecmwf\uv\850\17041020.000 K:\GQEC\uv\500\17041720.024
                          K:\GQEC\10uv\999\17011408.186 K:\GQEC\uv\850\18020108.003
                 -->
-                <FileName> K:\zdzjm\rain24\18041313.000 </FileName>
+                <FileName> K:\GQEC\uv\500\19111920.240  </FileName>
             </File>
             <!-- 图例 -->
             <Legend>
@@ -248,13 +248,13 @@
                  格式:文件名，插入经度，插入纬度，图例缩放系数
                  jxlogo.png,117,25.7,1
                 -->
-                <LegendPic> </LegendPic>
+                <LegendPic></LegendPic>
 
                 <!-- 图例的延展类型:neither,min,max,both default is neither-->
                 <Extend>neither</Extend>
 
                 <!-- 是否取MICAPS数据本身的图例值 True False default is True-->
-                <MicapsLegendValue>True1</MicapsLegendValue>
+                <MicapsLegendValue>True</MicapsLegendValue>
 
                 <!--
                      When micapslegendvalue is true, the setting is working.
@@ -281,23 +281,34 @@
                      单个样式有'', '/', '\\', '|', '-', '+', 'x', 'o', 'O', '.', '*'共10种.
                 -->
                 <Hatches></Hatches>
-		    
-		        <!-- 图例按以下间隔抽稀 -->
-                <Thinning>1</Thinning>
-		    
-                <!-- 图例等级值 0, 0.01, 10, 25, 50, 100, 250, 9999. default is None -->
-                <LegendValue>0.01, 10, 25, 50, 100, 250, 999999</LegendValue>
-                <!-- 实际显示在图例上的值：支持字符和数字类型混杂 0, 0.01, 10, 25, 50, 100, 250, 9999. default is None -->
-                <LegendValueAlias>0, 10, 25, 50, 100, '250', ''</LegendValueAlias>
-                <!-- 图例颜色值 'none', '#A6F28F', '#3DBA3D', '#61B8FF', '#0000FF', '#FF00FA', '#800040', '#000000'. default is None-->
-                <LegendColor>'#A6F28F', '#3DBA3D', '#61B8FF', '#0000FF', '#FF00FA', '#800040', 'k'</LegendColor>
 
-				<!--colorbar yaxis ticklabels 图例ticklabel字体
+                <!-- 图例按以下间隔抽稀 -->
+                <Thinning>1</Thinning>
+
+                <!-- 图例等级值 0, 0.01, 10, 25, 50, 100, 250, 9999. default is None -->
+                <!-- <LegendValue>0.01, 10, 25, 50, 100, 250, 999999</LegendValue> -->
+                <!-- 实际显示在图例上的值：支持字符和数字类型混杂 0, 0.01, 10, 25, 50, 100, 250, 9999. default is None -->
+                <!-- <LegendValueAlias>0, 10, 25, 50, 100, '250', ''</LegendValueAlias> -->
+                <!-- 图例颜色值 'none', '#A6F28F', '#3DBA3D', '#61B8FF', '#0000FF', '#FF00FA', '#800040', '#000000'. default is None-->
+                <!-- <LegendColor>'#A6F28F', '#3DBA3D', '#61B8FF', '#0000FF', '#FF00FA', '#800040', 'k'</LegendColor> -->
+
+                <LegendValueAlias>'',-30, -28, -26, -24, -22,
+                    -20,-18,-16,-14,-12,-10,-8,-6,-4,-2,0,2,4,6,8,10,12,14,16,18,20,22,24,26,28,30,32,34,35,37,40,''
+                </LegendValueAlias>
+                <LegendValue>-999999,-30, -28, -26, -24, -22,
+                    -20,-18,-16,-14,-12,-10,-8,-6,-4,-2,0,2,4,6,8,10,12,14,16,18,20,22,24,26,28,30,32,34,35,37,40,999999
+                </LegendValue>
+                <LegendColor>'#020c64', '#071e78', '#11318b', '#1b449f', '#2657b3',
+                    '#306ac7','#3b7ddb','#4e8add','#6196e0', '#74a3e2','#87afe5','#87afe5','#9ac4dc',
+                    '#9acdd0','#98d6c4','#97e8ad','#d7de7d', '#eadb70','#f4d963','#facc4f','#f7b42d',
+                    '#f29b00','#f19303','#f0850a','#ef7511','#ee6518','#ee581f','#e74b1a','#e03f16','#d93312','#d0240e','#c20003','#b50109','#a90210','#8a0519','#6f0015','#50000f','none'
+                </LegendColor>
+                <!--colorbar yaxis ticklabels 图例ticklabel字体
                     font = {'family': 'serif', 'color': 'darkred', 'weight': 'normal', 'size': 12}
                 -->
                 <Font>{'family': 'msyhbd.ttc', 'color': 'k', 'weight': 'normal', 'size': 10}</Font>
-				
-				<!-- 图例标题 str , default is '' -->
+
+                <!-- 图例标题 str , default is '' -->
                 <Title>雨量:mm</Title>
 
                 <!-- 图例标题字体 dict -->
@@ -352,10 +363,10 @@
                 <Grid>195,216</Grid>
                 <!-- 等值线配置 -->
                 <Contour>
-                    <Visible>True1</Visible>     <!-- True False. default is False -->
-                    <LineWidth>1</LineWidth>  <!-- float. default is 1. -->
-                    <LineColor>k</LineColor>    <!-- string. default is 'black' -->
-                    <ColorLine>True1</ColorLine> <!-- 等值线渐变色 if True linecolor设置无效. default is False-->
+                    <Visible>True1</Visible>                    <!-- True False. default is False -->
+                    <LineWidth>1</LineWidth>                    <!-- float. default is 1. -->
+                    <LineColor>k</LineColor>                    <!-- string. default is 'black' -->
+                    <ColorLine>True1</ColorLine>                    <!-- 等值线渐变色 if True linecolor设置无效. default is False-->
                 </Contour>
                 <!-- <ContourVisible>True</ContourVisible>  -->
 
@@ -364,11 +375,11 @@
 
                 <!-- 等值线标注配置 True False. default is False  -->
                 <ContourLabel>
-                    <Visible>True</Visible>    <!-- True False. default is False -->
-                    <Fmt>%1.0f</Fmt>           <!-- label数据显示格式 default is '%1.0f' -->
-                    <FontSize>12</FontSize>    <!-- float.. default is 12. -->
-                    <FontColor>k</FontColor>   <!-- string. default is 'black' -->
-                    <InlineSpacing>0</InlineSpacing> <!-- 等值线标注开口距离 float. default is 5 -->
+                    <Visible>True</Visible>                    <!-- True False. default is False -->
+                    <Fmt>%1.0f</Fmt>                    <!-- label数据显示格式 default is '%1.0f' -->
+                    <FontSize>12</FontSize>                    <!-- float.. default is 12. -->
+                    <FontColor>k</FontColor>                    <!-- string. default is 'black' -->
+                    <InlineSpacing>0</InlineSpacing>                    <!-- 等值线标注开口距离 float. default is 5 -->
                 </ContourLabel>
             </Contour>
 
@@ -432,9 +443,9 @@
                 -->
                 <Descs>
                     <Desc>
-                        <Text>北京市降水量分布图(单位 : 毫米)</Text>       <!-- 文字-->
-                        <Position>115.37,41.126</Position>                 <!-- 文字绘制的开始点-->
-                        <Font>26,msyhbd.ttc,bold,black</Font>               <!-- 文字大小,字体,是否加粗,颜色-->
+                        <Text>北京市降水量分布图(单位 : 毫米)</Text>                        <!-- 文字-->
+                        <Position>115.37,41.126</Position>                        <!-- 文字绘制的开始点-->
+                        <Font>26,msyhbd.ttc,bold,black</Font>                        <!-- 文字大小,字体,是否加粗,颜色-->
                     </Desc>
                     <Desc>
                         <Text>2016年09月25日21时-26日08时</Text>

@@ -17,10 +17,6 @@ from matplotlib.markers import MarkerStyle
 import MicapsFile
 from Map import Map
 from Picture import Picture
-
-reload(sys)
-sys.setdefaultencoding('utf-8')
-
 # matplotlib.use('Agg')
 from pylab import *
 from matplotlib.transforms import Bbox
@@ -58,8 +54,6 @@ class Micaps:
         self.endlon = None
         self.beginlat = None
         self.endlat = None
-        self.beginlon = None
-        self.endlon = None
         self.sumlon = None
         self.sumlat = None
         self.distance = None
@@ -87,7 +81,7 @@ class Micaps:
 
     def SetEncoding(self):
         if os.path.isfile(self.filename):
-            bigdata = open(filename, "rb")
+            bigdata = open(self.filename, "rb")
             from cchardet import UniversalDetector
             detector = UniversalDetector()
             for line in bigdata.readlines():
@@ -97,8 +91,9 @@ class Micaps:
             detector.close()
             bigdata.close()
             result = detector.result
-            self.encoding = result.get('encoding', self.encoding)
-            
+            if result['confidence'] is not None and result['confidence'] > 0.6:
+                self.encoding = result.get('encoding', self.encoding)
+
     @staticmethod
     def UpdatePath(path, projection):
         """
@@ -158,8 +153,7 @@ class Micaps:
         else:
             extents = products.picture.extents
             if isinstance(extents, list):
-                products.picture.extents = Bbox.from_extents(extents[0], extents[1],
-                                                             extents[2], extents[3])
+                products.picture.extents = Bbox.from_extents(extents[0], extents[1], extents[2], extents[3])
 
     def UpdatePinLegendValue(self, micapsfile):
         pin = micapsfile.legend.pinlegendvalue
@@ -274,16 +268,31 @@ class Micaps:
         # 绘制等值线 ------ 等值线和标注是一体的
         c = micapsfile.contour
 
-        Map.DrawContourAndMark(contour=c, x=self.X, y=self.Y, z=self.Z,
-                               level=level, clipborder=clipborder, patch=patch, m=m)
+        Map.DrawContourAndMark(contour=c,
+                               x=self.X,
+                               y=self.Y,
+                               z=self.Z,
+                               level=level,
+                               clipborder=clipborder,
+                               patch=patch,
+                               m=m)
 
         cf = micapsfile.contour
         cbar = micapsfile.legend
         extend = micapsfile.legend.extend
         # 绘制色斑图 ------ 色版图、图例、裁切是一体的
-        Map.DrawContourfAndLegend(contourf=cf, legend=cbar, clipborder=clipborder,
-                                  patch=patch, cmap=cmap, levels=levels,
-                                  extend=extend, extents=extents, x=self.X, y=self.Y, z=self.Z, m=m)
+        Map.DrawContourfAndLegend(contourf=cf,
+                                  legend=cbar,
+                                  clipborder=clipborder,
+                                  patch=patch,
+                                  cmap=cmap,
+                                  levels=levels,
+                                  extend=extend,
+                                  extents=extents,
+                                  x=self.X,
+                                  y=self.Y,
+                                  z=self.Z,
+                                  m=m)
 
         # 绘制描述文本
         MicapsFile.MicapsFile.DrawTitle(m, micapsfile.title, self.title)
@@ -296,11 +305,17 @@ class Micaps:
         # 绘制散点
         if micapsfile.contour.scatter:
             if hasattr(self, 'x1'):
-                m.scatter(self.x1, self.y1, s=micapsfile.contour.radius, c=self.z1,
+                m.scatter(self.x1,
+                          self.y1,
+                          s=micapsfile.contour.radius,
+                          c=self.z1,
                           alpha=micapsfile.contour.alpha,
                           edgecolors='b')
             else:
-                m.scatter(self.X, self.Y, s=micapsfile.contour.radius, c=self.Z,
+                m.scatter(self.X,
+                          self.Y,
+                          s=micapsfile.contour.radius,
+                          c=self.Z,
                           alpha=micapsfile.contour.alpha,
                           edgecolors='b')
 
@@ -322,15 +337,19 @@ class Micaps:
             # ])
 
             # stations_array = [list(ele) for ele in zip(*stations.micapsdata.stations)]
-            stations_array = zip(*stations.micapsdata.stations)
+            stations_array = list(zip(*stations.micapsdata.stations))
             # 画站点mark
             if m is not plt:
                 stations_array[2], stations_array[1] = \
                     Micaps.UpdateXY(m, stations_array[2], stations_array[1])
             marker = MarkerStyle(stations.markstyle[0], stations.markstyle[1])
-            m.scatter(stations_array[2], stations_array[1], marker=marker,
-                      s=stations.radius, c=stations.color,
-                      alpha=stations.alpha, edgecolors=stations.edgecolors)
+            m.scatter(stations_array[2],
+                      stations_array[1],
+                      marker=marker,
+                      s=stations.radius,
+                      c=stations.color,
+                      alpha=stations.alpha,
+                      edgecolors=stations.edgecolors)
 
             # 画站点文本
 
@@ -342,14 +361,19 @@ class Micaps:
             for sta in stations.micapsdata.stations:
                 if m is not plt:
                     lon, lat = Micaps.UpdateXY(m, sta[2], sta[1])
-                    lon1, lat1 = Micaps.UpdateXY(m, sta[2] + stations.detax, sta[1])
+                    lon1, _ = Micaps.UpdateXY(m, sta[2] + stations.detax, sta[1])
                     deta = lon1 - lon
                 else:
                     lon, lat = sta[2], sta[1]
                     deta = stations.detax
-                plt.text(lon + deta, lat, sta[6],
-                         fontproperties=font, rotation=0,
-                         color=stations.font[3], ha='left', va='center')
+                plt.text(lon + deta,
+                         lat,
+                         sta[6],
+                         fontproperties=font,
+                         rotation=0,
+                         color=stations.font[3],
+                         ha='left',
+                         va='center')
 
         # 接近收尾
 

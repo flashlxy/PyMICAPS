@@ -54,7 +54,7 @@ class Legend:
         self.validhatches(self.hatches)
         # 图例等级值
         self.legendvalue = Projection.leaf_to_list(p, "LegendValue", None)
-		
+
         # 实际显示在图例上的值
         self.legendvaluealias = Projection.leaf_to_list(p, "LegendValueAlias", None)
 
@@ -63,10 +63,10 @@ class Legend:
 
         # 图例抽稀间隔
         self.thinning = Projection.leaf_to_int(p, "Thinning", 1)
-	
+
         # 图例字体
         self.font = Projection.leaf_to_dict(p, "Font", None)
-		
+
         # 图例标题
         self.title = Projection.leaf_to_string(p, 'Title', '')
 
@@ -74,8 +74,12 @@ class Legend:
         self.titlefont = Projection.leaf_to_dict(p, "TitleFont", None)
 
         # 图例标题位置
-        self.titlepos = Projection.leaf_to_dict(p, "TitlePos",
-                                                {'rotation': 90, 'va': 'top', 'ha': 'center', 'ypercent': 0.5})
+        self.titlepos = Projection.leaf_to_dict(p, "TitlePos", {
+            'rotation': 90,
+            'va': 'top',
+            'ha': 'center',
+            'ypercent': 0.5
+        })
 
         # ---------- 无投影时的图例配置 start --------
         # 图例放置方式
@@ -110,4 +114,3 @@ class Legend:
         hatches_list = ["", "/", "\\", "|", "-", "+", "x", "o", "O", ".", "*"]
         if hatches is not None:
             self.hatches = [a if a in hatches_list else '' for a in hatches]
-

@@ -21,7 +21,6 @@ from matplotlib.mlab import griddata
 
 
 class Micaps3Data(Micaps):
-
     def __init__(self, filename, encoding='GBK'):
         Micaps.__init__(self, filename, encoding=encoding)
         self.contoursum = None
@@ -56,7 +55,7 @@ class Micaps3Data(Micaps):
             file_object = codecs.open(self.filename, mode='r', encoding=self.encoding)
             all_the_text = file_object.read().strip()
             file_object.close()
-            contents = re.split('[\s]+', all_the_text)
+            contents = re.split(r'[\s]+', all_the_text)
             if len(contents) < 14:
                 return
             self.dataflag = contents[0].strip()
@@ -84,7 +83,7 @@ class Micaps3Data(Micaps):
             self.y1 = []
             self.z1 = []
 
-            self.stationsum = (len(contents) - 14) / 5
+            self.stationsum = int((len(contents) - 14) / 5)
             stations = []
             if self.dataflag == 'diamond' and self.style == '3':
                 begin = 14
@@ -133,13 +132,9 @@ class Micaps3Data(Micaps):
             z.append(point[2])
 
     def CreateArray(self):
-        self.data = np.array(self.data, dtype=[
-            ('code', np.int32),
-            ('lon', np.float32),
-            ('lat', np.float32),
-            ('height', np.float32),
-            ('zvalue', np.float32)]
-                             )
+        self.data = np.array(self.data,
+                             dtype=[('code', np.int32), ('lon', np.float32), ('lat', np.float32),
+                                    ('height', np.float32), ('zvalue', np.float32)])
 
     def UpdateData(self, products, micapsfile):
         self.UpdateExtents(products)
@@ -178,6 +173,6 @@ class Micaps3Data(Micaps):
         getvals = operator.itemgetter('lon', 'lat')
         data.sort(key=getvals)
         result = []
-        for k, g in itertools.groupby(data, getvals):
-            result.append(g.next())
+        for _, g in itertools.groupby(data, getvals):
+            result.append(next(g))
         data[:] = result

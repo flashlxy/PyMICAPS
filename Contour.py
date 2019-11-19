@@ -7,8 +7,6 @@
 #     Version:    1.1.20170406
 from __future__ import print_function
 from __future__ import print_function
-
-from Main import parseInt
 from Projection import Projection
 
 
@@ -31,7 +29,7 @@ class Contour:
         if len(self.grid) != 2:
             self.grid = [195, 216]
         else:
-            self.grid = [parseInt(str(g)) for g in self.grid]
+            self.grid = [int(str(g)) for g in self.grid]
 
         # 等值线参数
         contourleaf = p.find("Contour")

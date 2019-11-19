@@ -44,7 +44,7 @@ class Micaps11Data(Micaps):
             file_object = codecs.open(self.filename, mode='r', encoding=self.encoding)
             all_the_text = file_object.read().strip()
             file_object.close()
-            contents = re.split('[\s]+', all_the_text)
+            contents = re.split(r'[\s]+', all_the_text)
             if len(contents) < begin:
                 return
             self.dataflag = contents[0].strip()
@@ -87,7 +87,7 @@ class Micaps11Data(Micaps):
 
                 for i in range(self.sumlon):
                     for j in range(self.sumlat):
-                        self.Z[j, i] = math.sqrt(self.U[j, i] ** 2 + self.V[j, i] ** 2)
+                        self.Z[j, i] = math.sqrt(self.U[j, i]**2 + self.V[j, i]**2)
             if self.deltalat < 0:
                 self.TransposeYaxis()
 
@@ -136,7 +136,6 @@ class Micaps11Data(Micaps):
         self.wholeclip = micapsfile.uv.wholecilp
         self.colorlist = micapsfile.legend.legendcolor
 
-
     def GetPatches(self, paths):
         ps = []
         for path in paths:
@@ -155,12 +154,9 @@ class Micaps11Data(Micaps):
             lon.append(xpix[0])
             lat.append(ypix[0])
         from matplotlib.path import Path
-        apath = Path(zip(lon, lat))
+        apath = Path(list(zip(lon, lat)))
         from matplotlib import patches
-        apatch = patches.PathPatch(apath,
-                                   linewidth=1,
-                                   facecolor='none',
-                                   edgecolor='k')
+        apatch = patches.PathPatch(apath, linewidth=1, facecolor='none', edgecolor='k')
         plt.gca().add_patch(apatch)
         return apatch
 
@@ -168,15 +164,21 @@ class Micaps11Data(Micaps):
 
         if m is plt:
             if self.stream:
-                plot = m.streamplot(self.X, self.Y, self.U, self.V,
+                plot = m.streamplot(self.X,
+                                    self.Y,
+                                    self.U,
+                                    self.V,
                                     density=self.density,
                                     linewidth=self.linewidth,
                                     color=self.color,
-                                    cmap=self.cmap
-                                    )
+                                    cmap=self.cmap)
             if self.barbs:
-                barbs = m.barbs(self.X, self.Y, self.U, self.V,
-                                length=self.length, barb_increments=dict(half=2, full=4, flag=20),
+                barbs = m.barbs(self.X,
+                                self.Y,
+                                self.U,
+                                self.V,
+                                length=self.length,
+                                barb_increments=dict(half=2, full=4, flag=20),
                                 sizes=dict(emptybarb=0))
                 pass
 
@@ -202,10 +204,15 @@ class Micaps11Data(Micaps):
                 speed = micapsfile.uv.markscalelength
                 qk = plt.quiverkey(Q, 0.1, 0.1, speed, '%.0f m/s' % speed, labelpos='W')
             if self.barbs:
-                barbs = m.barbs(xx, yy, uproj, vproj, length=self.length,
+                barbs = m.barbs(xx,
+                                yy,
+                                uproj,
+                                vproj,
+                                length=self.length,
                                 barb_increments=dict(half=2, full=4, flag=20),
                                 sizes=dict(emptybarb=0),
-                                barbcolor='k', flagcolor='r',
+                                barbcolor='k',
+                                flagcolor='r',
                                 linewidth=0.5)
 
         if clipborder.path is not None and clipborder.using:

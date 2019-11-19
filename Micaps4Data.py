@@ -28,7 +28,7 @@ class Micaps4Data(Micaps):
             file_object = codecs.open(self.filename, mode='r', encoding=self.encoding)
             all_the_text = file_object.read().strip()
             file_object.close()
-            contents = re.split('[\s]+', all_the_text)
+            contents = re.split(r'[\s]+', all_the_text)
             if len(contents) < 23:
                 return
             self.dataflag = contents[0].strip()
@@ -56,8 +56,8 @@ class Micaps4Data(Micaps):
             self.def1 = contents[20].strip()
             self.def2 = contents[21].strip()
 
-            x = np.arange(self.beginlon, self.endlon + 0.9*self.deltalon, self.deltalon)
-            y = np.arange(self.beginlat, self.endlat + 0.9*self.deltalat, self.deltalat)
+            x = np.arange(self.beginlon, self.endlon + 0.9 * self.deltalon, self.deltalon)
+            y = np.arange(self.beginlat, self.endlat + 0.9 * self.deltalat, self.deltalat)
             self.X, self.Y = np.meshgrid(x, y)
 
             if self.dataflag == 'diamond' and self.style == '4':

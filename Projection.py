@@ -7,17 +7,9 @@
 #     Version:    1.1.20170406
 from __future__ import print_function
 from __future__ import print_function
-
 import sys
-
 from mpl_toolkits.basemap import Basemap
-
 from Main import parseInt
-
-reload(sys)
-sys.setdefaultencoding('utf-8')
-
-# matplotlib.use('Agg')
 from pylab import *
 import matplotlib.pyplot as plt
 
@@ -53,10 +45,11 @@ class Projection:
         if subleaf is None:
             self.lsmask = {'visible': False, 'land_color': '#BF9E30', 'ocean_color': '#689CD2'}
         else:
-            self.lsmask = {'visible': self.leaf_to_bool(leaf=subleaf, code='Visible'),
-                           'land_color': self.leaf_to_string(subleaf, 'Land_color', '#BF9E30'),
-                           'ocean_color': self.leaf_to_string(subleaf, 'Ocean_color', '#689CD2')
-                           }
+            self.lsmask = {
+                'visible': self.leaf_to_bool(leaf=subleaf, code='Visible'),
+                'land_color': self.leaf_to_string(subleaf, 'Land_color', '#BF9E30'),
+                'ocean_color': self.leaf_to_string(subleaf, 'Ocean_color', '#689CD2')
+            }
         self.axis = Projection.leaf_to_string(leaf=leaf, code='Axis', defvalue='off')
         if self.axis not in ['on', 'off']:
             self.axis = 'off'
@@ -95,7 +88,7 @@ class Projection:
             lat_0 = projection.lat_0
 
         if Projection.ValidExtents(
-                (projection.llcrnrlat, projection.llcrnrlat, projection.urcrnrlat, projection.urcrnrlon)):
+            (projection.llcrnrlat, projection.llcrnrlat, projection.urcrnrlat, projection.urcrnrlon)):
             xmax = projection.urcrnrlon
             xmin = projection.llcrnrlon
             ymax = projection.urcrnrlat
@@ -112,13 +105,23 @@ class Projection:
         if pjname == 'sall':
             m = plt
         elif pjname == 'cyl':
-            m = Basemap(projection='cyl', llcrnrlat=ymin, urcrnrlat=ymax, llcrnrlon=xmin, urcrnrlon=xmax,
-                        lon_0=lon_0, lat_0=lat_0)
+            m = Basemap(projection='cyl',
+                        llcrnrlat=ymin,
+                        urcrnrlat=ymax,
+                        llcrnrlon=xmin,
+                        urcrnrlon=xmax,
+                        lon_0=lon_0,
+                        lat_0=lat_0)
         elif pjname == 'mill':
             m = Basemap(projection='mill', llcrnrlon=xmin, llcrnrlat=ymin, urcrnrlon=xmax, urcrnrlat=ymax)
         elif pjname == 'gnom':
-            m = Basemap(projection='gnom', llcrnrlon=xmin, llcrnrlat=ymin, urcrnrlon=xmax, urcrnrlat=ymax,
-                        lat_0=lat_0, lon_0=lon_0)
+            m = Basemap(projection='gnom',
+                        llcrnrlon=xmin,
+                        llcrnrlat=ymin,
+                        urcrnrlon=xmax,
+                        urcrnrlat=ymax,
+                        lat_0=lat_0,
+                        lon_0=lon_0)
         elif pjname == 'ortho':
             m = Basemap(projection='ortho', lat_0=lat_0, lon_0=lon_0, resolution='l')
         elif pjname == 'hammer':
@@ -129,10 +132,16 @@ class Projection:
             ymin = ymin if ymin >= -80 else -80
             ymax = ymax if ymax <= 80 else 80
             lat_ts = lat_ts if lat_ts < 90 else 80.
-            m = Basemap(llcrnrlon=xmin, llcrnrlat=ymin, urcrnrlon=xmax, urcrnrlat=ymax,
+            m = Basemap(llcrnrlon=xmin,
+                        llcrnrlat=ymin,
+                        urcrnrlon=xmax,
+                        urcrnrlat=ymax,
                         rsphere=(6378137.00, 6356752.3142),
-                        resolution='l', projection='merc',
-                        lat_0=lat_0, lon_0=lon_0, lat_ts=lat_ts)
+                        resolution='l',
+                        projection='merc',
+                        lat_0=lat_0,
+                        lon_0=lon_0,
+                        lat_ts=lat_ts)
         elif pjname == 'lcc':
             # lat_1=lat_0, lat_2=60, lat_0=lat_0, lon_0=lon_0 width=12000000, height=9000000,
             # lon_0 = 120.
@@ -141,13 +150,20 @@ class Projection:
             # ymax = 53.51
             # xmin = 85.86
             # xmax = 174.69
-            m = Basemap(projection='lcc',
-                        # width=w, height=h,
-                        llcrnrlon=xmin, llcrnrlat=ymin, urcrnrlon=xmax, urcrnrlat=ymax,
-                        rsphere=(6378137.00, 6356752.3142),
-                        resolution='l',
-                        area_thresh=1000.,
-                        lat_2=60, lat_1=30, lon_0=lon_0, lat_0=lat_0)
+            m = Basemap(
+                projection='lcc',
+                # width=w, height=h,
+                llcrnrlon=xmin,
+                llcrnrlat=ymin,
+                urcrnrlon=xmax,
+                urcrnrlat=ymax,
+                rsphere=(6378137.00, 6356752.3142),
+                resolution='l',
+                area_thresh=1000.,
+                lat_2=60,
+                lat_1=30,
+                lon_0=lon_0,
+                lat_0=lat_0)
         elif pjname == 'stere':
             # lon_0 = 116.
             # lat_0 = 90.
@@ -155,21 +171,32 @@ class Projection:
             # ymax = 53.51
             # xmin = 85.86
             # xmax = 174.69
-            m = Basemap(projection='stere', lon_0=lon_0, lat_0=lat_0, lat_ts=lat_ts,
-                        llcrnrlat=ymin, urcrnrlat=ymax,
-                        llcrnrlon=xmin, urcrnrlon=xmax,
-                        # boundinglat=ymin,
-                        # width=w, height=h,
-                        rsphere=6371200., resolution='l', area_thresh=10000
-                        )
+            m = Basemap(
+                projection='stere',
+                lon_0=lon_0,
+                lat_0=lat_0,
+                lat_ts=lat_ts,
+                llcrnrlat=ymin,
+                urcrnrlat=ymax,
+                llcrnrlon=xmin,
+                urcrnrlon=xmax,
+                # boundinglat=ymin,
+                # width=w, height=h,
+                rsphere=6371200.,
+                resolution='l',
+                area_thresh=10000)
         elif pjname == 'npstere':
-            m = Basemap(projection='npstere',
-                        lon_0=lon_0, lat_0=lat_0,
-                        lat_ts=lat_ts, boundinglat=boundinglat,
-                        # llcrnrlat=ymin, urcrnrlat=ymax,
-                        # llcrnrlon=xmin, urcrnrlon=xmax,
-                        # width=12000000, height=8000000,
-                        rsphere=6371200., area_thresh=10000)
+            m = Basemap(
+                projection='npstere',
+                lon_0=lon_0,
+                lat_0=lat_0,
+                lat_ts=lat_ts,
+                boundinglat=boundinglat,
+                # llcrnrlat=ymin, urcrnrlat=ymax,
+                # llcrnrlon=xmin, urcrnrlon=xmax,
+                # width=12000000, height=8000000,
+                rsphere=6371200.,
+                area_thresh=10000)
         else:
             m = plt
         return m
@@ -233,7 +260,7 @@ class Projection:
                 return labels
         except Exception as err:
             return defvalue
-	
+
     @staticmethod
     def leaf_to_dict(leaf, code, defvalue=None):
         #

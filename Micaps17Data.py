@@ -31,7 +31,7 @@ class Micaps17Data(Micaps):
             file_object = codecs.open(self.filename, mode='r', encoding=self.encoding)
             all_the_text = file_object.read().strip()
             file_object.close()
-            contents = re.split('[\s]+', all_the_text)
+            contents = re.split(r'[\s]+', all_the_text)
             if len(contents) < 4:
                 return
             self.dataflag = contents[0].strip()
@@ -59,9 +59,7 @@ class Micaps17Data(Micaps):
                     #      'iclass': iclass, 'infosum': infosum, 'name': info[0]
                     #      }
                     # )
-                    self.stations.append(
-                        [code, lat, lon, height, iclass, infosum, info[0]]
-                    )
+                    self.stations.append([code, lat, lon, height, iclass, infosum, info[0]])
         except Exception as err:
             print(u'【{0}】{1}-{2}'.format(self.filename, err, datetime.now()))
 
@@ -70,5 +68,5 @@ class Micaps17Data(Micaps):
         if '.' in lonlat:
             return float(lonlat)
         else:
-            just = math.floor(float(lonlat)/100)
-            return just + (float(lonlat)/100 - just)*100/60.
+            just = math.floor(float(lonlat) / 100)
+            return just + (float(lonlat) / 100 - just) * 100 / 60.

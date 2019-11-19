@@ -6,11 +6,7 @@
 # Author: liuxianyao
 # Created: 04/11/2015
 # ##############################################
-
 import sys
-
-# reload(sys)
-# sys.setdefaultencoding('utf-8')
 import scipy
 import scipy.linalg
 import scipy.integrate
@@ -92,8 +88,7 @@ class PolygonEx:
 
             x = Symbol('x')
             y = Symbol('y')
-            func = [(x2 - x1) * (x - x1) + (y2 - y1) * (y - y1),
-                    (x - x1) ** 2 + (y - y1) ** 2 - self.d ** 2]
+            func = [(x2 - x1) * (x - x1) + (y2 - y1) * (y - y1), (x - x1)**2 + (y - y1)**2 - self.d**2]
             return nsolve(func, [x, y], init_pairs)
         except Exception as err:
             return None
