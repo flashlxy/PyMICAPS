@@ -87,7 +87,7 @@ class Micaps:
 
     def SetEncoding(self):
         if os.path.isfile(self.filename):
-            bigdata = open(filename, "rb")
+            bigdata = open(self.filename, "rb")
             from cchardet import UniversalDetector
             detector = UniversalDetector()
             for line in bigdata.readlines():
