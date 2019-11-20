@@ -1,4 +1,4 @@
-## PyMICAPS（原名：MicapsDataDraw）
+## PyMICAPS（原名：MicapsDataDraw）更新到Python3.7 python2.7版见分支 v2.2-py2.7-20191119
 
 #### 一个超级实用生产图片工具，用matplotlib和basemap绘制micaps数据
 
@@ -11,9 +11,11 @@
 | 如果你想捐助项目或者你觉得代码对你有所帮助，请打 | [![立即捐助](https://github.com/flashlxy/MicapsDataDraw/raw/master/images/sh1.png)](https://github.com/flashlxy/MicapsDataDraw/issues/8) |
 | ---- | ---- |
 
-###### Author：Xianyao Liu | Version：2.1.20170420 | E-mail：flashlxy@qq.com | Language：Python2.7
+###### Author：Xianyao Liu | Version：2.1.20170420 | E-mail：flashlxy@qq.com | Language：Python3.7
 
 ## 更新日志
+
+    2019-11-20 升级到python3.7
 
     2019-11-19 准备升级到python3.7
     
@@ -93,7 +95,7 @@
 
     作者的一个支持NCL colorbar的python库。
     
-    matplotlib，basemap，numpy，natgrid，scipy，sympy，pyshp，nclcmaps
+    matplotlib3.0.3，basemap，numpy，natgrid，scipy，sympy，pyshp，nclcmaps, cchardet
     
     欢迎大家star和fork，一并感谢2位作者！
 
