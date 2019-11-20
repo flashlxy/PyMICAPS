@@ -94,14 +94,20 @@
 #### 第三方库[nclcmaps](http://bbs.06climate.com/forum.php?mod=viewthread&tid=43521)
 
     作者的一个支持NCL colorbar的python库。
-    
-    matplotlib==3.0.3 （安装方法：conda安装 conda install matplotlib==3.0.3 pip安装 pip install matplotlib==3.0.3
+
+    matplotlib==3.0.3
+    安装方法：
+    conda安装 conda install matplotlib==3.0.3
+    pip安装 pip install matplotlib==3.0.3
 
     basemap
 
     numpy
 
-    natgrid （安装包见.\lib\natgrid-0.2.1-cp37-cp37m-win_amd64.whl 安装方法：pip install natgrid-0.2.1-cp37-cp37m-win_amd64.whl）
+    natgrid
+    安装包见.\lib\natgrid-0.2.1-cp37-cp37m-win_amd64.whl
+    安装方法：
+    pip install natgrid-0.2.1-cp37-cp37m-win_amd64.whl
 
     scipy
 
@@ -109,10 +115,12 @@
 
     pyshp
 
-    nclcmaps （安装包见.\lib\nclcmaps-master.zip 安装方法：解压后在当前目录运行python setup.py install）
-    
+    nclcmaps
+    安装包见.\lib\nclcmaps-master.zip
+    安装方法：解压后在当前目录运行python setup.py install
+
     cchardet
-    
+
     欢迎大家star和fork，一并感谢2位作者！
 
 ## 示例数据结合适当配置文件输出的图片
