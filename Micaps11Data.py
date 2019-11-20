@@ -2,7 +2,7 @@
 #     Micaps第11类数据 继承Micaps基类
 #     Author:     Liu xianyao
 #     Email:      flashlxy@qq.com
-#     Update:     2017-04-11
+#     Update:     2019-11-20
 #     Copyright:  ©江西省气象台 2017
 #     Version:    3.0.20191120
 

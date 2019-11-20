@@ -2,7 +2,7 @@
 #     MicapsData基类
 #     Author:     Liu xianyao
 #     Email:      flashlxy@qq.com
-#     Update:     2017-04-11
+#     Update:     2019-11-20
 #     Copyright:  ©江西省气象台 2017
 #     Version:    3.0.20191120
 from __future__ import print_function
