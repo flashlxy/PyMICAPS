@@ -11,7 +11,7 @@
 | 如果你想捐助项目或者你觉得代码对你有所帮助，请打 | [![立即捐助](https://github.com/flashlxy/MicapsDataDraw/raw/master/images/sh1.png)](https://github.com/flashlxy/MicapsDataDraw/issues/8) |
 | ---- | ---- |
 
-###### Author：Xianyao Liu | Version：2.1.20170420 | E-mail：flashlxy@qq.com | Language：Python3.7
+###### Author：Xianyao Liu | Version：3.0.20191120 | E-mail：flashlxy@qq.com | Language：Python3.7
 
 ## 更新日志
 
