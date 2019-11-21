@@ -9,6 +9,7 @@
 import codecs
 import math
 import re
+import sys
 import nclcmaps
 from datetime import datetime
 import matplotlib.pyplot as plt
@@ -18,7 +19,7 @@ from MicapsData import Micaps
 
 class Micaps11Data(Micaps):
     def __init__(self, filename, encoding='GBK'):
-        Micaps.__init__(self, filename, encoding=encoding)
+        super().__init__(filename, encoding=encoding)
         self.U = None
         self.V = None
         self.linewidth = 1

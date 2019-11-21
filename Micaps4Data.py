@@ -16,7 +16,7 @@ from MicapsData import Micaps
 
 class Micaps4Data(Micaps):
     def __init__(self, filename, encoding='GBK'):
-        Micaps.__init__(self, filename, encoding=encoding)
+        super().__init__(filename, encoding=encoding)
         self.ReadFromFile()
 
     def ReadFromFile(self):

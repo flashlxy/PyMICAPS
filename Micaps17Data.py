@@ -17,7 +17,7 @@ from MicapsData import Micaps, np
 
 class Micaps17Data(Micaps):
     def __init__(self, filename, encoding='GBK'):
-        Micaps.__init__(self, filename, encoding=encoding)
+        super().__init__(filename, encoding=encoding)
         self.stationsum = None
         self.stations = []
         self.ReadFromFile()
