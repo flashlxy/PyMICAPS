@@ -115,7 +115,7 @@
 
     sympy
 
-    pyshp
+    pyshp=1.2.10
 
     nclcmaps
     安装包见.\lib\nclcmaps-master.zip
