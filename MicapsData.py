@@ -67,7 +67,7 @@ class Micaps:
         self.outPath = os.path.dirname(os.path.abspath(__file__))
 
         self.SetCheckSize(self.filename, **kwargs)
-        self.SetEncoding()
+        self.SetEncoding0()
         pass
 
     def SetCheckSize(self, filename, **kwargs):
@@ -94,6 +94,14 @@ class Micaps:
             if result['confidence'] is not None and result['confidence'] > 0.6:
                 self.encoding = result.get('encoding', self.encoding)
 
+    def SetEncoding0(self):
+        # 二进制方式读取，获取字节数据，检测类型
+        with open(self.filename, 'rb') as f:
+            data = f.read()
+            result = chardet.detect(data)
+            if result['confidence'] is not None and result['confidence'] > 0.8:
+                self.encoding = result.get('encoding', self.encoding)
+            
     @staticmethod
     def UpdatePath(path, projection):
         """
