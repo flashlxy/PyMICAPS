@@ -63,10 +63,14 @@ class Micaps4Data(Micaps):
             if self.dataflag == 'diamond' and self.style == '4':
                 begin = 22
                 self.Z = np.zeros((self.sumlat, self.sumlon))
+                if contents is not None:
+                    contents = np.array(contents[begin:]).astype(np.float64)
+                    self.Z = contents.reshape((self.sumlat, self.sumlon))
+#                 self.Z = np.zeros((self.sumlat, self.sumlon))
 
-                for i in range(self.sumlon):
-                    for j in range(self.sumlat):
-                        self.Z[j, i] = float(contents[begin + j * self.sumlon + i])
+#                 for i in range(self.sumlon):
+#                     for j in range(self.sumlat):
+#                         self.Z[j, i] = float(contents[begin + j * self.sumlon + i])
 
         except Exception as err:
             print(u'【{0}】{1}-{2}'.format(self.filename, err, datetime.now()))
