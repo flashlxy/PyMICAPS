@@ -6,7 +6,7 @@
 
 可实现多种 micaps 数据类型的单独绘制或叠加绘制（in the future）
 
-    并自动输出相应图像到指定文件。
+并自动输出相应图像到指定文件。
 
 
 ###### Author：Xianyao Liu | Version：3.0.20191120 | E-mail：flashlxy@qq.com | Language：Python3.7
