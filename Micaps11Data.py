@@ -6,10 +6,8 @@
 #     Copyright:  ©江西省气象台 2017
 #     Version:    3.0.20191120
 
-import codecs
 import math
 import re
-import sys
 import nclcmaps
 from datetime import datetime
 import matplotlib.pyplot as plt
@@ -18,12 +16,12 @@ from MicapsData import Micaps
 
 
 class Micaps11Data(Micaps):
-    def __init__(self, filename, encoding='GBK'):
+    def __init__(self, filename, encoding="GBK"):
         super().__init__(filename, encoding=encoding)
         self.U = None
         self.V = None
         self.linewidth = 1
-        self.color = 'k'
+        self.color = "k"
         self.density = [1, 1]
         self.barbsgrid = [31, 31]
         self.cmap = None
@@ -31,21 +29,22 @@ class Micaps11Data(Micaps):
         self.barbs = None
         self.length = 5
         self.scale = 700
-        self.colorlist = ['k', 'b', 'r', 'g']
+        self.colorlist = ["k", "b", "r", "g"]
         self.wholeclip = False
         self.ReadFromFile()
 
     def ReadFromFile(self):
         """
         读micaps第11类数据文件到内存
-        :return: 
+        :return:
         """
         try:
             begin = 17
-            file_object = codecs.open(self.filename, mode='r', encoding=self.encoding)
-            all_the_text = file_object.read().strip()
-            file_object.close()
-            contents = re.split(r'[\s]+', all_the_text)
+            all_the_text = self.Read(self.filename, self.encoding)
+            if all_the_text is None:
+                print("Micaps 11 file error: " + self.filename)
+                return None
+            contents = re.split(r"[\s]+", all_the_text)
             if len(contents) < begin:
                 return
             self.dataflag = contents[0].strip()
@@ -68,11 +67,15 @@ class Micaps11Data(Micaps):
             self.sumlon = int(contents[15].strip())
             self.sumlat = int(contents[16].strip())
 
-            self.x = np.arange(self.beginlon, self.endlon + self.deltalon, self.deltalon)
-            self.y = np.arange(self.beginlat, self.endlat + self.deltalat, self.deltalat)
+            self.x = np.arange(
+                self.beginlon, self.endlon + self.deltalon, self.deltalon
+            )
+            self.y = np.arange(
+                self.beginlat, self.endlat + self.deltalat, self.deltalat
+            )
             self.X, self.Y = np.meshgrid(self.x, self.y)
 
-            if self.dataflag == 'diamond' and self.style == '11':
+            if self.dataflag == "diamond" and self.style == "11":
                 self.U = np.zeros((self.sumlat, self.sumlon))
                 self.V = np.zeros((self.sumlat, self.sumlon))
                 self.Z = np.zeros((self.sumlat, self.sumlon))
@@ -88,12 +91,12 @@ class Micaps11Data(Micaps):
 
                 for i in range(self.sumlon):
                     for j in range(self.sumlat):
-                        self.Z[j, i] = math.sqrt(self.U[j, i]**2 + self.V[j, i]**2)
+                        self.Z[j, i] = math.sqrt(self.U[j, i] ** 2 + self.V[j, i] ** 2)
             if self.deltalat < 0:
                 self.TransposeYaxis()
 
         except Exception as err:
-            print(u'【{0}】{1}-{2}'.format(self.filename, err, datetime.now()))
+            print("【{0}】{1}-{2}".format(self.filename, err, datetime.now()))
 
     def TransposeYaxis(self):
         self.beginlat, self.endlat = self.endlat, self.beginlat
@@ -117,6 +120,7 @@ class Micaps11Data(Micaps):
         self.UpdatePinLegendValue(micapsfile)
 
         from Main import equal
+
         if micapsfile.uv.onspeed and not equal(self.Z.max(), 0):
             self.linewidth = 5 * self.Z / self.Z.max()
         else:
@@ -141,7 +145,10 @@ class Micaps11Data(Micaps):
         ps = []
         for path in paths:
             from matplotlib import patches
-            ps.append(patches.PathPatch(path, linewidth=1, facecolor='none', edgecolor='k'))
+
+            ps.append(
+                patches.PathPatch(path, linewidth=1, facecolor="none", edgecolor="k")
+            )
         return ps
 
     def ConvertPacth(self, ax, patch):
@@ -155,39 +162,51 @@ class Micaps11Data(Micaps):
             lon.append(xpix[0])
             lat.append(ypix[0])
         from matplotlib.path import Path
+
         apath = Path(list(zip(lon, lat)))
         from matplotlib import patches
-        apatch = patches.PathPatch(apath, linewidth=1, facecolor='none', edgecolor='k')
+
+        apatch = patches.PathPatch(apath, linewidth=1, facecolor="none", edgecolor="k")
         plt.gca().add_patch(apatch)
         return apatch
 
     def DrawUV(self, m, micapsfile, clipborder, patch):
-
         if m is plt:
             if self.stream:
-                plot = m.streamplot(self.X,
-                                    self.Y,
-                                    self.U,
-                                    self.V,
-                                    density=self.density,
-                                    linewidth=self.linewidth,
-                                    color=self.color,
-                                    cmap=self.cmap)
+                plot = m.streamplot(
+                    self.X,
+                    self.Y,
+                    self.U,
+                    self.V,
+                    density=self.density,
+                    linewidth=self.linewidth,
+                    color=self.color,
+                    cmap=self.cmap,
+                )
             if self.barbs:
-                barbs = m.barbs(self.X,
-                                self.Y,
-                                self.U,
-                                self.V,
-                                length=self.length,
-                                barb_increments=dict(half=2, full=4, flag=20),
-                                sizes=dict(emptybarb=0))
+                barbs = m.barbs(
+                    self.X,
+                    self.Y,
+                    self.U,
+                    self.V,
+                    length=self.length,
+                    barb_increments=dict(half=2, full=4, flag=20),
+                    sizes=dict(emptybarb=0),
+                )
                 pass
 
         else:
             # transform vectors to projection grid.
-            uproj, vproj, xx, yy = \
-                m.transform_vector(self.U, self.V, self.x, self.y, self.barbsgrid[0], self.barbsgrid[1],
-                                   returnxy=True, masked=True)
+            uproj, vproj, xx, yy = m.transform_vector(
+                self.U,
+                self.V,
+                self.x,
+                self.y,
+                self.barbsgrid[0],
+                self.barbsgrid[1],
+                returnxy=True,
+                masked=True,
+            )
 
             if isinstance(self.color, np.ndarray):
                 self.color = self.colorlist
@@ -203,23 +222,26 @@ class Micaps11Data(Micaps):
                 Q = m.quiver(xx, yy, uproj, vproj, color=self.color, scale=self.scale)
                 # make quiver key.
                 speed = micapsfile.uv.markscalelength
-                qk = plt.quiverkey(Q, 0.1, 0.1, speed, '%.0f m/s' % speed, labelpos='W')
+                qk = plt.quiverkey(Q, 0.1, 0.1, speed, "%.0f m/s" % speed, labelpos="W")
             if self.barbs:
-                barbs = m.barbs(xx,
-                                yy,
-                                uproj,
-                                vproj,
-                                length=self.length,
-                                barb_increments=dict(half=2, full=4, flag=20),
-                                sizes=dict(emptybarb=0),
-                                barbcolor='k',
-                                flagcolor='r',
-                                linewidth=0.5)
+                barbs = m.barbs(
+                    xx,
+                    yy,
+                    uproj,
+                    vproj,
+                    length=self.length,
+                    barb_increments=dict(half=2, full=4, flag=20),
+                    sizes=dict(emptybarb=0),
+                    barbcolor="k",
+                    flagcolor="r",
+                    linewidth=0.5,
+                )
 
         if clipborder.path is not None and clipborder.using:
             from matplotlib.patches import FancyArrowPatch
             from matplotlib.collections import PolyCollection
             from matplotlib.lines import Line2D
+
             for artist in plt.gca().get_children():
                 if self.wholeclip:
                     # from matplotlib.patches import Polygon
@@ -227,8 +249,12 @@ class Micaps11Data(Micaps):
                         artist.set_clip_path(patch)
                 else:
                     from matplotlib.collections import LineCollection
-                    if isinstance(artist, FancyArrowPatch) or isinstance(artist, PolyCollection) or \
-                            isinstance(artist, LineCollection):
+
+                    if (
+                        isinstance(artist, FancyArrowPatch)
+                        or isinstance(artist, PolyCollection)
+                        or isinstance(artist, LineCollection)
+                    ):
                         artist.set_clip_path(patch)
 
             # if m is plt and self.stream:

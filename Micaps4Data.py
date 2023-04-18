@@ -6,7 +6,6 @@
 #     Copyright:  ©江西省气象台 2017
 #     Version:    2.0.20170411
 
-import codecs
 import numpy as np
 import re
 
@@ -15,20 +14,26 @@ from MicapsData import Micaps
 
 
 class Micaps4Data(Micaps):
-    def __init__(self, filename, encoding='GBK'):
+    def __init__(self, filename, encoding="GBK"):
         super().__init__(filename, encoding=encoding)
+        self.empty = False
         self.ReadFromFile()
 
     def ReadFromFile(self):
         """
         读micaps第4类数据文件到内存
-        :return: 
+        :return:
         """
         try:
-            file_object = codecs.open(self.filename, mode='r', encoding=self.encoding)
-            all_the_text = file_object.read().strip()
-            file_object.close()
-            contents = re.split(r'[\s]+', all_the_text)
+            # file_object = codecs.open(self.filename, mode='r', encoding=self.encoding)
+            # all_the_text = file_object.read().strip()
+            # file_object.close()
+            all_the_text = self.Read(self.filename, self.encoding)
+            if all_the_text is None:
+                self.empty = True
+                print("Micaps 4 file error: " + self.filename)
+                return None
+            contents = re.split(r"[\s]+", all_the_text)
             if len(contents) < 23:
                 return
             self.dataflag = contents[0].strip()
@@ -56,24 +61,28 @@ class Micaps4Data(Micaps):
             self.def1 = contents[20].strip()
             self.def2 = contents[21].strip()
 
-            x = np.arange(self.beginlon, self.endlon + 0.9 * self.deltalon, self.deltalon)
-            y = np.arange(self.beginlat, self.endlat + 0.9 * self.deltalat, self.deltalat)
+            x = np.arange(
+                self.beginlon, self.endlon + 0.9 * self.deltalon, self.deltalon
+            )
+            y = np.arange(
+                self.beginlat, self.endlat + 0.9 * self.deltalat, self.deltalat
+            )
             self.X, self.Y = np.meshgrid(x, y)
 
-            if self.dataflag == 'diamond' and self.style == '4':
+            if self.dataflag == "diamond" and self.style == "4":
                 begin = 22
                 self.Z = np.zeros((self.sumlat, self.sumlon))
                 if contents is not None:
                     contents = np.array(contents[begin:]).astype(np.float64)
                     self.Z = contents.reshape((self.sumlat, self.sumlon))
-#                 self.Z = np.zeros((self.sumlat, self.sumlon))
+        #                 self.Z = np.zeros((self.sumlat, self.sumlon))
 
-#                 for i in range(self.sumlon):
-#                     for j in range(self.sumlat):
-#                         self.Z[j, i] = float(contents[begin + j * self.sumlon + i])
+        #                 for i in range(self.sumlon):
+        #                     for j in range(self.sumlat):
+        #                         self.Z[j, i] = float(contents[begin + j * self.sumlon + i])
 
         except Exception as err:
-            print(u'【{0}】{1}-{2}'.format(self.filename, err, datetime.now()))
+            print("【{0}】{1}-{2}".format(self.filename, err, datetime.now()))
 
     def UpdateData(self, products, micapsfile):
         self.UpdateExtents(products)
@@ -96,14 +105,42 @@ class Micaps4Data(Micaps):
         :param nx: 经度方向上的点数
         :param ny: 纬度方向上的点数
         :param zi: z值数组
-        :return: 
+        :return:
         """
-        content = 'diamond 4 ' + fdate + '-' + edate + '客观分析网格雨量 '
-        content += fdate[0:4] + ' ' + fdate[4:6] + ' ' + fdate[6:8] + ' ' + fdate[8:10] + ' 000 999 '
-        content += ' '.join([xjj, yjj, flon, elon, flat, elat, nx, ny, '10.0', '0', str(zi.max()), '0', '0']) + '\n'
+        content = "diamond 4 " + fdate + "-" + edate + "客观分析网格雨量 "
+        content += (
+            fdate[0:4]
+            + " "
+            + fdate[4:6]
+            + " "
+            + fdate[6:8]
+            + " "
+            + fdate[8:10]
+            + " 000 999 "
+        )
+        content += (
+            " ".join(
+                [
+                    xjj,
+                    yjj,
+                    flon,
+                    elon,
+                    flat,
+                    elat,
+                    nx,
+                    ny,
+                    "10.0",
+                    "0",
+                    str(zi.max()),
+                    "0",
+                    "0",
+                ]
+            )
+            + "\n"
+        )
         for a in zi.tolist():
-            content += ' '.join([Micaps4Data.FToS(b) for b in a]) + '\n'
-        fp = open(filename, 'w')
+            content += " ".join([Micaps4Data.FToS(b) for b in a]) + "\n"
+        fp = open(filename, "w")
         fp.write(content)
         fp.close()
 
@@ -115,7 +152,7 @@ class Micaps4Data(Micaps):
         :return: 转换后的字符串
         """
         if lat is None:
-            s = '0'
+            s = "0"
         else:
-            s = '%.2f' % lat
+            s = "%.2f" % lat
         return s

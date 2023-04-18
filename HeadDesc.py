@@ -6,6 +6,7 @@
 #     Copyright:  ©江西省气象台 2017
 #     Version:    1.1.20170406
 
+
 class HeadDesc:
     """
     标题描述类
@@ -15,4 +16,3 @@ class HeadDesc:
         self.text = txt
         self.pos = pos
         self.font = font
-        # fontdict={'family': 'monospace', 'color': 'blue'}

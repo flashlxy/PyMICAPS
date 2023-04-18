@@ -6,11 +6,8 @@
 #     Copyright:  ©江西省气象台 2017
 #     Version:    2.0.20170411
 from __future__ import print_function
-
 import os
-
 from matplotlib.transforms import Bbox
-
 from Projection import Projection
 
 
@@ -37,9 +34,13 @@ class Picture:
 
         # 绘图区域
 
-        extents = p.find("Extents").text.strip()
-        if extents is None or extents == '':
-            if len(clipborders) < 1 or clipborders[0].path is None or (not clipborders[0].using):
+        extents = p.find("Extents").text
+        if extents is None or extents == "":
+            if (
+                len(clipborders) < 1
+                or clipborders[0].path is None
+                or (not clipborders[0].using)
+            ):
                 self.extents = None
             else:
                 jxextend = clipborders[0].path.get_extents()
@@ -53,12 +54,12 @@ class Picture:
             self.extents = Projection.leaf_to_list(p, "Extents", None)
 
         # 画布透明度
-        self.opacity = Projection.leaf_to_float(p, 'Opacity', 1)
+        self.opacity = Projection.leaf_to_float(p, "Opacity", 1)
         if self.opacity < 0 or self.opacity > 1:
             self.opacity = 1
 
         # 生成的图片文件存放路径
-        self.picfile = Projection.leaf_to_string(p, 'PicFile', 'mytest.png')
+        self.picfile = Projection.leaf_to_string(p, "PicFile", "mytest.png")
         self.checkFilename()
 
         return
@@ -66,7 +67,7 @@ class Picture:
     @staticmethod
     def savePicture(fig, filename):
         # 存图
-        fig.savefig(filename, format='png', transparent=False)
+        fig.savefig(filename, format="png", transparent=False)
         # return
 
     def checkFilename(self):
@@ -79,4 +80,4 @@ class Picture:
             if not os.path.isdir(path):
                 os.makedirs(path)
         except:
-            self.picfile = 'mytest.png'
+            self.picfile = "mytest.png"

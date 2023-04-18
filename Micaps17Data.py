@@ -6,17 +6,16 @@
 #     Copyright:  ©江西省气象台 2017
 #     Version:    2.0.20170414
 from __future__ import print_function
-import codecs
 import re
 from datetime import datetime
 
 import math
 
-from MicapsData import Micaps, np
+from MicapsData import Micaps
 
 
 class Micaps17Data(Micaps):
-    def __init__(self, filename, encoding='GBK'):
+    def __init__(self, filename, encoding="GBK"):
         super().__init__(filename, encoding=encoding)
         self.stationsum = None
         self.stations = []
@@ -25,13 +24,14 @@ class Micaps17Data(Micaps):
     def ReadFromFile(self):
         """
         读micaps第3类数据文件到内存
-        :return: 
+        :return:
         """
         try:
-            file_object = codecs.open(self.filename, mode='r', encoding=self.encoding)
-            all_the_text = file_object.read().strip()
-            file_object.close()
-            contents = re.split(r'[\s]+', all_the_text)
+            all_the_text = self.Read(self.filename, self.encoding)
+            if all_the_text is None:
+                print("Micaps 17 file error: " + self.filename)
+                return None
+            contents = re.split(r"[\s]+", all_the_text)
             if len(contents) < 4:
                 return
             self.dataflag = contents[0].strip()
@@ -39,7 +39,7 @@ class Micaps17Data(Micaps):
             self.title = contents[2].strip()
             self.stationsum = int(contents[3].strip())
 
-            if self.dataflag == 'diamond' and self.style == '17':
+            if self.dataflag == "diamond" and self.style == "17":
                 begin = 4
                 step = 0
                 for i in range(self.stationsum):
@@ -59,14 +59,16 @@ class Micaps17Data(Micaps):
                     #      'iclass': iclass, 'infosum': infosum, 'name': info[0]
                     #      }
                     # )
-                    self.stations.append([code, lat, lon, height, iclass, infosum, info[0]])
+                    self.stations.append(
+                        [code, lat, lon, height, iclass, infosum, info[0]]
+                    )
         except Exception as err:
-            print(u'【{0}】{1}-{2}'.format(self.filename, err, datetime.now()))
+            print("【{0}】{1}-{2}".format(self.filename, err, datetime.now()))
 
     @staticmethod
     def ChangeLL(lonlat):
-        if '.' in lonlat:
+        if "." in lonlat:
             return float(lonlat)
         else:
             just = math.floor(float(lonlat) / 100)
-            return just + (float(lonlat) / 100 - just) * 100 / 60.
+            return just + (float(lonlat) / 100 - just) * 100 / 60.0

@@ -6,13 +6,9 @@
 #     Copyright:  ©江西省气象台 2017
 #     Version:    2.0.20170411
 import os
-import re
 from datetime import datetime
 from xml.etree import ElementTree
 
-from matplotlib.path import Path
-
-import maskout
 from Map import Map
 from MicapsFile import MicapsFile
 from Picture import Picture
@@ -46,6 +42,5 @@ class Products:
                 self.micapsfiles.append(MicapsFile(micapsfile))
 
         except Exception as err:
-            print(u'【{0}】{1}-{2}'.format(self.xmlfile, err, datetime.now()))
+            print("【{0}】{1}-{2}".format(self.xmlfile, err, datetime.now()))
             return None
-

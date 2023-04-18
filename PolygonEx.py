@@ -6,7 +6,6 @@
 # Author: liuxianyao
 # Created: 04/11/2015
 # ##############################################
-import sys
 import scipy
 import scipy.linalg
 import scipy.integrate
@@ -17,8 +16,6 @@ import scipy.optimize._lbfgsb
 import scipy.linalg.cython_blas
 import scipy.linalg.cython_lapack
 import numpy as np
-# from sympy import *
-# from pylab import *
 from sympy import Symbol, nsolve
 
 
@@ -59,7 +56,9 @@ class PolygonEx:
                 extend_point = self.equations(points[simplex], pair)
                 # 在边界内的点排除
                 if extend_point and not self.point_in_path(extend_point):
-                    ext_points.append([extend_point[0], extend_point[1], self.zvalues[simplex[0]]])
+                    ext_points.append(
+                        [extend_point[0], extend_point[1], self.zvalues[simplex[0]]]
+                    )
         return ext_points
 
     def equations(self, point_pairs, is_less):
@@ -86,9 +85,12 @@ class PolygonEx:
             else:
                 init_pairs = [x1 + deta, y1]
 
-            x = Symbol('x')
-            y = Symbol('y')
-            func = [(x2 - x1) * (x - x1) + (y2 - y1) * (y - y1), (x - x1)**2 + (y - y1)**2 - self.d**2]
+            x = Symbol("x")
+            y = Symbol("y")
+            func = [
+                (x2 - x1) * (x - x1) + (y2 - y1) * (y - y1),
+                (x - x1) ** 2 + (y - y1) ** 2 - self.d**2,
+            ]
             return nsolve(func, [x, y], init_pairs)
         except Exception as err:
             return None

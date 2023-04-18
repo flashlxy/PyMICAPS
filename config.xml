@@ -228,7 +228,7 @@
             <!-- micaps数据类型 -->
             <File>
                 <!-- M1：站点数据，M4：第4类格点数据，M11：第11类UV数据-->
-                <Type>M11</Type>
+                <Type>M4</Type>
 
                 <!--原始数据文件
                     M4 - K:\GQEC\TP\r24\17032908.060 16062908.012 K:\ecmwf\pressure\999\16122520.000
@@ -240,7 +240,7 @@
                     M11  K:\ecmwf\uv\850\17041020.000 K:\GQEC\uv\500\17041720.024
                          K:\GQEC\10uv\999\17011408.186 K:\GQEC\uv\850\18020108.003
                 -->
-                <FileName> K:\GQEC\uv\500\19111920.240  </FileName>
+                <FileName> 23041808.024  </FileName>
             </File>
             <!-- 图例 -->
             <Legend>
@@ -484,7 +484,7 @@
              113.33273, 24.241938000000001, 118.74326600000001, 30.330926999999999
              90, 15, 125, 45
         -->
-        <Extents> </Extents>
+        <Extents></Extents>
         <!-- 画布透明度 浮点数0-1之间 default is 1.-->
         <Opacity>1</Opacity>
         <!-- 生成的图片文件路径 default is mytest.png -->

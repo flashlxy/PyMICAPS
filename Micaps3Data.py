@@ -6,7 +6,6 @@
 #     Copyright:  ©江西省气象台 2017
 #     Version:    3.0.20191120
 
-import codecs
 import itertools
 import math
 import operator
@@ -17,11 +16,13 @@ from datetime import datetime
 
 from Main import equal
 from MicapsData import Micaps
-from matplotlib.mlab import griddata
+
+# from matplotlib.mlab import griddata
+from MlabGridData import griddata
 
 
 class Micaps3Data(Micaps):
-    def __init__(self, filename, encoding='GBK'):
+    def __init__(self, filename, encoding="GBK"):
         super().__init__(filename, encoding=encoding)
         self.contoursum = None
         self.smoothindex = None
@@ -30,7 +31,7 @@ class Micaps3Data(Micaps):
         self.elementsum = 1
         self.stationsum = None
         self.data = []
-        self.defaultvalue = 9999.
+        self.defaultvalue = 9999.0
 
         self.ReadFromFile()
 
@@ -49,13 +50,14 @@ class Micaps3Data(Micaps):
     def ReadFromFile(self):
         """
         读micaps第3类数据文件到内存
-        :return: 
+        :return:
         """
         try:
-            file_object = codecs.open(self.filename, mode='r', encoding=self.encoding)
-            all_the_text = file_object.read().strip()
-            file_object.close()
-            contents = re.split(r'[\s]+', all_the_text)
+            all_the_text = self.Read(self.filename, self.encoding)
+            if all_the_text is None:
+                print("Micaps 3 file error: " + self.filename)
+                return None
+            contents = re.split(r"[\s]+", all_the_text)
             if len(contents) < 14:
                 return
             self.dataflag = contents[0].strip()
@@ -85,7 +87,7 @@ class Micaps3Data(Micaps):
 
             self.stationsum = int((len(contents) - 14) / 5)
             stations = []
-            if self.dataflag == 'diamond' and self.style == '3':
+            if self.dataflag == "diamond" and self.style == "3":
                 begin = 14
                 for i in range(self.stationsum):
                     code = contents[begin + 5 * i + 0].strip()
@@ -94,17 +96,25 @@ class Micaps3Data(Micaps):
                     height = float(contents[begin + 5 * i + 3].strip())
                     zvalue = float(contents[begin + 5 * i + 4].strip())
                     if self.valid(lon, lat, zvalue):
-                        stations.append({'code': code, 'lon': lon, 'lat': lat, 'height': height, 'zvalue': zvalue})
+                        stations.append(
+                            {
+                                "code": code,
+                                "lon": lon,
+                                "lat": lat,
+                                "height": height,
+                                "zvalue": zvalue,
+                            }
+                        )
 
             if len(stations) > 0:
                 self.CheckData(stations)
 
             for ele in stations:
                 # code = ele['code']
-                lon = ele['lon']
-                lat = ele['lat']
+                lon = ele["lon"]
+                lat = ele["lat"]
                 # height = ele['height']
-                zvalue = ele['zvalue']
+                zvalue = ele["zvalue"]
                 self.x.append(lon)
                 self.y.append(lat)
                 self.z.append(zvalue)
@@ -119,7 +129,7 @@ class Micaps3Data(Micaps):
             # self.data.append((code, lon, lat, height, zvalue))
 
         except Exception as err:
-            print(u'【{0}】{1}-{2}'.format(self.filename, err, datetime.now()))
+            print("【{0}】{1}-{2}".format(self.filename, err, datetime.now()))
 
     @staticmethod
     def AddPoints(x, y, z, path):
@@ -132,9 +142,16 @@ class Micaps3Data(Micaps):
             z.append(point[2])
 
     def CreateArray(self):
-        self.data = np.array(self.data,
-                             dtype=[('code', np.int32), ('lon', np.float32), ('lat', np.float32),
-                                    ('height', np.float32), ('zvalue', np.float32)])
+        self.data = np.array(
+            self.data,
+            dtype=[
+                ("code", np.int32),
+                ("lon", np.float32),
+                ("lat", np.float32),
+                ("height", np.float32),
+                ("zvalue", np.float32),
+            ],
+        )
 
     def UpdateData(self, products, micapsfile):
         self.UpdateExtents(products)
@@ -156,7 +173,7 @@ class Micaps3Data(Micaps):
         # x = self.data['lon']
         # y = self.data['lat']
         # z = self.data['zvalue']
-        self.Z = griddata(self.x, self.y, self.z, self.X, self.Y, 'nn')
+        self.Z = griddata(self.x, self.y, self.z, self.X, self.Y, "nn")
         self.X, self.Y = np.meshgrid(self.X, self.Y)
 
         self.min = min(self.z)
@@ -170,7 +187,7 @@ class Micaps3Data(Micaps):
     @staticmethod
     def CheckData(data):
         # 根据经纬度去重
-        getvals = operator.itemgetter('lon', 'lat')
+        getvals = operator.itemgetter("lon", "lat")
         data.sort(key=getvals)
         result = []
         for _, g in itertools.groupby(data, getvals):

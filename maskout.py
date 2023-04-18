@@ -14,9 +14,9 @@ from matplotlib.path import Path
 from matplotlib.patches import PathPatch
 
 
-def getPathFromShp(shpfile, region):
+def getPathFromShp(shpfile, region, encoding="utf-8"):
     try:
-        sf = shapefile.Reader(shpfile)
+        sf = shapefile.Reader(shpfile, encoding=encoding)
         vertices = []  # 这块是已经修改的地方
         codes = []  # 这块是已经修改的地方
         paths = []
@@ -43,11 +43,15 @@ def getPathFromShp(shpfile, region):
         return None
 
 
-def shp2clip(originfig, ax, shpfile, region):
-    path = getPathFromShp(shpfile=shpfile, region=region)
+def shp2clip(originfig, ax, shpfile, region, encoding=None):
+    if encoding is None:
+        encoding = "utf-8"
+    path = getPathFromShp(shpfile=shpfile, region=region, encoding=encoding)
     patch = None
     if path:
-        patch = PathPatch(path, transform=ax.transData, facecolor='none', edgecolor='black')
+        patch = PathPatch(
+            path, transform=ax.transData, facecolor="none", edgecolor="black"
+        )
         for contour in originfig.collections:
             contour.set_clip_path(patch)
     return path, patch

@@ -7,8 +7,6 @@
 #     Version:    3.0.20191120
 from __future__ import print_function
 
-import codecs
-import sys
 
 import chardet
 from matplotlib.font_manager import FontProperties
@@ -17,6 +15,7 @@ from matplotlib.markers import MarkerStyle
 import MicapsFile
 from Map import Map
 from Picture import Picture
+
 # matplotlib.use('Agg')
 from pylab import *
 from matplotlib.transforms import Bbox
@@ -24,19 +23,20 @@ import os
 import numpy as np
 import matplotlib.pyplot as plt
 import nclcmaps
+import math
 
 matplotlib.rcParams["figure.subplot.top"] = 1
 matplotlib.rcParams["figure.subplot.bottom"] = 0
 matplotlib.rcParams["figure.subplot.left"] = 0
 matplotlib.rcParams["figure.subplot.right"] = 1
-matplotlib.rcParams['font.size'] = 12
-matplotlib.rcParams['font.sans-serif'] = ['SimHei']  # 指定默认字体 SimHei
-matplotlib.rcParams['axes.unicode_minus'] = False  # 解决保存图像是负号'-'显示为方块的问题
+matplotlib.rcParams["font.size"] = 12
+matplotlib.rcParams["font.sans-serif"] = ["SimHei"]  # 指定默认字体 SimHei
+matplotlib.rcParams["axes.unicode_minus"] = False  # 解决保存图像是负号'-'显示为方块的问题
 matplotlib.rcParams["savefig.dpi"] = 72
 
 
 class Micaps:
-    def __init__(self, filename, encoding='utf-8', **kwargs):
+    def __init__(self, filename, encoding="utf-8", **kwargs):
         self.filename = filename
         self.encoding = encoding
         self.dataflag = None
@@ -71,8 +71,8 @@ class Micaps:
         pass
 
     def SetCheckSize(self, filename, **kwargs):
-        if 'check_bytes' in kwargs.keys():
-            self.check_bytes = kwargs['check_bytes']
+        if "check_bytes" in kwargs.keys():
+            self.check_bytes = kwargs["check_bytes"]
         else:
             if os.path.isfile(filename):
                 self.check_bytes = os.path.getsize(self.filename)
@@ -83,6 +83,7 @@ class Micaps:
         if os.path.isfile(self.filename):
             bigdata = open(self.filename, "rb")
             from cchardet import UniversalDetector
+
             detector = UniversalDetector()
             for line in bigdata.readlines():
                 detector.feed(line)
@@ -91,24 +92,24 @@ class Micaps:
             detector.close()
             bigdata.close()
             result = detector.result
-            if result['confidence'] is not None and result['confidence'] > 0.6:
-                self.encoding = result.get('encoding', self.encoding)
+            if result["confidence"] is not None and result["confidence"] > 0.6:
+                self.encoding = result.get("encoding", self.encoding)
 
     def SetEncoding0(self):
         # 二进制方式读取，获取字节数据，检测类型
-        with open(self.filename, 'rb') as f:
+        with open(self.filename, "rb") as f:
             data = f.read()
             result = chardet.detect(data)
-            if result['confidence'] is not None and result['confidence'] > 0.8:
-                self.encoding = result.get('encoding', self.encoding)
-            
+            if result["confidence"] is not None and result["confidence"] > 0.8:
+                self.encoding = result.get("encoding", self.encoding)
+
     @staticmethod
     def UpdatePath(path, projection):
         """
         根据投影对象更新path
         :param path: 路径对象
         :param projection: 投影类型
-        :return: 
+        :return:
         """
         if path is None:
             return
@@ -121,7 +122,7 @@ class Micaps:
         根据投影类型和更新产品对象中的path对象
         :param products: 产品参数
         :param projection: 投影类型
-        :return: 
+        :return:
         """
 
         Micaps.UpdatePath(products.map.clipborders[0].path, projection)
@@ -145,7 +146,7 @@ class Micaps:
         """
         更新产品参数的extents
         :param products: 产品参数对象
-        :return: 
+        :return:
         """
         if products.picture.extents is None:
             maxlon = max(self.endlon, self.beginlon)
@@ -161,7 +162,9 @@ class Micaps:
         else:
             extents = products.picture.extents
             if isinstance(extents, list):
-                products.picture.extents = Bbox.from_extents(extents[0], extents[1], extents[2], extents[3])
+                products.picture.extents = Bbox.from_extents(
+                    extents[0], extents[1], extents[2], extents[3]
+                )
 
     def UpdatePinLegendValue(self, micapsfile):
         pin = micapsfile.legend.pinlegendvalue
@@ -172,16 +175,16 @@ class Micaps:
         """
         要被重载的函数，用来更新产品中的一系列参数
         :param micapsfile: 产品中包含的一个micapsfile
-        :param products:产品参数 
-        :return: 
+        :param products:产品参数
+        :return:
         """
         return
 
     def GetExtend(self):
-        if self.title.find(u'降水') >= 0 or self.title.find(u'雨') >= 0:
-            extend = 'max'
+        if self.title.find("降水") >= 0 or self.title.find("雨") >= 0:
+            extend = "max"
         else:
-            extend = 'neither'
+            extend = "neither"
         return extend
 
     def DrawUV(self, m, micapsfile, clipborder, patch):
@@ -204,13 +207,29 @@ class Micaps:
                         # if isinstance(artist, FancyArrowPatch):
                         artist.set_clip_path(patch)
 
+    @classmethod
+    def Read(cls, filename, encoding):
+        encodings = [encoding, "utf-8", "gb18030", "GBK"]
+        for encoding in encodings:
+            all_the_text = None
+            try:
+                with open(filename, "r", encoding=encoding) as f:
+                    all_the_text = f.read().replace(",", "").strip()
+                    break
+            except Exception:
+                pass
+        if all_the_text is None:
+            print("Micaps file error: " + filename)
+            return None
+        return all_the_text
+
     def Draw(self, products, micapsfile, debug=True):
         """
         根据产品参数绘制图像
         :param micapsfile: 指定绘制产品中包含的一个micapsfile
         :param debug: 调试状态
-        :param products: 产品参数 
-        :return: 
+        :param products: 产品参数
+        :return:
         """
         self.UpdateData(products, micapsfile)
         extents = products.picture.extents
@@ -221,18 +240,24 @@ class Micaps:
 
         # 设置绘图画板的宽和高 单位：英寸
         h = products.picture.height
-        if products.map.projection.name == 'sall':  # 等经纬度投影时不用配置本身的宽度，直接根据宽高比得到
-            w = h * np.math.fabs((xmax - xmin) / (ymax - ymin)) * products.picture.widthshrink
+        if products.map.projection.name == "sall":  # 等经纬度投影时不用配置本身的宽度，直接根据宽高比得到
+            w = (
+                h
+                * np.math.fabs((xmax - xmin) / (ymax - ymin))
+                * products.picture.widthshrink
+            )
         else:
             w = products.picture.width
 
         # 创建画布
-        fig = plt.figure(figsize=(w, h), dpi=products.picture.dpi, facecolor="white")  # 必须在前面
+        fig = plt.figure(
+            figsize=(w, h), dpi=products.picture.dpi, facecolor="white"
+        )  # 必须在前面
         ax = fig.add_subplot(111)
-        ax.spines['bottom'].set_linewidth(products.map.projection.axisthick)
-        ax.spines['left'].set_linewidth(products.map.projection.axisthick)
-        ax.spines['right'].set_linewidth(products.map.projection.axisthick)
-        ax.spines['top'].set_linewidth(products.map.projection.axisthick)
+        ax.spines["bottom"].set_linewidth(products.map.projection.axisthick)
+        ax.spines["left"].set_linewidth(products.map.projection.axisthick)
+        ax.spines["right"].set_linewidth(products.map.projection.axisthick)
+        ax.spines["top"].set_linewidth(products.map.projection.axisthick)
         # 设置绘图区域
         plt.xlim(xmin, xmax)
         plt.ylim(ymin, ymax)
@@ -247,6 +272,7 @@ class Micaps:
 
         # 获得产品投影
         from Projection import Projection
+
         m = Projection.GetProjection(products)
 
         if m is not plt:
@@ -263,7 +289,9 @@ class Micaps:
         # draw parallels and meridians.
         Map.DrawGridLine(products, m)
 
-        cmap = nclcmaps.cmaps(micapsfile.legend.micapslegendcolor)  # cm.jet  temp_diff_18lev
+        cmap = nclcmaps.cmaps(
+            micapsfile.legend.micapslegendcolor
+        )  # cm.jet  temp_diff_18lev
         vmax = math.ceil(self.max)
         vmin = math.floor(self.min)
         levels = arange(vmin - self.distance, vmax + self.distance + 0.1, self.distance)
@@ -276,31 +304,35 @@ class Micaps:
         # 绘制等值线 ------ 等值线和标注是一体的
         c = micapsfile.contour
 
-        Map.DrawContourAndMark(contour=c,
-                               x=self.X,
-                               y=self.Y,
-                               z=self.Z,
-                               level=level,
-                               clipborder=clipborder,
-                               patch=patch,
-                               m=m)
+        Map.DrawContourAndMark(
+            contour=c,
+            x=self.X,
+            y=self.Y,
+            z=self.Z,
+            level=level,
+            clipborder=clipborder,
+            patch=patch,
+            m=m,
+        )
 
         cf = micapsfile.contour
         cbar = micapsfile.legend
         extend = micapsfile.legend.extend
         # 绘制色斑图 ------ 色版图、图例、裁切是一体的
-        Map.DrawContourfAndLegend(contourf=cf,
-                                  legend=cbar,
-                                  clipborder=clipborder,
-                                  patch=patch,
-                                  cmap=cmap,
-                                  levels=levels,
-                                  extend=extend,
-                                  extents=extents,
-                                  x=self.X,
-                                  y=self.Y,
-                                  z=self.Z,
-                                  m=m)
+        Map.DrawContourfAndLegend(
+            contourf=cf,
+            legend=cbar,
+            clipborder=clipborder,
+            patch=patch,
+            cmap=cmap,
+            levels=levels,
+            extend=extend,
+            extents=extents,
+            x=self.X,
+            y=self.Y,
+            z=self.Z,
+            m=m,
+        )
 
         # 绘制描述文本
         MicapsFile.MicapsFile.DrawTitle(m, micapsfile.title, self.title)
@@ -312,20 +344,24 @@ class Micaps:
 
         # 绘制散点
         if micapsfile.contour.scatter:
-            if hasattr(self, 'x1'):
-                m.scatter(self.x1,
-                          self.y1,
-                          s=micapsfile.contour.radius,
-                          c=self.z1,
-                          alpha=micapsfile.contour.alpha,
-                          edgecolors='b')
+            if hasattr(self, "x1"):
+                m.scatter(
+                    self.x1,
+                    self.y1,
+                    s=micapsfile.contour.radius,
+                    c=self.z1,
+                    alpha=micapsfile.contour.alpha,
+                    edgecolors="b",
+                )
             else:
-                m.scatter(self.X,
-                          self.Y,
-                          s=micapsfile.contour.radius,
-                          c=self.Z,
-                          alpha=micapsfile.contour.alpha,
-                          edgecolors='b')
+                m.scatter(
+                    self.X,
+                    self.Y,
+                    s=micapsfile.contour.radius,
+                    c=self.Z,
+                    alpha=micapsfile.contour.alpha,
+                    edgecolors="b",
+                )
 
         # 绘制站点
         stations = products.map.stations
@@ -348,16 +384,19 @@ class Micaps:
             stations_array = list(zip(*stations.micapsdata.stations))
             # 画站点mark
             if m is not plt:
-                stations_array[2], stations_array[1] = \
-                    Micaps.UpdateXY(m, stations_array[2], stations_array[1])
+                stations_array[2], stations_array[1] = Micaps.UpdateXY(
+                    m, stations_array[2], stations_array[1]
+                )
             marker = MarkerStyle(stations.markstyle[0], stations.markstyle[1])
-            m.scatter(stations_array[2],
-                      stations_array[1],
-                      marker=marker,
-                      s=stations.radius,
-                      c=stations.color,
-                      alpha=stations.alpha,
-                      edgecolors=stations.edgecolors)
+            m.scatter(
+                stations_array[2],
+                stations_array[1],
+                marker=marker,
+                s=stations.radius,
+                c=stations.color,
+                alpha=stations.alpha,
+                edgecolors=stations.edgecolors,
+            )
 
             # 画站点文本
 
@@ -365,7 +404,9 @@ class Micaps:
             if not os.path.exists(fontfile):
                 font = FontProperties(size=stations.font[0], weight=stations.font[2])
             else:
-                font = FontProperties(fname=fontfile, size=stations.font[0], weight=stations.font[2])
+                font = FontProperties(
+                    fname=fontfile, size=stations.font[0], weight=stations.font[2]
+                )
             for sta in stations.micapsdata.stations:
                 if m is not plt:
                     lon, lat = Micaps.UpdateXY(m, sta[2], sta[1])
@@ -374,14 +415,16 @@ class Micaps:
                 else:
                     lon, lat = sta[2], sta[1]
                     deta = stations.detax
-                plt.text(lon + deta,
-                         lat,
-                         sta[6],
-                         fontproperties=font,
-                         rotation=0,
-                         color=stations.font[3],
-                         ha='left',
-                         va='center')
+                plt.text(
+                    lon + deta,
+                    lat,
+                    sta[6],
+                    fontproperties=font,
+                    rotation=0,
+                    color=stations.font[3],
+                    ha="left",
+                    va="center",
+                )
 
         # 接近收尾
 
@@ -390,7 +433,7 @@ class Micaps:
         # 存图
         Picture.savePicture(fig, products.picture.picfile)
 
-        print(products.picture.picfile + u'存图成功!')
+        print(products.picture.picfile + "存图成功!")
         if debug:
             plt.show()
 
