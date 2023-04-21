@@ -19,7 +19,7 @@ class Title:
         self.mtitleposition = Projection.leaf_to_list(p, "MTitlePosition", None)
 
         # 产品图片文字描述（可能多个）
-        descs = p.find("Descs").getchildren()
+        descs = list(p.find("Descs"))
         self.descs = []
         for desc in descs:
             txt = Projection.leaf_to_string(desc, "Text", "测试数据")
