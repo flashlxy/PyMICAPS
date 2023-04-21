@@ -37,7 +37,8 @@ class Products:
 
             # Get the micaps files list
             self.micapsfiles = []
-            micapsfiles = p.find("MicapsFiles").getchildren()
+            # micapsfiles = p.find("MicapsFiles").getchildren()
+            micapsfiles = list(p.find("MicapsFiles"))
             for micapsfile in micapsfiles:
                 self.micapsfiles.append(MicapsFile(micapsfile))
 
