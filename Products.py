@@ -37,6 +37,7 @@ class Products:
 
             # Get the micaps files list
             self.micapsfiles = []
+            # 3.9以上版本 .getchildren() 方法被清除
             # micapsfiles = p.find("MicapsFiles").getchildren()
             micapsfiles = list(p.find("MicapsFiles"))
             for micapsfile in micapsfiles:
