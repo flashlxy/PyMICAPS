@@ -40,13 +40,13 @@ class Map:
         self.projection = Projection(root[0])
 
         # 边界集合
-        bordersleaf = root[0].find("Borders").getchildren()
+        bordersleaf = list(root[0].find("Borders"))
         self.borders = []
         for borderleaf in bordersleaf:
             self.borders.append(Border(borderleaf))
 
         # clip区域集合
-        clipsleaf = root[0].find("ClipBorders").getchildren()
+        clipsleaf = list(root[0].find("ClipBorders"))
         self.clipborders = []
         for clipleaf in clipsleaf:
             self.clipborders.append(ClipBorder(clipleaf))
